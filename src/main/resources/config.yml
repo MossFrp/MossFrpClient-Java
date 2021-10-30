@@ -5,7 +5,7 @@
 #语言选项
 #填写的时候请注意大小写
 #支持的语言如下：
-#zh_cn
+#zh_cn en_us
 language: zh_cn
 
 #报错显示方式

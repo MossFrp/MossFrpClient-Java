@@ -1,0 +1,9 @@
+Start_Welcome: Welcome to use MossFrp, version：
+Start_Copyright: This plugin client and standard version client are copyrighted by Bilibili@墨守MossCG.
+Start_ToGuide: Starting boot guide.
+Prefix_Info: [Info]
+Prefix_Warn: [Warn]
+Prefix_Error: [Error]
+Prefix_Exception: [Exception]
+Prefix_Unknown: [Unknown]
+Prefix_Command: [Command]
