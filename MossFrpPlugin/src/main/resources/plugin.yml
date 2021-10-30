@@ -1,0 +1,12 @@
+name: MossFrp
+version: 0.0.0.1.0000
+main: org.mossmc.mosscg.MossFrp
+api-version: 1.16
+soft-depend: []
+commands:
+  MossFrp:
+    description: MossFrp主指令
+permissions:
+  mossfrp.copyright:
+    description: 版权信息显示权限
+    default: op

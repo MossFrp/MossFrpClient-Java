@@ -1,0 +1,14 @@
+#MossFrp配置文件
+#插件&客户端开发者：B站_墨守MossCG
+#本配置文件兼容插件版本及独立端版本
+
+#语言选项
+#填写的时候请注意大小写
+#支持的语言如下：
+#zh_cn
+language: zh_cn
+
+#报错显示方式
+#light为简化报错
+#full为完整报错
+exceptionMode: full
