@@ -1,6 +1,7 @@
 Start_Welcome: 欢迎使用MossFrp 版本：
 Start_Copyright: 本插件&独立客户端均为B站@墨守MossCG版权所有
 Start_ToGuide: 正在启动运行引导
+Start_CheckFailed: 启动失败！请使用命令行启动MossFrp！并添加启动参数：-MossFrp=nb
 Prefix_Info: [信息]
 Prefix_Warn: [警告]
 Prefix_Error: [错误]

@@ -4,6 +4,7 @@ import org.yaml.snakeyaml.Yaml;
 
 import java.io.*;
 import java.nio.file.Files;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Map;
 
@@ -15,8 +16,30 @@ public class MossFrp {
         loadConfig();
         loadLanguage();
         loadData();
+        checkStart(Arrays.toString(args));
         sendInfo(getLanguage("Start_Welcome")+getData("version"));
         sendInfo(getLanguage("Start_Copyright"));
+        sendInfo(getLanguage("Start_ToGuide"));
+        StartGuide.start();
+    }
+
+    //检查是否用CMD启动
+    //避免有用户直接点软件导致命令行界面出不来
+    public static void checkStart(String args) {
+        if (!args.contains("-MossFrp=nb")) {
+            try {
+                FileWriter fileWriter = new FileWriter("./run.bat");
+                fileWriter.write("@echo off \r\n");
+                fileWriter.write("java -server -Xmx50m -jar MossFrpStandard.jar -MossFrp=nb \r\n");
+                fileWriter.write("pause \r\n");
+                fileWriter.flush();
+                fileWriter.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            sendInfo(getLanguage("Start_CheckFailed"));
+            System.exit(1);
+        }
     }
 
     //yml数据全部转为Map存储在这一块
