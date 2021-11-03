@@ -12,3 +12,12 @@ language: zh_cn
 #light为简化报错
 #full为完整报错
 exceptionMode: full
+
+#系统类型
+#一般来说默认auto就行
+#如果自动判断不对，那就自己填系统名称
+#请复制下方的名称填入，若你填了个不知道啥就默认判断windows
+#auto
+#windows
+#linux
+systemType: auto

@@ -8,3 +8,5 @@ Prefix_Error: [错误]
 Prefix_Exception: [报错]
 Prefix_Unknown: [未知]
 Prefix_Command: [指令]
+Guide_CommandStart: 正在启动指令线程
+Guide_CommandStartComplete: 指令线程已启动

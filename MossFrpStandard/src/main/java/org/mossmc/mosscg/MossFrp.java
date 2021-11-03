@@ -25,7 +25,11 @@ public class MossFrp {
 
     //检查是否用CMD启动
     //避免有用户直接点软件导致命令行界面出不来
+    //linux直接忽略此方法
     public static void checkStart(String args) {
+        if (getSystemType().equals("linux")) {
+            return;
+        }
         if (!args.contains("-MossFrp=nb")) {
             try {
                 FileWriter fileWriter = new FileWriter("./run.bat");
@@ -123,6 +127,25 @@ public class MossFrp {
                 ex.printStackTrace();
             }
         }
+    }
+
+    //获取系统类型方法
+    //简单但是确实有效
+    public static String getSystemType() {
+        String getSystemName = System.getProperty("os.name");
+        if (getConfig("systemType").equals("auto")) {
+            if (getSystemName.toLowerCase().startsWith("win")) {
+                return "windows";
+            }
+            return "linux";
+        }
+        if (getConfig("systemType").equals("windows")) {
+            return "windows";
+        }
+        if (getConfig("systemType").equals("linux")) {
+            return "linux";
+        }
+        return "windows";
     }
 
     //简单的获取时间的一个方法
