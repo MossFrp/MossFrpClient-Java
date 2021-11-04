@@ -24,7 +24,50 @@ public class Command {
 
     //无情的指令读取工具方法
     //说白就是分割指令然后读取
-    public static void readCommand(String command) {
-
+    public static Boolean readCommand(String command) {
+        String[] cut = command.split("\\s+");
+        String part1 = "";
+        String part2 = "";
+        String part3 = "";
+        String part4 = "";
+        String part5 = "";
+        for (int i = 0; i < cut.length; i++) {
+            switch (i) {
+                case 0:
+                    part1 = cut[i];
+                    break;
+                case 1:
+                    part2 = cut[i];
+                    break;
+                case 2:
+                    part3 = cut[i];
+                    break;
+                case 3:
+                    part4 = cut[i];
+                    break;
+                case 4:
+                    part5 = cut[i];
+                    break;
+                default:
+                    break;
+            }
+        }
+        //指令部分（写注释只是为了方便看）
+        //空指令判断
+        if (command.length() < 1) {
+            sendWarn(getLanguage("Command_Unknown"));
+            return false;
+        }
+        switch (part1) {
+            case "help":
+                sendInfo(getLanguage("Command_Help"));
+                return true;
+            case "code":
+                sendInfo(getLanguage("Command_helpCodeMain"));
+                return true;
+            default:
+                sendWarn(getLanguage("Command_Unknown"));
+                return false;
+        }
     }
 }

@@ -11,6 +11,7 @@ public class StartGuide {
     public static void start() {
         sendInfo(getLanguage("Guide_CommandStart"));
         commandThread();
+        sendInfo(getLanguage("Guide_StartComplete"));
     }
 
     //指令系统线程
