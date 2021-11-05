@@ -11,8 +11,16 @@ Prefix_Command: [指令]
 Guide_CommandStart: 正在启动指令线程
 Guide_CommandStartComplete: 指令线程已启动
 Guide_StartComplete: 启动完成！输入“help”查看帮助！
+Code_DecodeFailed: 激活码解码失败！请确认你输入的激活码是否有误！
+Code_DecodeSuccess: 激活码解码成功！数据如下：
+Code_DecodeNode: 节点：
+Code_DecodeNumber: 编号：
+Code_DecodePortServer: 服务端口：
+Code_DecodePortRange: 可用端口：
 Command_Unknown: 未知指令！
 Command_Help: "\r\n--= MossFrp 指令帮助 =--
   \r\n查看帮助：help
   \r\n激活码指令：code"
-Command_helpCodeMain: 使用方法：code <new/remove>
+Command_HelpCodeMain: "\r\n--= MossFrp 指令帮助 =--
+  \r\n解析激活码：code decode"
+Command_HelpCodeDecode: 使用方法：code decode <激活码>

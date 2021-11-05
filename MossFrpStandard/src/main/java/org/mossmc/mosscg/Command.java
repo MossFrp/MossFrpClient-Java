@@ -25,6 +25,7 @@ public class Command {
     //无情的指令读取工具方法
     //说白就是分割指令然后读取
     public static Boolean readCommand(String command) {
+        //依据空格分割指令
         String[] cut = command.split("\\s+");
         String part1 = "";
         String part2 = "";
@@ -52,19 +53,33 @@ public class Command {
                     break;
             }
         }
-        //指令部分（写注释只是为了方便看）
+        //读取指令部分
         //空指令判断
         if (command.length() < 1) {
             sendWarn(getLanguage("Command_Unknown"));
             return false;
         }
         switch (part1) {
+            //帮助指令
             case "help":
                 sendInfo(getLanguage("Command_Help"));
                 return true;
+            //激活码相关指令
             case "code":
-                sendInfo(getLanguage("Command_helpCodeMain"));
-                return true;
+                if (part2.equals("decode")) {
+                    if (!part3.equals("")) {
+                        Code.decode(part3);
+                        return true;
+                    }
+                    sendInfo(getLanguage("Command_HelpCodeDecode"));
+                    return false;
+                }
+                if (part2.equals("new")) {
+
+                }
+                sendInfo(getLanguage("Command_HelpCodeMain"));
+                return false;
+            //未知指令判断
             default:
                 sendWarn(getLanguage("Command_Unknown"));
                 return false;
