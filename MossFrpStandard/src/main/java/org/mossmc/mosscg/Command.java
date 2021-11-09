@@ -64,18 +64,28 @@ public class Command {
             case "help":
                 sendInfo(getLanguage("Command_Help"));
                 return true;
+            //隧道相关指令
+            case "tunnel":
+                if (part2.equals("new")) {
+                    if (!part3.equals("") && !part4.equals("")) {
+                        sendInfo(getLanguage("CodeGuide_Start"));
+                        Code.codeGuide(part4,part3);
+                        return true;
+                    }
+                    sendInfo(getLanguage("Command_HelpTunnelNew"));
+                    return false;
+                }
+                sendInfo(getLanguage("Command_HelpTunnelMain"));
+                return false;
             //激活码相关指令
             case "code":
                 if (part2.equals("decode")) {
                     if (!part3.equals("")) {
-                        Code.decode(part3);
+                        Code.decode(part3,false);
                         return true;
                     }
                     sendInfo(getLanguage("Command_HelpCodeDecode"));
                     return false;
-                }
-                if (part2.equals("new")) {
-
                 }
                 sendInfo(getLanguage("Command_HelpCodeMain"));
                 return false;

@@ -17,10 +17,41 @@ Code_DecodeNode: 节点：
 Code_DecodeNumber: 编号：
 Code_DecodePortServer: 服务端口：
 Code_DecodePortRange: 可用端口：
+CodeGuide_Start: 正在启动隧道设置向导！
+CodeGuide_PrintLine: ----------===MossFrp===----------
+CodeGuide_PrintFrpName: 名称：
+CodeGuide_PrintToken: 激活码：
+CodeGuide_PrintProtocol: 穿透协议：
+CodeGuide_PrintLocalIP: 本地地址：
+CodeGuide_PrintRemoteIP: 远程地址：
+CodeGuide_PrintExit: 输入exit离开设置向导
+CodeGuide_Exit: 已退出设置向导
+CodeGuide_Complete: 设置完成！正在启动Frp！
+CodeGuide_ProtocolInfo: "\r\n请输入使用的穿透协议
+  \r\n可用协议：tcp udp
+  \r\nTips：我的世界JAVA版使用tcp协议"
+CodeGuide_ProtocolWarn: 参数错误！请输入tcp或udp！
+CodeGuide_LocalIPInfo: "\r\n请输入要映射的本地地址
+  \r\n千万不要在此输入端口！
+  \r\nTips：本地地址为 127.0.0.1，一般填这个即可"
+CodeGuide_LocalIPWarn: 参数错误！请输入合法的IP地址！
+CodeGuide_LocalIPWarnPort: 参数错误！请不要在此输入端口号！
+CodeGuide_LocalPortInfo: "\r\n请输入要映射的本地端口
+  \r\n可用范围：1-65535
+  \r\nTips：MC服务器默认为25565端口，联机请查看对局域网开放时提示的端口！"
+CodeGuide_LocalPortWarn: 参数错误！请输入合法的数字端口号！
+CodeGuide_RemotePortInfo: "\r\n请输入使用的远程端口
+  \r\n可用范围：[remotePortRange]
+  \r\nTips：就是别人连接用的端口"
+CodeGuide_RemotePortWarn: 请输入可用的范围！可用端口范围：[remotePortRange]
 Command_Unknown: 未知指令！
 Command_Help: "\r\n--= MossFrp 指令帮助 =--
   \r\n查看帮助：help
   \r\n激活码指令：code"
 Command_HelpCodeMain: "\r\n--= MossFrp 指令帮助 =--
   \r\n解析激活码：code decode"
+Command_HelpTunnelMain: "\r\n--= MossFrp 指令帮助 =--
+  \r\n新建隧道：tunnel new"
+Command_HelpTunnelNew: 使用方法：tunnel new <隧道名称> <激活码>
+#Command_HelpTunnelFile: 已创建配置文件！配置文件位于Frp运行目录下”/MossFrp/configs“文件夹，请在配置文件中设置好你的隧道配置，然后使用tunnel run <隧道名称>来运行隧道！
 Command_HelpCodeDecode: 使用方法：code decode <激活码>
