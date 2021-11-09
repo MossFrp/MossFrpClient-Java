@@ -44,6 +44,14 @@ CodeGuide_RemotePortInfo: "\r\n请输入使用的远程端口
   \r\n可用范围：[remotePortRange]
   \r\nTips：就是别人连接用的端口"
 CodeGuide_RemotePortWarn: 请输入可用的范围！可用端口范围：[remotePortRange]
+CodeGuide_AdvancedInfo: "\r\n请输入开启的高级选项前的数字
+  \r\n1.开启带宽压缩
+  \r\n2.开启链接加密
+  \r\n3.开启proxy协议v1
+  \r\n4.开启proxy协议v2
+  \r\n如开启链接加密+带宽压缩+proxy协议v2则填124
+  \r\n不开启请直接回车跳过"
+CodeGuide_AdvancedWarn: 请填入合法的数字选项！
 Command_Unknown: 未知指令！
 Command_Help: "\r\n--= MossFrp 指令帮助 =--
   \r\n查看帮助：help

@@ -127,6 +127,26 @@ public class Code {
             }
             sendErrorWarn(getLanguage("CodeGuide_RemotePortWarn").replace("[remotePortRange]",tunnelMap.get(prefix+"portStart")+"-"+tunnelMap.get(prefix+"portEnd")));
         }
+        while (true) {
+            printTunnelInfo(code,frpName);
+            sendInfo(getLanguage("CodeGuide_AdvancedInfo"));
+            String read = readInput();
+            if (read.equals("exit")) {
+                sendInfo(getLanguage("CodeGuide_Exit"));
+                return;
+            }
+            if (read.length() < 1) {
+                tunnelMap.put(code+"-"+frpName+"-"+"advancedSettings","0");
+                break;
+            }
+            try {
+                Integer.parseInt(read);
+                tunnelMap.put(code+"-"+frpName+"-"+"advancedSettings",read);
+                break;
+            } catch (NumberFormatException e) {
+                sendErrorWarn(getLanguage("CodeGuide_AdvancedWarn"));
+            }
+        }
         printTunnelInfo(code,frpName);
         sendInfo(getLanguage("CodeGuide_Complete"));
     }
