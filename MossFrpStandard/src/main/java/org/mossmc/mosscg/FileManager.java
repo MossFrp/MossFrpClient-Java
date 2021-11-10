@@ -33,17 +33,17 @@ public class FileManager {
             proxyProtocol = "v2";
         }
         //内容标识符替换
-        fileInput = fileInput.replace("[runMode]","1");
-        fileInput = fileInput.replace("[code]",tunnelMap.get(prefix+"token"));
-        fileInput = fileInput.replace("[token]",tunnelMap.get(prefix+"token"));
-        fileInput = fileInput.replace("[protocol]",tunnelMap.get(prefix+"frpType"));
-        fileInput = fileInput.replace("[localIP]",tunnelMap.get(prefix+"localIP"));
-        fileInput = fileInput.replace("[localPort]",tunnelMap.get(prefix+"portLocal"));
-        fileInput = fileInput.replace("[remoteIP]","null");
-        fileInput = fileInput.replace("[remotePort]",tunnelMap.get(prefix+"portOpen"));
-        fileInput = fileInput.replace("[compression]",compression);
-        fileInput = fileInput.replace("[encryption]",encryption);
-        fileInput = fileInput.replace("[proxyProtocol]",proxyProtocol);
+        fileInput = fileInput.replace("[runMode]","1")
+                .replace("[code]",tunnelMap.get(prefix+"token"))
+                .replace("[token]",tunnelMap.get(prefix+"token"))
+                .replace("[protocol]",tunnelMap.get(prefix+"frpType"))
+                .replace("[localIP]",tunnelMap.get(prefix+"localIP"))
+                .replace("[localPort]",tunnelMap.get(prefix+"portLocal"))
+                .replace("[remoteIP]","null")
+                .replace("[remotePort]",tunnelMap.get(prefix+"portOpen"))
+                .replace("[compression]",compression)
+                .replace("[encryption]",encryption)
+                .replace("[proxyProtocol]",proxyProtocol);
         //写入文件部分
         try {
             File saveFile = new File("./MossFrp/configs/"+code+"-"+frpName+".yml");
