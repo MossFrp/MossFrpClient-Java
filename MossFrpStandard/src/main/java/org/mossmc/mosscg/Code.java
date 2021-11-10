@@ -10,8 +10,11 @@ import java.util.Map;
 import static org.mossmc.mosscg.MossFrp.*;
 
 public class Code {
+    //俩缓存用的Map
     public static Map<String,String> codeMap = new HashMap<>();
     public static Map<String,String> tunnelMap = new HashMap<>();
+    //一个通过阻塞线程来读取用户输入的方法
+    //将用户输入内容转为String输出
     public static String readInput() {
         BufferedReader bufferedReader =new BufferedReader(new InputStreamReader(System.in, Charset.defaultCharset()));
         try {
@@ -21,15 +24,20 @@ public class Code {
             return "null";
         }
     }
+    //发送错误信息
+    //主要是用户输入错了内容发送错误没有sleep信息会被刷上去
+    //导致用户看不到
+    //所以为了方便好看就把sleep和send写一起单独写了一个方法
     public static void sendErrorWarn(String warn) {
         sendWarn(warn);
         try {
-            Thread.sleep(3000);
+            Thread.sleep(2000);
         } catch (InterruptedException e) {
             sendException(e);
         }
     }
-
+    //显示隧道信息的方法
+    //每次输入设置都会调用一次
     public static void printTunnelInfo(String code,String frpName) {
         String prefix = code+"-"+frpName+"-";
         sendInfo("");
@@ -42,11 +50,16 @@ public class Code {
         sendInfo(getLanguage("CodeGuide_PrintLine"));
         sendInfo(getLanguage("CodeGuide_PrintExit"));
     }
-
+    //激活码设置向导
+    //方便一些萌新不会用做了一个向导
+    //不然我挺想做全指令的其实
     public static void codeGuide(String code,String frpName) {
+        //进行激活码解码然后存入激活码缓存
         if (!decode(code,true)) {
             return;
         }
+        //将数据存入隧道缓存
+        //方便后续调用
         String prefix = code+"-"+frpName+"-";
         tunnelMap.put(prefix+"token",code);
         tunnelMap.put(prefix+"frpType","");
@@ -57,6 +70,7 @@ public class Code {
         tunnelMap.put(prefix+"portStart",codeMap.get(code+"-portStart"));
         tunnelMap.put(prefix+"portEnd",codeMap.get(code+"-portEnd"));
         tunnelMap.put(prefix+"node",codeMap.get(code+"-node"));
+        //设置隧道协议
         while (true) {
             printTunnelInfo(code,frpName);
             sendInfo(getLanguage("CodeGuide_ProtocolInfo"));
@@ -66,11 +80,12 @@ public class Code {
                 return;
             }
             if (read.equals("tcp") || read.equals("udp")) {
-                tunnelMap.put(code+"-"+frpName+"-"+"frpType",read);
+                tunnelMap.put(prefix+"frpType",read);
                 break;
             }
             sendErrorWarn(getLanguage("CodeGuide_ProtocolWarn"));
         }
+        //设置本地IP地址
         while (true) {
             printTunnelInfo(code,frpName);
             sendInfo(getLanguage("CodeGuide_LocalIPInfo"));
@@ -84,11 +99,12 @@ public class Code {
                 continue;
             }
             if (read.length() > 0) {
-                tunnelMap.put(code+"-"+frpName+"-"+"localIP",read);
+                tunnelMap.put(prefix+"localIP",read);
                 break;
             }
             sendErrorWarn(getLanguage("CodeGuide_LocalIPWarn"));
         }
+        //设置本地端口
         while (true) {
             printTunnelInfo(code,frpName);
             sendInfo(getLanguage("CodeGuide_LocalPortInfo"));
@@ -105,11 +121,12 @@ public class Code {
                 continue;
             }
             if (port > 0 && port <= 65535) {
-                tunnelMap.put(code+"-"+frpName+"-"+"portLocal",read);
+                tunnelMap.put(prefix+"portLocal",read);
                 break;
             }
             sendErrorWarn(getLanguage("CodeGuide_LocalPortWarn"));
         }
+        //设置远程端口
         while (true) {
             printTunnelInfo(code,frpName);
             sendInfo(getLanguage("CodeGuide_RemotePortInfo").replace("[remotePortRange]",tunnelMap.get(prefix+"portStart")+"-"+tunnelMap.get(prefix+"portEnd")));
@@ -122,11 +139,12 @@ public class Code {
             int end = Integer.parseInt(tunnelMap.get(prefix+"portEnd"));
             int select = Integer.parseInt(read);
             if (select >= start && select <= end) {
-                tunnelMap.put(code+"-"+frpName+"-"+"portOpen",read);
+                tunnelMap.put(prefix+"portOpen",read);
                 break;
             }
             sendErrorWarn(getLanguage("CodeGuide_RemotePortWarn").replace("[remotePortRange]",tunnelMap.get(prefix+"portStart")+"-"+tunnelMap.get(prefix+"portEnd")));
         }
+        //设置高级选项
         while (true) {
             printTunnelInfo(code,frpName);
             sendInfo(getLanguage("CodeGuide_AdvancedInfo"));
@@ -136,12 +154,12 @@ public class Code {
                 return;
             }
             if (read.length() < 1) {
-                tunnelMap.put(code+"-"+frpName+"-"+"advancedSettings","0");
+                tunnelMap.put(prefix+"advancedSettings","0");
                 break;
             }
             try {
                 Integer.parseInt(read);
-                tunnelMap.put(code+"-"+frpName+"-"+"advancedSettings",read);
+                tunnelMap.put(prefix+"advancedSettings",read);
                 break;
             } catch (NumberFormatException e) {
                 sendErrorWarn(getLanguage("CodeGuide_AdvancedWarn"));
@@ -149,10 +167,15 @@ public class Code {
         }
         printTunnelInfo(code,frpName);
         sendInfo(getLanguage("CodeGuide_Complete"));
+        //新建独立线程运行frp
+        //保证运行不把主线程玩炸了
+        FrpManager.newFrpThread(code,frpName);
     }
-
+    //激活码解码方法
+    //cache选项为是否存入缓存
     public static Boolean decode(String code, boolean cache) {
         try {
+            //解码部分
             int nodeNameLength = Integer.parseInt(code.substring(0,1));
             String nodeName = code.substring(1,nodeNameLength+1);
             int auth = Integer.parseInt(code.substring(nodeNameLength+1,nodeNameLength+6));
@@ -162,11 +185,13 @@ public class Code {
             int portEnd = portServer + 9;
             int number = Integer.parseInt(code.substring(nodeNameLength+11,nodeNameLength+18));
             number = number - auth;
+            //显示部分
             sendInfo(getLanguage("Code_DecodeSuccess"));
             sendInfo(getLanguage("Code_DecodeNode")+nodeName);
             sendInfo(getLanguage("Code_DecodeNumber")+number);
             sendInfo(getLanguage("Code_DecodePortServer")+portServer);
             sendInfo(getLanguage("Code_DecodePortRange")+portStart+"-"+portEnd);
+            //缓存部分
             if (cache) {
                 codeMap.put(code+"-code", code);
                 codeMap.put(code+"-node", nodeName);

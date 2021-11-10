@@ -267,6 +267,16 @@ public class MossFrp {
         if (!languageDir.exists()) {
             languageDir.mkdir();
         }
+        //frp文件夹检查
+        File frpDir = new File("./MossFrp/frps");
+        if (!frpDir.exists()) {
+            frpDir.mkdir();
+        }
+        //frp配置文件夹检查
+        File frpConfigDir = new File("./MossFrp/configs");
+        if (!frpConfigDir.exists()) {
+            frpConfigDir.mkdir();
+        }
         //语言文件检查
         File languageFile = new File("./MossFrp/languages/zh_cn.yml");
         if (!languageFile.exists()) {

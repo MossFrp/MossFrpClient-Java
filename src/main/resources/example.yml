@@ -1,27 +1,38 @@
-#MossFrp激活码
-code: nope
-#协议
+#运行模式（必填）
+#1、MossFrp激活码模式
+#2、自建节点模式
+#注释后括号内数字代表对应模式需填写此项
+mode: 1
+#MossFrp激活码（1）
+code: aaaaaaaaaaaaaaa
+#Token密码（2）
+#用于服务端身份验证
+token: 123456
+#协议（1/2）
 #MC一般是tcp
 protocol: tcp
-#本地地址
+#本地地址（1/2）
 #一般填127.0.0.1即可
 localIP: 127.0.0.1
-#本地端口
+#本地端口（1/2）
 #MC服务器默认25565
 #联机请填开放端口
 #即开启局域网游戏后聊天栏提示的端口
 localPort: 25565
-#服务器端口
+#服务器地址（2）
+#frp服务器的地址
+remoteIP: test.mossfrp.cn
+#服务器端口（1/2）
 #请填写激活码对应可用端口范围内的一个
 remotePort: 40021
-#启用带宽压缩
+#启用带宽压缩（1/2）
 #据说会有一点点延迟
 #带宽不够用可以开启
 use_compression: false
-#启用链接加密
+#启用链接加密（1/2）
 #讲真没啥用，需要可以开启
 use_encryption: false
-#开启protocol
+#开启protocol（1/2）
 #用于Bungee转发真实IP
 #请在Bungee配置文件中设置proxy_protocol: true
 #然后在此设置参数为 v2
