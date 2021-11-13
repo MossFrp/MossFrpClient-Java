@@ -1,9 +1,137 @@
-Start_Welcome: Welcome to use MossFrp, version：
+Start_Welcome: "Welcome to use MossFrp, version:"
 Start_Copyright: This plugin client and standard version client are copyrighted by Bilibili@墨守MossCG.
 Start_ToGuide: Starting boot guide.
+Start_CheckFailed: Start failed! Please start MossFrp client with CMD, and add arguments '-MossFrp=nb'!
+Exit_Start: Exiting MossFrp client......
+Exit_Finished: MossFrp client have already exit! Thanks for using!
 Prefix_Info: [Info]
 Prefix_Warn: [Warn]
 Prefix_Error: [Error]
 Prefix_Exception: [Exception]
 Prefix_Unknown: [Unknown]
 Prefix_Command: [Command]
+Guide_CommandStart: Starting command thread......
+Guide_CommandStartComplete: Command thread started!
+Guide_ProcessStart: Starting frp process manager core......
+Guide_ProcessStartComplete: Frp process manager core started!
+Guide_StartComplete: Start complete! Input 'help' for more infomation!
+Code_DecodeFailed: CDK decode failed! Please comfirm your CDK!
+Code_DecodeSuccess: CDK decode success! Infomation below.
+Code_DecodeNode: "Node: "
+Code_DecodeNumber: "Number: "
+Code_DecodePortServer: "Server Port: "
+Code_DecodePortRange: "Available Port: "
+CodeGuide_Start: Starting tunnel settings guide......
+CodeGuide_PrintLine: ----------===MossFrp===----------
+CodeGuide_PrintFrpName: "Name: "
+CodeGuide_PrintToken: "Token: "
+CodeGuide_PrintProtocol: "Protocol: "
+CodeGuide_PrintLocalIP: "Local host: "
+CodeGuide_PrintRemoteIP: "Remote Host: "
+CodeGuide_PrintExit: Input 'exit' to leave tunnel settings guide.
+CodeGuide_Exit: Exited tunnel settings guide!
+CodeGuide_Complete: Setting complete! Starting your tunnel......
+CodeGuide_ProtocolInfo: "\r\nPlease input the protocol of tunnel.
+  \r\nAvailable protocol:tcp udp
+  \r\nTips: Minecraft JAVA version use 'tcp' protocol."
+CodeGuide_ProtocolWarn: Argument wrong! Input 'tcp' or 'udp'!
+CodeGuide_LocalIPInfo: "\r\nPlease input the local host of tunnel.
+  \r\nDON'T INPUT PORT THERE!
+  \r\nTips: You can input '127.0.0.1' as local host."
+CodeGuide_LocalIPWarn: Argument wrong! Please input a availble hostname!
+CodeGuide_LocalIPWarnPort: Argument wrong! DON'T INPUT PORT THERE!
+CodeGuide_LocalPortInfo: "\r\nPlease input the local port of tunnel.
+  \r\nAvailable range: 1-65535
+  \r\nTips: Minecraft server default is 25565. If you are LAN game, just see which port the game opened for LAN game and input it here."
+CodeGuide_LocalPortWarn: Argument wrong! Input a number within range of 1-25565!
+CodeGuide_RemotePortInfo: "\r\nPlease input the remote port of tunnel.
+  \r\nAvailable range: [remotePortRange]
+  \r\nTips: Means the port your friends use to connect."
+CodeGuide_RemotePortWarn: Argument wrong! Input a number within range of [remotePortRange].
+CodeGuide_AdvancedInfo: "\r\nPlease input the number behind the advanced settings below.
+  \r\n1.Enable bandwidth compression.
+  \r\n2.Enable connection encryption.
+  \r\n3.Enable proxy protocol version 1.
+  \r\n4.Enable proxy protocol version 2.
+  \r\n5.Remember this tunnel. (Start automatically the next time you use MossFrp client.)
+  \r\nFor example: To enable bandwidth compression and connection encryption and remember this tunnel, input '125'.
+  \r\nPress enter to skip these settings."
+CodeGuide_AdvancedWarn: Argument wrong! Input a available number or use enter to skip these settings.
+File_WriteConfigStart: Writing Frp configuration file.......
+File_WriteConfigSuccess: The configuration file was written successfully.
+File_WriteConfigFailed: The configuration file was written failed!
+File_WriteSaveStart: Writing save configuration file.......
+File_WriteSaveSuccess: The save configuration file was written successfully.
+File_WriteSaveFailed: The save configuration file was written failed!
+Process_Start: Starting Frp......
+Process_Failed: Frp start failed!
+Process_Success: Frp start successed!
+Frp_ReadError: An error has occurred while reading Frp output message.
+Frp_InfoLogin: Successfully login info remote Frp server!
+Frp_InfoStarting: Starting tunnel......
+Frp_InfoStartSuccess: Tunnel start successfully! Use 'list' to see the list of tunnel.
+Frp_InfoPortUsed: Port already used! Please change your remote port!
+Frp_InfoErrorEOF: Connection error! EOF.
+Frp_InfoReconnecting: Trying reconnect to Frp server......
+Frp_InfoConnectNoRespond: Connection failed! There was no respond from Frp server! Check if the Frp server down of your MossFrp CDK is outdated!
+Frp_InfoConnectReject: Connection failed! Your connection was rejected by server! Check if the Frp server down of your MossFrp CDK is outdated!
+Frp_InfoConnectTokenWrong: Connection failed! Wrong token! Check if the Frp server down of your MossFrp CDK is outdated or wrong!
+Command_Unknown: Unknown command.
+Command_TunnelAlreadyExist: Tunnel already existed! Please change the name of tunnel.
+Command_Help: "\r\n--= MossFrp Command Help =--
+  \r\nFor Help: help
+  \r\nCDK command: code
+  \r\nTunnel command: tunnel
+  \r\nTips: Don't input <> while input arguments."
+Command_HelpCodeMain: "\r\n--= MossFrp Command Help =--
+  \r\nDecode CDK: code decode
+  \r\nTips: Don't input <> while input arguments."
+Command_HelpTunnelMain: "\r\n--= MossFrp Command Help =--
+  \r\nNew tunnel: tunnel new
+  \r\nTips: Don't input <> while input arguments."
+Command_HelpTunnelNew: "Usage: tunnel new <name> <CDK>"
+#Command_HelpTunnelFile: Created configuration file! Location is '/MossFrp/configs 'folder, please set your tunnel in it and use command 'tunnel run <name>' to run the tunnel.
+Command_HelpCodeDecode: "Usage: code decode <CDK>"
+SaveFile: "#MossFrp Client Custom Configuration File \r\n
+#Mode of run\r\n
+#1. MossFrp CDK mode. \r\n
+#2. Custom Frp server mode. \r\n
+#The number in brackets after the note means that in that run mode needs to be filled in. \r\n
+mode: [runMode] \r\n
+#MossFrp CDK.(1) \r\n
+code: [code] \r\n
+#Connect token.(2) \r\n
+#Used for server auth. \r\n
+token: [token] \r\n
+#Protocol of tunnel.(1/2) \r\n
+#Minecraft JAVA version is tcp. \r\n
+protocol: [protocol] \r\n
+#Local host.(1/2) \r\n
+#Just input '127.0.0.1' is enough. \r\n
+localIP: [localIP] \r\n
+#Local port.(1/2) \r\n
+#Minecraft server default is 25565. \r\n
+#If you are LAN game, \r\n
+#just see in the chat which port the game opened for LAN game and input it here. \r\n
+localPort: [localPort] \r\n
+#Frp server address.(2) \r\n
+#Input your Frp server address here. \r\n
+#Incloud Frp server connection port. \r\n
+remoteIP: [remoteIP] \r\n
+#Server port of Frp server.(1/2) \r\n
+#If use MossFrp mode, input one of the available port MossFrp gave you here. \r\n
+#If use Custom mode, input available port here. \r\n
+remotePort: [remotePort] \r\n
+#Enable bandwidth compression.(1/2) \r\n
+#Maybe cause a bit of delay. \r\n
+#If your bandwidth is out of use, you can try open it. \r\n
+use_compression: [compression] \r\n
+#Enable connection encryption.(1/2) \r\n
+#Actually, it's not useful...... But you can open it if you want. \r\n
+use_encryption: [encryption] \r\n
+#Enable proxy protocol.(1/2) \r\n
+#For Minecraft Bungee to forward real IP instead using 127.0.0.1 as the IP of all the players.\r\n
+#Please set 'proxy_protocol: true' and 'ip_forward: true' in Bungee configuration. \r\n
+#And set 'BungeeCord: true' in Spigot configuration. \r\n
+#Then set argument there as 'v2' \r\n
+proxy_protocol_version: [proxyProtocol] \r\n"

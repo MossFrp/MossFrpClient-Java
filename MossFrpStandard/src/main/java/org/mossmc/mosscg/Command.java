@@ -11,6 +11,7 @@ public class Command {
     //然后交给readCommand方法解析
     public static void listenCommand() {
         BufferedReader bufferedReader =new BufferedReader(new InputStreamReader(System.in, Charset.defaultCharset()));
+        //死循环监听
         while (true){
             try {
                 String command = bufferedReader.readLine();
@@ -25,6 +26,9 @@ public class Command {
     //无情的指令读取工具方法
     //说白就是分割指令然后读取
     public static Boolean readCommand(String command) {
+        if (command == null) {
+            return true;
+        }
         //依据空格分割指令
         String[] cut = command.split("\\s+");
         String part1 = "";
@@ -60,6 +64,10 @@ public class Command {
             return false;
         }
         switch (part1) {
+            //退出指令
+            case "stop":
+                System.exit(0);
+                return true;
             //帮助指令
             case "help":
                 sendInfo(getLanguage("Command_Help"));
@@ -68,6 +76,10 @@ public class Command {
             case "tunnel":
                 if (part2.equals("new")) {
                     if (!part3.equals("") && !part4.equals("")) {
+                        if (FrpManager.frpStatusMap.containsKey(part3)) {
+                            sendInfo(getLanguage("Command_TunnelAlreadyExist"));
+                            return false;
+                        }
                         sendInfo(getLanguage("CodeGuide_Start"));
                         Code.codeGuide(part4,part3);
                         return true;
@@ -75,6 +87,9 @@ public class Command {
                     sendInfo(getLanguage("Command_HelpTunnelNew"));
                     return false;
                 }
+                //if (part2.equals("remove")) {
+                //    return false;
+                //}
                 sendInfo(getLanguage("Command_HelpTunnelMain"));
                 return false;
             //激活码相关指令

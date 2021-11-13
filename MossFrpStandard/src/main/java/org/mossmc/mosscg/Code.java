@@ -169,7 +169,7 @@ public class Code {
         sendInfo(getLanguage("CodeGuide_Complete"));
         //新建独立线程运行frp
         //保证运行不把主线程玩炸了
-        FrpManager.newFrpThread(code,frpName);
+        FrpManager.runFrp(code,frpName);
     }
     //激活码解码方法
     //cache选项为是否存入缓存

@@ -73,7 +73,7 @@ public class FileManager {
         try{
             File dirFile = new File(dirPath);
             File cfgFile = new File(dirPath+"/frpc.ini");
-            File frpFile = new File(dirPath+"/frpc.exe");
+            File frpFile = new File(dirPath+"/frpc-"+tunnelMap.get(prefix+"node")+"-"+frpName+".exe");
             if (!dirFile.exists()) {
                 if (!dirFile.mkdir()) {
                     sendWarn(getLanguage("File_WriteConfigFailed"));

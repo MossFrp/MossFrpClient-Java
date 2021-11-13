@@ -6,6 +6,7 @@ import java.io.*;
 import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Iterator;
 import java.util.Map;
 
 public class MossFrp {
@@ -34,6 +35,7 @@ public class MossFrp {
             try {
                 FileWriter fileWriter = new FileWriter("./run.bat");
                 fileWriter.write("@echo off \r\n");
+                fileWriter.write("title MossFrp Standard Client \r\n");
                 fileWriter.write("java -server -Xmx50m -jar MossFrpStandard.jar -MossFrp=nb \r\n");
                 fileWriter.write("pause \r\n");
                 fileWriter.flush();
@@ -271,6 +273,18 @@ public class MossFrp {
         File frpDir = new File("./MossFrp/frps");
         if (!frpDir.exists()) {
             frpDir.mkdir();
+        }
+        //frp进程核心检查
+        File frpProcessFile = new File("./MossFrp/frps/MossFrpProcess.jar");
+        if (!frpProcessFile.exists()) {
+            InputStream in = InputStream.class.getResourceAsStream("/MossFrpProcess.jar");
+            try {
+                assert in != null;
+                Files.copy(in, frpProcessFile.toPath());
+            } catch (IOException e) {
+                e.printStackTrace();
+                System.exit(1);
+            }
         }
         //frp配置文件夹检查
         File frpConfigDir = new File("./MossFrp/configs");

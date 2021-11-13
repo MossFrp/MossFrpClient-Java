@@ -9,6 +9,8 @@ public class StartGuide {
     //启动引导
     //我咋感觉我写啥都要单独写个引导
     public static void start() {
+        sendInfo(getLanguage("Guide_ProcessStart"));
+        FrpManager.loadProcessThread();
         sendInfo(getLanguage("Guide_CommandStart"));
         commandThread();
         sendInfo(getLanguage("Guide_StartComplete"));

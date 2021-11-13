@@ -2,6 +2,8 @@ Start_Welcome: 欢迎使用MossFrp 版本：
 Start_Copyright: 本插件&独立客户端均为B站@墨守MossCG版权所有
 Start_ToGuide: 正在启动运行引导
 Start_CheckFailed: 启动失败！请使用命令行启动MossFrp！并添加启动参数：-MossFrp=nb
+Exit_Start: 正在退出MossFrp客户端！
+Exit_Finished: MossFrp客户端已退出！感谢使用！
 Prefix_Info: [信息]
 Prefix_Warn: [警告]
 Prefix_Error: [错误]
@@ -10,6 +12,8 @@ Prefix_Unknown: [未知]
 Prefix_Command: [指令]
 Guide_CommandStart: 正在启动指令线程
 Guide_CommandStartComplete: 指令线程已启动
+Guide_ProcessStart: 正在启动frp核心管理线程
+Guide_ProcessStartComplete: frp核心管理线程已启动
 Guide_StartComplete: 启动完成！输入“help”查看帮助！
 Code_DecodeFailed: 激活码解码失败！请确认你输入的激活码是否有误！
 Code_DecodeSuccess: 激活码解码成功！数据如下：
@@ -59,7 +63,21 @@ File_WriteConfigFailed: 配置文件写入失败！
 File_WriteSaveSuccess: 保存配置文件写入完成
 File_WriteSaveFailed: 保存配置文件写入失败！
 File_WriteSaveStart: 正在写入frp保存配置文件
+Process_Start: 正在启动frp！
+Process_Failed: frp启动失败！
+Process_Success: frp启动成功！
+Frp_ReadError: 读取frp输出时发生错误！
+Frp_InfoLogin: 成功登录到远程Frp节点！
+Frp_InfoStarting: 正在启动隧道！
+Frp_InfoStartSuccess: 隧道启动成功！请使用指令 list 查看隧道列表！
+Frp_InfoPortUsed: 检测到端口被占用！已停止frp！请修改端口！
+Frp_InfoErrorEOF: 链接异常！错误：EOF
+Frp_InfoReconnecting: 正在尝试重新链接到服务器！
+Frp_InfoConnectNoRespond: 链接失败：目标服务器无响应！请检查远程frp服务器是否在线或MossFrp激活码是否到期！
+Frp_InfoConnectReject: 链接失败：目标服务器拒绝连接！请检查远程frp服务器是否在线或MossFrp激活码是否到期！
+Frp_InfoConnectTokenWrong: 链接失败：token错误！请检查远程frp服务器token是否对应本地token或MossFrp激活码是否正确！
 Command_Unknown: 未知指令！
+Command_TunnelAlreadyExist: 隧道已存在！请更换隧道名称！
 Command_Help: "\r\n--= MossFrp 指令帮助 =--
   \r\n查看帮助：help
   \r\n激活码指令：code
@@ -111,6 +129,7 @@ use_compression: [compression] \r\n
 use_encryption: [encryption] \r\n
 #开启protocol（1/2） \r\n
 #用于Bungee转发真实IP \r\n
-#请在Bungee配置文件中设置proxy_protocol: true \r\n
-#然后在此设置参数为 v2 \r\n
+#请在Bungee配置文件中设置proxy_protocol: true以及ip_forward: true \r\n
+#然后在Spigot配置文件中设置BungeeCord: true \r\n
+#最后在此设置参数为 v2 \r\n
 proxy_protocol_version: [proxyProtocol] \r\n"

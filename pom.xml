@@ -11,6 +11,7 @@
     <modules>
         <module>MossFrpPlugin</module>
         <module>MossFrpStandard</module>
+        <module>MossFrpProcess</module>
     </modules>
 
     <properties>
