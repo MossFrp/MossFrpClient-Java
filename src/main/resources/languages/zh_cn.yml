@@ -2,6 +2,8 @@ Start_Welcome: 欢迎使用MossFrp 版本：
 Start_Copyright: 本插件&独立客户端均为B站@墨守MossCG版权所有
 Start_ToGuide: 正在启动运行引导
 Start_CheckFailed: 启动失败！请使用命令行启动MossFrp！并添加启动参数：-MossFrp=nb
+Language_Unknown: 未知的语言名称！
+Language_Changed: 成功切换语言为中文(简体)！
 Exit_Start: 正在退出MossFrp客户端！
 Exit_Finished: MossFrp客户端已退出！感谢使用！
 Prefix_Info: [信息]
@@ -15,6 +17,8 @@ Guide_CommandStartComplete: 指令线程已启动
 Guide_ProcessStart: 正在启动frp核心管理线程
 Guide_ProcessStartComplete: frp核心管理线程已启动
 Guide_StartComplete: 启动完成！输入“help”查看帮助！
+Guide_LoadSaveStart: 正在加载保存配置文件
+Guide_LoadSaveComplete: 保存配置文件加载完成！
 Code_DecodeFailed: 激活码解码失败！请确认你输入的激活码是否有误！
 Code_DecodeSuccess: 激活码解码成功！数据如下：
 Code_DecodeNode: 节点：
@@ -63,9 +67,11 @@ File_WriteConfigFailed: 配置文件写入失败！
 File_WriteSaveSuccess: 保存配置文件写入完成
 File_WriteSaveFailed: 保存配置文件写入失败！
 File_WriteSaveStart: 正在写入frp保存配置文件
-Process_Start: 正在启动frp！
+Process_Start: 正在启动Frp！
+Process_Stop: 已关闭隧道[tunnelName]！
 Process_Failed: frp启动失败！
 Process_Success: frp启动成功！
+List_Send: Frp隧道：[tunnelName] - [tunnelStatus]
 Frp_ReadError: 读取frp输出时发生错误！
 Frp_InfoLogin: 成功登录到远程Frp节点！
 Frp_InfoStarting: 正在启动隧道！
@@ -80,56 +86,60 @@ Command_Unknown: 未知指令！
 Command_TunnelAlreadyExist: 隧道已存在！请更换隧道名称！
 Command_Help: "\r\n--= MossFrp 指令帮助 =--
   \r\n查看帮助：help
-  \r\n激活码指令：code
   \r\n隧道指令：tunnel
-  \r\nTips：输入的时候别带括号<>哦！"
-Command_HelpCodeMain: "\r\n--= MossFrp 指令帮助 =--
-  \r\n解析激活码：code decode
+  \r\n切换语言：lang
   \r\nTips：输入的时候别带括号<>哦！"
 Command_HelpTunnelMain: "\r\n--= MossFrp 指令帮助 =--
   \r\n新建隧道：tunnel new
+  \r\n删除隧道：tunnel remove
+  \r\nTips：输入的时候别带括号<>哦！"
+Command_HelpLangMain: "\r\n--= MossFrp 指令帮助 =--
+  \r\n切换语言：lang <语言>
+  \r\n可用语言列表：zh_cn en_us
   \r\nTips：输入的时候别带括号<>哦！"
 Command_HelpTunnelNew: 使用方法：tunnel new <隧道名称> <激活码>
+Command_HelpTunnelRemove: 使用方法：tunnel remove <隧道名称>
+Command_TunnelNotExist: 隧道不存在！请使用list指令查看隧道列表！
+Command_TunnelStopping: 正在关闭隧道！请等待......
 #Command_HelpTunnelFile: 已创建配置文件！配置文件位于Frp运行目录下”/MossFrp/configs“文件夹，请在配置文件中设置好你的隧道配置，然后使用tunnel run <隧道名称>来运行隧道！
-Command_HelpCodeDecode: 使用方法：code decode <激活码>
-SaveFile: "#MossFrp客户端自定义配置文件 \r\n
-#运行模式（必填） \r\n
-#1、MossFrp激活码模式 \r\n
-#2、自建节点模式 \r\n
-#注释后括号内数字代表对应模式需填写此项 \r\n
-mode: [runMode] \r\n
-#MossFrp激活码（1） \r\n
-code: [code] \r\n
-#Token密码（2） \r\n
-#用于服务端身份验证 \r\n
-token: [token] \r\n
-#协议（1/2） \r\n
-#MC一般是tcp \r\n
-protocol: [protocol] \r\n
-#本地地址（1/2） \r\n
-#一般填127.0.0.1即可 \r\n
-localIP: [localIP] \r\n
-#本地端口（1/2） \r\n
-#MC服务器默认25565 \r\n
-#联机请填开放端口 \r\n
-#即开启局域网游戏后聊天栏提示的端口 \r\n
-localPort: [localPort] \r\n
-#服务器地址（2） \r\n
-#frp服务器的地址 \r\n
-remoteIP: [remoteIP] \r\n
-#服务器端口（1/2） \r\n
-#请填写激活码对应可用端口范围内的一个 \r\n
-remotePort: [remotePort] \r\n
-#启用带宽压缩（1/2） \r\n
-#据说会有一点点延迟 \r\n
-#带宽不够用可以开启 \r\n
-use_compression: [compression] \r\n
-#启用链接加密（1/2） \r\n
-#讲真没啥用，需要可以开启 \r\n
-use_encryption: [encryption] \r\n
-#开启protocol（1/2） \r\n
-#用于Bungee转发真实IP \r\n
-#请在Bungee配置文件中设置proxy_protocol: true以及ip_forward: true \r\n
-#然后在Spigot配置文件中设置BungeeCord: true \r\n
-#最后在此设置参数为 v2 \r\n
-proxy_protocol_version: [proxyProtocol] \r\n"
+SaveFile: "#MossFrp客户端自定义配置文件
+\r\n#运行模式（必填）
+\r\n#1、MossFrp激活码模式
+\r\n#2、自建节点模式 \
+\r\n#注释后括号内数字代表对应模式需填写此项
+\r\nmode: [runMode]
+\r\n#MossFrp激活码（1）
+\r\ncode: [code]
+\r\n#Token密码（2）
+\r\n#用于服务端身份验证
+\r\ntoken: [token]
+\r\n#协议（1/2）
+\r\n#MC一般是tcp
+\r\nprotocol: [protocol]
+\r\n#本地地址（1/2）
+\r\n#一般填127.0.0.1即可
+\r\nlocalIP: [localIP]
+\r\n#本地端口（1/2）
+\r\n#MC服务器默认25565
+\r\n#联机请填开放端口
+\r\n#即开启局域网游戏后聊天栏提示的端口
+\r\nlocalPort: [localPort]
+\r\n#服务器地址（2）
+\r\n#frp服务器的地址
+\r\nremoteIP: [remoteIP]
+\r\n#服务器端口（1/2）
+\r\n#请填写激活码对应可用端口范围内的一个
+\r\nremotePort: [remotePort]
+\r\n#启用带宽压缩（1/2）
+\r\n#据说会有一点点延迟
+\r\n#带宽不够用可以开启
+\r\nuse_compression: [compression]
+\r\n#启用链接加密（1/2）
+\r\n#讲真没啥用，需要可以开启
+\r\nuse_encryption: [encryption]
+\r\n#开启protocol（1/2）
+\r\n#用于Bungee转发真实IP
+\r\n#请在Bungee配置文件中设置proxy_protocol: true以及ip_forward: true
+\r\n#然后在Spigot配置文件中设置BungeeCord: true
+\r\n#最后在此设置参数为 v2
+\r\nproxy_protocol_version: [proxyProtocol] "

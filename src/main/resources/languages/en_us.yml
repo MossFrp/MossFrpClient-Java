@@ -2,6 +2,8 @@ Start_Welcome: "Welcome to use MossFrp, version:"
 Start_Copyright: This plugin client and standard version client are copyrighted by Bilibili@墨守MossCG.
 Start_ToGuide: Starting boot guide.
 Start_CheckFailed: Start failed! Please start MossFrp client with CMD, and add arguments '-MossFrp=nb'!
+Language_Unknown: Unknown language!
+Language_Changed: Successfully change language to English(us)!
 Exit_Start: Exiting MossFrp client......
 Exit_Finished: MossFrp client have already exit! Thanks for using!
 Prefix_Info: [Info]
@@ -15,6 +17,8 @@ Guide_CommandStartComplete: Command thread started!
 Guide_ProcessStart: Starting frp process manager core......
 Guide_ProcessStartComplete: Frp process manager core started!
 Guide_StartComplete: Start complete! Input 'help' for more infomation!
+Guide_LoadSaveStart: Loading saved configuration......
+Guide_LoadSaveComplete: Successfully loaded saved configuration!
 Code_DecodeFailed: CDK decode failed! Please comfirm your CDK!
 Code_DecodeSuccess: CDK decode success! Infomation below.
 Code_DecodeNode: "Node: "
@@ -64,8 +68,10 @@ File_WriteSaveStart: Writing save configuration file.......
 File_WriteSaveSuccess: The save configuration file was written successfully.
 File_WriteSaveFailed: The save configuration file was written failed!
 Process_Start: Starting Frp......
+Process_Stop: Stopped tunnel [tunnelName]!
 Process_Failed: Frp start failed!
 Process_Success: Frp start successed!
+List_Send: "Tunnel: [tunnelName] - [tunnelStatus]"
 Frp_ReadError: An error has occurred while reading Frp output message.
 Frp_InfoLogin: Successfully login info remote Frp server!
 Frp_InfoStarting: Starting tunnel......
@@ -79,19 +85,23 @@ Frp_InfoConnectTokenWrong: Connection failed! Wrong token! Check if the Frp serv
 Command_Unknown: Unknown command.
 Command_TunnelAlreadyExist: Tunnel already existed! Please change the name of tunnel.
 Command_Help: "\r\n--= MossFrp Command Help =--
-  \r\nFor Help: help
-  \r\nCDK command: code
+  \r\nFor help: help
   \r\nTunnel command: tunnel
-  \r\nTips: Don't input <> while input arguments."
-Command_HelpCodeMain: "\r\n--= MossFrp Command Help =--
-  \r\nDecode CDK: code decode
+  \r\nChange language: lang
   \r\nTips: Don't input <> while input arguments."
 Command_HelpTunnelMain: "\r\n--= MossFrp Command Help =--
   \r\nNew tunnel: tunnel new
+  \r\nRemove tunnel: tunnel remove
+  \r\nTips: Don't input <> while input arguments."
+Command_HelpLangMain: "\r\n--= MossFrp Command Help =--
+  \r\nChange language: lang <language>
+  \r\nSupport languages: zh_cn en_us
   \r\nTips: Don't input <> while input arguments."
 Command_HelpTunnelNew: "Usage: tunnel new <name> <CDK>"
+Command_HelpTunnelRemove: "Usage: tunnel remove <name>"
+Command_TunnelNotExist: "Tunnel not exists! Please use command 'list' to check the tunnel list."
+Command_TunnelStopping: "Stopping the tunnel...... Please wait......"
 #Command_HelpTunnelFile: Created configuration file! Location is '/MossFrp/configs 'folder, please set your tunnel in it and use command 'tunnel run <name>' to run the tunnel.
-Command_HelpCodeDecode: "Usage: code decode <CDK>"
 SaveFile: "#MossFrp Client Custom Configuration File \r\n
 #Mode of run\r\n
 #1. MossFrp CDK mode. \r\n

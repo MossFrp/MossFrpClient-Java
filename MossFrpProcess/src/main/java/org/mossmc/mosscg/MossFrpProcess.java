@@ -4,10 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -124,6 +121,7 @@ public class MossFrpProcess {
         try {
             frpThreadMap.get(path).interrupt();
             frpProcessMap.get(path).destroy();
+            sendInfo("send Stop "+path);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -136,8 +134,15 @@ public class MossFrpProcess {
         String prefix = path+" ";
         BufferedReader frpOut = new BufferedReader(new InputStreamReader(frp.getInputStream()));
         while (true) {
+            if (!frp.isAlive()) {
+                Thread.currentThread().interrupt();
+                return;
+            }
             try {
                 String frpInfo = frpOut.readLine();
+                if (frpInfo == null) {
+                    continue;
+                }
                 sendInfo("msg "+prefix+frpInfo);
             } catch (IOException e) {
                 sendInfo("msg "+prefix+"error");

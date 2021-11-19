@@ -46,7 +46,11 @@ public class Code {
         sendInfo(getLanguage("CodeGuide_PrintToken")+tunnelMap.get(prefix+"token"));
         sendInfo(getLanguage("CodeGuide_PrintProtocol")+tunnelMap.get(prefix+"frpType"));
         sendInfo(getLanguage("CodeGuide_PrintLocalIP")+tunnelMap.get(prefix+"localIP")+":"+tunnelMap.get(prefix+"portLocal"));
-        sendInfo(getLanguage("CodeGuide_PrintRemoteIP")+tunnelMap.get(prefix+"node")+".mossfrp.cn:"+tunnelMap.get(prefix+"portOpen"));
+        if (tunnelMap.containsKey(prefix+"custom")) {
+            sendInfo(getLanguage("CodeGuide_PrintRemoteIP") + tunnelMap.get(prefix + "remoteIP") + ":" + tunnelMap.get(prefix + "portOpen"));
+        } else {
+            sendInfo(getLanguage("CodeGuide_PrintRemoteIP") + tunnelMap.get(prefix + "node") + ".mossfrp.cn:" + tunnelMap.get(prefix + "portOpen"));
+        }
         sendInfo(getLanguage("CodeGuide_PrintLine"));
         sendInfo(getLanguage("CodeGuide_PrintExit"));
     }
@@ -56,6 +60,10 @@ public class Code {
     public static void codeGuide(String code,String frpName) {
         //进行激活码解码然后存入激活码缓存
         if (!decode(code,true)) {
+            return;
+        }
+        if (FrpManager.frpStatusMap.containsKey(codeMap.get(code+"-node")+"-"+frpName)) {
+            sendInfo(getLanguage("Command_TunnelAlreadyExist"));
             return;
         }
         //将数据存入隧道缓存
@@ -169,7 +177,7 @@ public class Code {
         sendInfo(getLanguage("CodeGuide_Complete"));
         //新建独立线程运行frp
         //保证运行不把主线程玩炸了
-        FrpManager.runFrp(code,frpName);
+        FrpManager.runFrp(code,tunnelMap.get(prefix+"node")+"-"+frpName);
     }
     //激活码解码方法
     //cache选项为是否存入缓存

@@ -12,7 +12,7 @@ import static org.mossmc.mosscg.MossFrp.*;
 public class FrpManager {
     //frp状态类型枚举
     public enum frpStatus {
-        STARTING,START,STOP
+        START,RUN,STOP
     }
 
     //frp缓存Map
@@ -42,6 +42,12 @@ public class FrpManager {
         ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
         Thread beat = new Thread(FrpManager::heartbeat);
         singleThreadExecutor.execute(beat::start);
+        loadSave();
+    }
+
+    public static void loadSave() {
+        sendInfo(getLanguage("Guide_LoadSaveStart"));
+        MossFrp.readSave();
     }
 
     //frp管理核心心跳包功能
@@ -61,6 +67,7 @@ public class FrpManager {
 
     //启动frp调用
     public static void runFrpProcess(String path) {
+        frpStatusMap.put(path,frpStatus.START);
         sendProcess("run "+path+"\r\n");
     }
 
@@ -71,15 +78,15 @@ public class FrpManager {
 
     //frp线程运行方法
     public static void runFrp(String code,String frpName) {
-        //初始化部分变量
-        String prefix = code+"-"+frpName+"-";
-        String node = Code.tunnelMap.get(prefix+"node");
-        String fileDir = node+"-"+frpName;
         //写入配置文件frpc.ini
         //生成frpc.exe文件
         FileManager.writeFrpSettings(code,frpName);
         //运行frp主方法部分
-        runFrpProcess(fileDir);
+        runFrpProcess(frpName);
+    }
+
+    public static void stopFrp(String path) {
+        stopFrpProcess(path);
     }
 
     //给process输入信息
@@ -154,12 +161,12 @@ public class FrpManager {
             }
             String prefix = "["+msg+"] ";
             if (part2.equals("Start")) {
-                frpStatusMap.put(msg,frpStatus.START);
+                frpStatusMap.put(msg,frpStatus.RUN);
             }
-            if (part2.equals("stop")) {
+            if (part2.equals("Stop")) {
                 frpStatusMap.put(msg,frpStatus.STOP);
             }
-            sendInfo(prefix+getLanguage("Process_"+part2));
+            sendInfo(prefix+getLanguage("Process_"+part2).replace("[tunnelName]",msg));
             return;
         }
         if (part1.equals("debug")) {

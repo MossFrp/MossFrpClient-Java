@@ -4,10 +4,10 @@ import org.yaml.snakeyaml.Yaml;
 
 import java.io.*;
 import java.nio.file.Files;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
+
+import static org.mossmc.mosscg.Code.codeMap;
+import static org.mossmc.mosscg.Code.tunnelMap;
 
 public class MossFrp {
     //主类
@@ -15,7 +15,7 @@ public class MossFrp {
     public static void main(String[] args) {
         checkFile();
         loadConfig();
-        loadLanguage();
+        loadLanguage(getConfig("language"));
         loadData();
         checkStart(Arrays.toString(args));
         sendInfo(getLanguage("Start_Welcome")+getData("version"));
@@ -46,6 +46,115 @@ public class MossFrp {
             sendInfo(getLanguage("Start_CheckFailed"));
             System.exit(1);
         }
+    }
+
+    //启动时读取已保存的配置文件
+    public static void readSave() {
+        //列出文件列表
+        File file = new File("./MossFrp/configs");
+        File[] tempList = file.listFiles();
+        if (tempList == null) {
+            return;
+        }
+        Map cacheMap;
+        //对文件列表进行遍历
+        for (File value : tempList) {
+            if (value.isFile()) {
+                //yaml格式读取
+                Yaml yaml = new Yaml();
+                FileInputStream input;
+                try {
+                    input = new FileInputStream(value);
+                    cacheMap = yaml.loadAs(input, Map.class);
+                    String fileName = value.getName();
+                    String[] cut = fileName.split("\\.");
+                    String name = cut[0];
+                    //未知模式判定
+                    if (!cacheMap.get("mode").toString().equals("1") && !cacheMap.get("mode").toString().equals("2")) {
+                        continue;
+                    }
+                    //MossFrp模式读取
+                    if (cacheMap.get("mode").toString().equals("1")) {
+                        String code = cacheMap.get("code").toString();
+                        String protocol = cacheMap.get("protocol").toString();
+                        String localIP = cacheMap.get("localIP").toString();
+                        String localPort = cacheMap.get("localPort").toString();
+                        String remotePort = cacheMap.get("remotePort").toString();
+                        String use_compression = cacheMap.get("use_compression").toString();
+                        String use_encryption = cacheMap.get("use_encryption").toString();
+                        String proxy_protocol_version = cacheMap.get("proxy_protocol_version").toString();
+                        String prefix = code+"-"+name+"-";
+                        Code.decode(code,true);
+                        tunnelMap.put(prefix+"token",code);
+                        tunnelMap.put(prefix+"frpType",protocol);
+                        tunnelMap.put(prefix+"localIP",localIP);
+                        tunnelMap.put(prefix+"portOpen",remotePort);
+                        tunnelMap.put(prefix+"portLocal",localPort);
+                        tunnelMap.put(prefix+"portServer",codeMap.get(code+"-portServer"));
+                        tunnelMap.put(prefix+"node",codeMap.get(code+"-node"));
+                        tunnelMap.put(prefix+"advancedSettings","");
+                        if (use_compression.equals("true")) {
+                            tunnelMap.put(prefix+"advancedSettings",tunnelMap.get(prefix+"advancedSettings")+"1");
+                        }
+                        if (use_encryption.equals("true")) {
+                            tunnelMap.put(prefix+"advancedSettings",tunnelMap.get(prefix+"advancedSettings")+"2");
+                        }
+                        if (proxy_protocol_version.equals("v1")) {
+                            tunnelMap.put(prefix+"advancedSettings",tunnelMap.get(prefix+"advancedSettings")+"3");
+                        }
+                        if (proxy_protocol_version.equals("v2")) {
+                            tunnelMap.put(prefix+"advancedSettings",tunnelMap.get(prefix+"advancedSettings")+"4");
+                        }
+                        cacheMap.clear();
+                        Code.printTunnelInfo(code,name);
+                        FileManager.writeFrpSettings(code,name);
+                        FrpManager.runFrpProcess(name);
+                        continue;
+                    }
+                    //自定义模式读取
+                    if (cacheMap.get("mode").equals("2")) {
+                        String token = cacheMap.get("token").toString();
+                        String protocol = cacheMap.get("protocol").toString();
+                        String localIP = cacheMap.get("localIP").toString();
+                        String localPort = cacheMap.get("localPort").toString();
+                        String remoteIP = cacheMap.get("remoteIP").toString();
+                        String remotePort = cacheMap.get("remotePort").toString();
+                        String use_compression = cacheMap.get("use_compression").toString();
+                        String use_encryption = cacheMap.get("use_encryption").toString();
+                        String proxy_protocol_version = cacheMap.get("proxy_protocol_version").toString();
+                        String prefix = token+"-"+name+"-";
+                        tunnelMap.put(prefix+"custom","true");
+                        tunnelMap.put(prefix+"token",token);
+                        tunnelMap.put(prefix+"frpType",protocol);
+                        tunnelMap.put(prefix+"localIP",localIP);
+                        tunnelMap.put(prefix+"portOpen",remotePort);
+                        tunnelMap.put(prefix+"portLocal",localPort);
+                        tunnelMap.put(prefix+"portServer",codeMap.get(remotePort));
+                        tunnelMap.put(prefix+"remoteIP",codeMap.get(remoteIP));
+                        tunnelMap.put(prefix+"advancedSettings","");
+                        if (use_compression.equals("true")) {
+                            tunnelMap.put(prefix+"advancedSettings",tunnelMap.get(prefix+"advancedSettings")+"1");
+                        }
+                        if (use_encryption.equals("true")) {
+                            tunnelMap.put(prefix+"advancedSettings",tunnelMap.get(prefix+"advancedSettings")+"2");
+                        }
+                        if (proxy_protocol_version.equals("v1")) {
+                            tunnelMap.put(prefix+"advancedSettings",tunnelMap.get(prefix+"advancedSettings")+"3");
+                        }
+                        if (proxy_protocol_version.equals("v2")) {
+                            tunnelMap.put(prefix+"advancedSettings",tunnelMap.get(prefix+"advancedSettings")+"4");
+                        }
+                        cacheMap.clear();
+                        Code.printTunnelInfo(token,name);
+                        FileManager.writeFrpSettings(token,name);
+                        FrpManager.runFrpProcess(name);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        sendInfo(getLanguage("Guide_LoadSaveComplete"));
     }
 
     //yml数据全部转为Map存储在这一块
@@ -201,15 +310,25 @@ public class MossFrp {
         configMap = yaml.loadAs(input, Map.class);
     }
 
-    public static void loadLanguage() {
+    public static void loadLanguage(String language) {
         Yaml yaml = new Yaml();
         FileInputStream input = null;
-        String languageFile = "./MossFrp/languages/"+getConfig("language")+".yml";
+        String languageFile = "./MossFrp/languages/"+language+".yml";
         try {
             input = new FileInputStream(languageFile);
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
-            System.exit(1);
+            if (languageMap == null) {
+                e.printStackTrace();
+                System.exit(1);
+            } else {
+                sendInfo(getLanguage("Language_Unknown"));
+                return;
+            }
+        }
+        if (languageMap != null) {
+            languageMap = yaml.loadAs(input, Map.class);
+            sendInfo(getLanguage("Language_Changed"));
+            return;
         }
         languageMap = yaml.loadAs(input, Map.class);
     }

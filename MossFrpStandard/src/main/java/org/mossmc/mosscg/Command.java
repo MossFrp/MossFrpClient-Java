@@ -3,6 +3,7 @@ package org.mossmc.mosscg;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
+import java.util.Iterator;
 
 import static org.mossmc.mosscg.MossFrp.*;
 
@@ -72,6 +73,20 @@ public class Command {
             case "help":
                 sendInfo(getLanguage("Command_Help"));
                 return true;
+            //语言指令
+            case "lang":
+                if (!part2.equals("")) {
+                    loadLanguage(part2);
+                    return true;
+                }
+                sendInfo(getLanguage("Command_HelpLangMain"));
+                return false;
+            //列表指令
+            case "list":
+                for (String name : FrpManager.frpStatusMap.keySet()) {
+                    sendInfo(getLanguage("List_Send").replace("[tunnelName]",name).replace("[tunnelStatus]",FrpManager.frpStatusMap.get(name).toString()));
+                }
+                return true;
             //隧道相关指令
             case "tunnel":
                 if (part2.equals("new")) {
@@ -87,22 +102,20 @@ public class Command {
                     sendInfo(getLanguage("Command_HelpTunnelNew"));
                     return false;
                 }
-                //if (part2.equals("remove")) {
-                //    return false;
-                //}
-                sendInfo(getLanguage("Command_HelpTunnelMain"));
-                return false;
-            //激活码相关指令
-            case "code":
-                if (part2.equals("decode")) {
+                if (part2.equals("remove")) {
                     if (!part3.equals("")) {
-                        Code.decode(part3,false);
-                        return true;
+                        if (FrpManager.frpStatusMap.containsKey(part3)) {
+                            FrpManager.stopFrp(part3);
+                            sendInfo(getLanguage("Command_TunnelStopping"));
+                            return true;
+                        }
+                        sendInfo(getLanguage("Command_TunnelNotExist"));
+                        return false;
                     }
-                    sendInfo(getLanguage("Command_HelpCodeDecode"));
+                    sendInfo(getLanguage("Command_HelpTunnelRemove"));
                     return false;
                 }
-                sendInfo(getLanguage("Command_HelpCodeMain"));
+                sendInfo(getLanguage("Command_HelpTunnelMain"));
                 return false;
             //未知指令判断
             default:

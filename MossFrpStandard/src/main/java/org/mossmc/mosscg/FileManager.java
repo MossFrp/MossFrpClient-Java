@@ -1,10 +1,10 @@
 package org.mossmc.mosscg;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.util.Arrays;
 
 import static org.mossmc.mosscg.MossFrp.*;
 import static org.mossmc.mosscg.Code.tunnelMap;
@@ -46,17 +46,17 @@ public class FileManager {
                 .replace("[proxyProtocol]",proxyProtocol);
         //写入文件部分
         try {
-            File saveFile = new File("./MossFrp/configs/"+code+"-"+frpName+".yml");
+            File saveFile = new File("./MossFrp/configs/"+tunnelMap.get(prefix+"node")+"-"+frpName+".yml");
             if (!saveFile.exists()) {
                 if (!saveFile.createNewFile()) {
                     sendWarn(getLanguage("File_WriteSaveFailed"));
                     return;
                 }
             }
-            FileWriter fileWriter = new FileWriter(saveFile,false);
-            fileWriter.write(fileInput);
-            fileWriter.flush();
-            fileWriter.close();
+            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(saveFile), StandardCharsets.UTF_8));
+            writer.write(fileInput);
+            writer.flush();
+            writer.close();
             sendInfo(getLanguage("File_WriteSaveSuccess"));
         } catch (Exception e) {
             e.printStackTrace();
@@ -69,11 +69,12 @@ public class FileManager {
         String prefix = code+"-"+frpName+"-";
         //检查文件是否存在
         //以及创建文件
-        String dirPath = "./MossFrp/frps/"+tunnelMap.get(prefix+"node")+"-"+frpName;
+        String dirPath;
+        dirPath = "./MossFrp/frps/" + frpName;
         try{
             File dirFile = new File(dirPath);
             File cfgFile = new File(dirPath+"/frpc.ini");
-            File frpFile = new File(dirPath+"/frpc-"+tunnelMap.get(prefix+"node")+"-"+frpName+".exe");
+            File frpFile = new File(dirPath+"/frpc-"+frpName+".exe");
             if (!dirFile.exists()) {
                 if (!dirFile.mkdir()) {
                     sendWarn(getLanguage("File_WriteConfigFailed"));
@@ -100,7 +101,11 @@ public class FileManager {
             //写入frpc.ini
             FileWriter fileWriter = new FileWriter(dirPath+"/frpc.ini",false);
             fileWriter.write("[common]"+"\r\n");
-            fileWriter.write("server_addr = "+tunnelMap.get(prefix+"node")+".mossfrp.cn\r\n");
+            if (tunnelMap.containsKey(prefix+"custom")) {
+                fileWriter.write("server_addr = "+tunnelMap.get(prefix+"remoteIP")+"\r\n");
+            } else {
+                fileWriter.write("server_addr = "+tunnelMap.get(prefix+"node")+".mossfrp.cn\r\n");
+            }
             fileWriter.write("server_port = "+tunnelMap.get(prefix+"portServer")+"\r\n");
             fileWriter.write("token = "+tunnelMap.get(prefix+"token"));
             fileWriter.write("\r\n");
