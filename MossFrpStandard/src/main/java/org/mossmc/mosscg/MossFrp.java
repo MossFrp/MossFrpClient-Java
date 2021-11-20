@@ -412,24 +412,26 @@ public class MossFrp {
         }
         //语言文件检查
         File languageFile = new File("./MossFrp/languages/zh_cn.yml");
-        if (!languageFile.exists()) {
-            InputStream in = InputStream.class.getResourceAsStream("/languages/zh_cn.yml");
-            try {
-                assert in != null;
-                Files.copy(in, languageFile.toPath());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        if (languageFile.exists()) {
+            languageFile.delete();
+        }
+        InputStream langIn = InputStream.class.getResourceAsStream("/languages/zh_cn.yml");
+        try {
+            assert langIn != null;
+            Files.copy(langIn, languageFile.toPath());
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         languageFile = new File("./MossFrp/languages/en_us.yml");
-        if (!languageFile.exists()) {
-            InputStream in = InputStream.class.getResourceAsStream("/languages/en_us.yml");
-            try {
-                assert in != null;
-                Files.copy(in, languageFile.toPath());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        if (languageFile.exists()) {
+            languageFile.delete();
+        }
+        langIn = InputStream.class.getResourceAsStream("/languages/en_us.yml");
+        try {
+            assert langIn != null;
+            Files.copy(langIn, languageFile.toPath());
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         //数据文件更新
         File dataFile = new File("./MossFrp/languages/data.yml");

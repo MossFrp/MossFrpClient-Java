@@ -88,6 +88,7 @@ Command_Help: "\r\n--= MossFrp Command Help =--
   \r\nFor help: help
   \r\nTunnel command: tunnel
   \r\nChange language: lang
+  \r\nTunnel list: list
   \r\nTips: Don't input <> while input arguments."
 Command_HelpTunnelMain: "\r\n--= MossFrp Command Help =--
   \r\nNew tunnel: tunnel new

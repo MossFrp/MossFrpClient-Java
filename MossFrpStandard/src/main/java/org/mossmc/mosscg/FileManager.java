@@ -67,14 +67,20 @@ public class FileManager {
     public static void writeFrpSettings(String code,String frpName) {
         sendInfo(getLanguage("File_WriteConfigStart"));
         String prefix = code+"-"+frpName+"-";
+        String frpFileName;
+        if (tunnelMap.containsKey(prefix+"new")) {
+            frpFileName = tunnelMap.get(prefix+"node") + "-" + frpName;
+        } else {
+            frpFileName = frpName;
+        }
         //检查文件是否存在
         //以及创建文件
         String dirPath;
-        dirPath = "./MossFrp/frps/" + frpName;
+        dirPath = "./MossFrp/frps/" + frpFileName;
         try{
             File dirFile = new File(dirPath);
             File cfgFile = new File(dirPath+"/frpc.ini");
-            File frpFile = new File(dirPath+"/frpc-"+frpName+".exe");
+            File frpFile = new File(dirPath+"/frpc-"+frpFileName+".exe");
             if (!dirFile.exists()) {
                 if (!dirFile.mkdir()) {
                     sendWarn(getLanguage("File_WriteConfigFailed"));
@@ -99,7 +105,7 @@ public class FileManager {
                 }
             }
             //写入frpc.ini
-            FileWriter fileWriter = new FileWriter(dirPath+"/frpc.ini",false);
+            FileWriter fileWriter = new FileWriter(cfgFile,false);
             fileWriter.write("[common]"+"\r\n");
             if (tunnelMap.containsKey(prefix+"custom")) {
                 fileWriter.write("server_addr = "+tunnelMap.get(prefix+"remoteIP")+"\r\n");
@@ -114,6 +120,7 @@ public class FileManager {
             fileWriter.write("local_ip = "+tunnelMap.get(prefix+"localIP")+"\r\n");
             fileWriter.write("local_port = "+tunnelMap.get(prefix+"portLocal")+"\r\n");
             fileWriter.write("remote_port = "+tunnelMap.get(prefix+"portOpen")+"\r\n");
+            fileWriter.flush();
             String advanced = tunnelMap.get(prefix+"advancedSettings");
             if (advanced.contains("1")) {
                 fileWriter.write("use_compression = true\r\n");

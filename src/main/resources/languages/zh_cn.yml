@@ -88,6 +88,7 @@ Command_Help: "\r\n--= MossFrp 指令帮助 =--
   \r\n查看帮助：help
   \r\n隧道指令：tunnel
   \r\n切换语言：lang
+  \r\n隧道列表：list
   \r\nTips：输入的时候别带括号<>哦！"
 Command_HelpTunnelMain: "\r\n--= MossFrp 指令帮助 =--
   \r\n新建隧道：tunnel new

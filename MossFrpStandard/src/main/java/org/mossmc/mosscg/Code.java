@@ -78,6 +78,7 @@ public class Code {
         tunnelMap.put(prefix+"portStart",codeMap.get(code+"-portStart"));
         tunnelMap.put(prefix+"portEnd",codeMap.get(code+"-portEnd"));
         tunnelMap.put(prefix+"node",codeMap.get(code+"-node"));
+        tunnelMap.put(prefix+"new","true");
         //设置隧道协议
         while (true) {
             printTunnelInfo(code,frpName);
@@ -177,7 +178,7 @@ public class Code {
         sendInfo(getLanguage("CodeGuide_Complete"));
         //新建独立线程运行frp
         //保证运行不把主线程玩炸了
-        FrpManager.runFrp(code,tunnelMap.get(prefix+"node")+"-"+frpName);
+        FrpManager.runFrp(code,frpName);
     }
     //激活码解码方法
     //cache选项为是否存入缓存
