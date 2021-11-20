@@ -3,6 +3,7 @@ package org.mossmc.mosscg;
 import org.yaml.snakeyaml.Yaml;
 
 import java.io.*;
+import java.net.URL;
 import java.nio.file.Files;
 import java.util.*;
 
@@ -374,7 +375,7 @@ public class MossFrp {
         //config文件检查
         File configFile = new File("./MossFrp/config.yml");
         if (!configFile.exists()) {
-            InputStream in = InputStream.class.getResourceAsStream("/config.yml");
+            InputStream in = MossFrp.class.getClassLoader().getResourceAsStream("config.yml");
             try {
                 assert in != null;
                 Files.copy(in, configFile.toPath());
@@ -396,7 +397,7 @@ public class MossFrp {
         //frp进程核心检查
         File frpProcessFile = new File("./MossFrp/frps/MossFrpProcess.jar");
         if (!frpProcessFile.exists()) {
-            InputStream in = InputStream.class.getResourceAsStream("/MossFrpProcess.jar");
+            InputStream in = MossFrp.class.getClassLoader().getResourceAsStream("MossFrpProcess.jar");
             try {
                 assert in != null;
                 Files.copy(in, frpProcessFile.toPath());
@@ -415,7 +416,7 @@ public class MossFrp {
         if (languageFile.exists()) {
             languageFile.delete();
         }
-        InputStream langIn = InputStream.class.getResourceAsStream("/languages/zh_cn.yml");
+        InputStream langIn = MossFrp.class.getClassLoader().getResourceAsStream("languages/zh_cn.yml");
         try {
             assert langIn != null;
             Files.copy(langIn, languageFile.toPath());
@@ -426,7 +427,7 @@ public class MossFrp {
         if (languageFile.exists()) {
             languageFile.delete();
         }
-        langIn = InputStream.class.getResourceAsStream("/languages/en_us.yml");
+        langIn = MossFrp.class.getClassLoader().getResourceAsStream("languages/en_us.yml");
         try {
             assert langIn != null;
             Files.copy(langIn, languageFile.toPath());
@@ -436,7 +437,7 @@ public class MossFrp {
         //数据文件更新
         File dataFile = new File("./MossFrp/languages/data.yml");
         if (!dataFile.exists()) {
-            InputStream in = InputStream.class.getResourceAsStream("/data.yml");
+            InputStream in = MossFrp.class.getClassLoader().getResourceAsStream("data.yml");
             try {
                 assert in != null;
                 Files.copy(in, dataFile.toPath());
@@ -444,7 +445,7 @@ public class MossFrp {
                 e.printStackTrace();
             }
         } else {
-            InputStream in = InputStream.class.getResourceAsStream("/data.yml");
+            InputStream in = MossFrp.class.getClassLoader().getResourceAsStream("data.yml");
             try {
                 assert in != null;
                 Files.delete(dataFile.toPath());

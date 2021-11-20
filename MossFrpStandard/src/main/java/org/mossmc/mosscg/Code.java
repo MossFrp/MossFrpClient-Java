@@ -52,7 +52,6 @@ public class Code {
             sendInfo(getLanguage("CodeGuide_PrintRemoteIP") + tunnelMap.get(prefix + "node") + ".mossfrp.cn:" + tunnelMap.get(prefix + "portOpen"));
         }
         sendInfo(getLanguage("CodeGuide_PrintLine"));
-        sendInfo(getLanguage("CodeGuide_PrintExit"));
     }
     //激活码设置向导
     //方便一些萌新不会用做了一个向导
@@ -82,6 +81,7 @@ public class Code {
         //设置隧道协议
         while (true) {
             printTunnelInfo(code,frpName);
+            sendInfo(getLanguage("CodeGuide_PrintExit"));
             sendInfo(getLanguage("CodeGuide_ProtocolInfo"));
             String read = readInput();
             if (read.equals("exit")) {
@@ -97,6 +97,7 @@ public class Code {
         //设置本地IP地址
         while (true) {
             printTunnelInfo(code,frpName);
+            sendInfo(getLanguage("CodeGuide_PrintExit"));
             sendInfo(getLanguage("CodeGuide_LocalIPInfo"));
             String read = readInput();
             if (read.equals("exit")) {
@@ -116,6 +117,7 @@ public class Code {
         //设置本地端口
         while (true) {
             printTunnelInfo(code,frpName);
+            sendInfo(getLanguage("CodeGuide_PrintExit"));
             sendInfo(getLanguage("CodeGuide_LocalPortInfo"));
             String read = readInput();
             if (read.equals("exit")) {
@@ -138,6 +140,7 @@ public class Code {
         //设置远程端口
         while (true) {
             printTunnelInfo(code,frpName);
+            sendInfo(getLanguage("CodeGuide_PrintExit"));
             sendInfo(getLanguage("CodeGuide_RemotePortInfo").replace("[remotePortRange]",tunnelMap.get(prefix+"portStart")+"-"+tunnelMap.get(prefix+"portEnd")));
             String read = readInput();
             if (read.equals("exit")) {
@@ -156,6 +159,7 @@ public class Code {
         //设置高级选项
         while (true) {
             printTunnelInfo(code,frpName);
+            sendInfo(getLanguage("CodeGuide_PrintExit"));
             sendInfo(getLanguage("CodeGuide_AdvancedInfo"));
             String read = readInput();
             if (read.equals("exit")) {

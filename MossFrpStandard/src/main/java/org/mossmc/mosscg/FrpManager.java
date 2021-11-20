@@ -48,6 +48,7 @@ public class FrpManager {
     public static void loadSave() {
         sendInfo(getLanguage("Guide_LoadSaveStart"));
         MossFrp.readSave();
+        StartGuide.processStarted = true;
     }
 
     //frp管理核心心跳包功能

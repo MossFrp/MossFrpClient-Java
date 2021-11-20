@@ -94,7 +94,7 @@ public class FileManager {
                 }
             }
             if (!frpFile.exists()) {
-                InputStream in = InputStream.class.getResourceAsStream("/frpc.exe");
+                InputStream in = MossFrp.class.getClassLoader().getResourceAsStream("frpc.exe");
                 try {
                     assert in != null;
                     Files.copy(in, frpFile.toPath());
