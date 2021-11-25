@@ -164,7 +164,7 @@ public class MossFrpProcess {
         BufferedReader frpOut = new BufferedReader(new InputStreamReader(frp.getInputStream()));
         while (true) {
             if (!frp.isAlive()) {
-                Thread.currentThread().interrupt();
+                stopFrp(path);
                 return;
             }
             try {

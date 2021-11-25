@@ -80,6 +80,7 @@ Frp_InfoStarting: Starting tunnel......
 Frp_InfoStartSuccess: Tunnel start successfully! Use 'list' to see the list of tunnel.
 Frp_InfoPortUsed: Port already used! Please change your remote port!
 Frp_InfoErrorEOF: Connection error! EOF.
+Frp_InfoLoginEOF: Login failed! EOF.
 Frp_InfoReconnecting: Trying reconnect to Frp server......
 Frp_InfoNoSuchHost: No such host! Please check your server address or if your PC connected to internet!
 Frp_InfoConnectNoRespond: Connection failed! There was no respond from Frp server! Check if the Frp server down of your MossFrp CDK is outdated!

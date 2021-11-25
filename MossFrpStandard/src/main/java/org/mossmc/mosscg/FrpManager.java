@@ -228,6 +228,10 @@ public class FrpManager {
             sendInfo(prefix+getLanguage("Frp_InfoNoSuchHost"));
             return;
         }
+        if (info.contains("login to server failed: EOF")) {
+            sendInfo(prefix+getLanguage("Frp_InfoLoginEOF"));
+            return;
+        }
         sendInfo(prefix+info);
     }
 }
