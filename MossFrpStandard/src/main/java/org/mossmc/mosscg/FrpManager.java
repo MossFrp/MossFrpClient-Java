@@ -45,6 +45,7 @@ public class FrpManager {
         loadSave();
     }
 
+    //加载保存的配置文件
     public static void loadSave() {
         sendInfo(getLanguage("Guide_LoadSaveStart"));
         MossFrp.readSave();
@@ -102,9 +103,15 @@ public class FrpManager {
     }
 
     //frp管理核心读取方法
+    //以及启动frp管理核心
     public static void readProcess() {
         try {
-            frpProcess = Runtime.getRuntime().exec("java -server -Xmx50M -jar ./MossFrp/frps/MossFrpProcess.jar -MossFrp=nb");
+            if (getSystemType == systemType.windows) {
+                frpProcess = Runtime.getRuntime().exec("java -server -Xmx30M -jar ./MossFrp/frps/MossFrpProcess.jar -MossFrp=nb -systemType=windows");
+            }
+            if (getSystemType == systemType.linux) {
+                frpProcess = Runtime.getRuntime().exec("java -server -Xmx50M -jar ./MossFrp/frps/MossFrpProcess.jar -MossFrp=nb -systemType=linux");
+            }
             BufferedReader frpOut = new BufferedReader(new InputStreamReader(frpProcess.getInputStream()));
             loadHeartbeatThread();
             while (true) {
@@ -215,6 +222,10 @@ public class FrpManager {
         }
         if (info.contains("token in login doesn't match token from configuration")) {
             sendInfo(prefix+getLanguage("Frp_InfoConnectTokenWrong"));
+            return;
+        }
+        if (info.contains("no such host")) {
+            sendInfo(prefix+getLanguage("Frp_InfoNoSuchHost"));
             return;
         }
         sendInfo(prefix+info);

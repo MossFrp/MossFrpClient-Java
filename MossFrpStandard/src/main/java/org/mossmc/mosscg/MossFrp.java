@@ -3,7 +3,6 @@ package org.mossmc.mosscg;
 import org.yaml.snakeyaml.Yaml;
 
 import java.io.*;
-import java.net.URL;
 import java.nio.file.Files;
 import java.util.*;
 
@@ -16,11 +15,14 @@ public class MossFrp {
     public static void main(String[] args) {
         checkFile();
         loadConfig();
+        loadSystemType();
         loadLanguage(getConfig("language"));
         loadData();
         checkStart(Arrays.toString(args));
         sendInfo(getLanguage("Start_Welcome")+getData("version"));
         sendInfo(getLanguage("Start_Copyright"));
+        sendInfo(getLanguage("Start_SystemFull").replace("[system]",System.getProperty("os.name")));
+        sendInfo(getLanguage("Start_SystemRead").replace("[system]", getSystemType.name()));
         sendInfo(getLanguage("Start_ToGuide"));
         StartGuide.start();
     }
@@ -29,7 +31,7 @@ public class MossFrp {
     //避免有用户直接点软件导致命令行界面出不来
     //linux直接忽略此方法
     public static void checkStart(String args) {
-        if (getSystemType().equals("linux")) {
+        if (getSystemType == systemType.linux) {
             return;
         }
         if (!args.contains("-MossFrp=nb")) {
@@ -243,21 +245,32 @@ public class MossFrp {
 
     //获取系统类型方法
     //简单但是确实有效
-    public static String getSystemType() {
+    public enum systemType {
+        windows,linux
+    }
+    public static systemType getSystemType = systemType.linux;
+
+    public static void loadSystemType() {
         String getSystemName = System.getProperty("os.name");
         if (getConfig("systemType").equals("auto")) {
-            if (getSystemName.toLowerCase().startsWith("win")) {
-                return "windows";
+            if (getSystemName.toLowerCase().startsWith("windows")) {
+                getSystemType = systemType.windows;
+                return;
             }
-            return "linux";
+            if (getSystemName.toLowerCase().startsWith("linux")) {
+                getSystemType = systemType.linux;
+                return;
+            }
         }
         if (getConfig("systemType").equals("windows")) {
-            return "windows";
+            getSystemType = systemType.windows;
+            return;
         }
         if (getConfig("systemType").equals("linux")) {
-            return "linux";
+            getSystemType = systemType.linux;
+            return;
         }
-        return "windows";
+        getSystemType = systemType.windows;
     }
 
     //简单的获取时间的一个方法

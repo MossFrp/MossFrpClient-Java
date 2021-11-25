@@ -214,6 +214,9 @@ public class Code {
                 codeMap.put(code+"-portEnd", String.valueOf(portEnd));
             }
             return true;
+        } catch (StringIndexOutOfBoundsException | NumberFormatException ex) {
+            sendWarn(getLanguage("Code_DecodeFailed"));
+            return false;
         } catch (Exception e) {
             sendException(e);
             sendWarn(getLanguage("Code_DecodeFailed"));

@@ -1,7 +1,9 @@
 Start_Welcome: "Welcome to use MossFrp, version:"
 Start_Copyright: This plugin client and standard version client are copyrighted by Bilibili@墨守MossCG.
 Start_ToGuide: Starting boot guide.
-Start_CheckFailed: Start failed! Please start MossFrp client with CMD, and add arguments '-MossFrp=nb'!
+Start_CheckFailed: Start failed! Please start MossFrp client with CMD, and add arguments '-MossFrp=syst
+Start_SystemFull:  "Operate system name: [system]"
+Start_SystemRead: "Run mode: [system]"
 Language_Unknown: Unknown language!
 Language_Changed: Successfully change language to English(us)!
 Exit_Start: Exiting MossFrp client......
@@ -79,6 +81,7 @@ Frp_InfoStartSuccess: Tunnel start successfully! Use 'list' to see the list of t
 Frp_InfoPortUsed: Port already used! Please change your remote port!
 Frp_InfoErrorEOF: Connection error! EOF.
 Frp_InfoReconnecting: Trying reconnect to Frp server......
+Frp_InfoNoSuchHost: No such host! Please check your server address or if your PC connected to internet!
 Frp_InfoConnectNoRespond: Connection failed! There was no respond from Frp server! Check if the Frp server down of your MossFrp CDK is outdated!
 Frp_InfoConnectReject: Connection failed! Your connection was rejected by server! Check if the Frp server down of your MossFrp CDK is outdated!
 Frp_InfoConnectTokenWrong: Connection failed! Wrong token! Check if the Frp server down of your MossFrp CDK is outdated or wrong!

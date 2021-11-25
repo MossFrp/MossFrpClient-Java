@@ -32,11 +32,30 @@ public class MossFrpProcess {
 
     //检查是否用参数启动
     //避免有用户直接点软件导致出bug
+    //以及初始化系统设定
     public static void checkStart(String args) {
         if (!args.contains("-MossFrp=nb")) {
             sendInfo("please not start this!");
             System.exit(1);
         }
+        if (args.contains("-systemType=linux")) {
+            getSystemType = systemType.linux;
+        }
+        if (args.contains("-systemType=windows")) {
+            getSystemType = systemType.windows;
+        }
+        if (getSystemType == null) {
+            sendInfo("please not start this!");
+            System.exit(1);
+        }
+    }
+
+    //系统类型
+    //没加参数就默认win
+    public static systemType getSystemType;
+
+    public enum systemType {
+        windows,linux
     }
 
     //读取请求
@@ -100,16 +119,26 @@ public class MossFrpProcess {
         sendInfo("debug frp run");
         Runtime run = Runtime.getRuntime();
         try {
-            sendInfo("send Start "+path);
-            Process frp;
-            frp = run.exec("taskkill /im frpc-"+path+".exe /f");
-            BufferedReader output = new BufferedReader(new InputStreamReader(frp.getInputStream()));
-            output.readLine();
-            output.close();
-            frp = run.exec("./MossFrp/frps/"+path+"/frpc-"+path+".exe -c ./MossFrp/frps/"+path+"/frpc.ini");
-            frpProcessMap.put(path,frp);
-            sendInfo("send Success "+path);
-            readFrp(path);
+            if (getSystemType == systemType.windows) {
+                sendInfo("send Start "+path);
+                Process frp;
+                frp = run.exec("taskkill /im frpc-"+path+".exe /f");
+                BufferedReader output = new BufferedReader(new InputStreamReader(frp.getInputStream()));
+                output.readLine();
+                output.close();
+                frp = run.exec("./MossFrp/frps/"+path+"/frpc-"+path+".exe -c ./MossFrp/frps/"+path+"/frpc.ini");
+                frpProcessMap.put(path,frp);
+                sendInfo("send Success "+path);
+                readFrp(path);
+            }
+            if (getSystemType == systemType.linux) {
+                sendInfo("send Start "+path);
+                Process frp;
+                frp = run.exec("./MossFrp/frps/"+path+"/frpc-"+path+" -c ./MossFrp/frps/"+path+"/frpc.ini");
+                frpProcessMap.put(path,frp);
+                sendInfo("send Success "+path);
+                readFrp(path);
+            }
         }catch (Exception e){
             e.printStackTrace();
             sendInfo("send Failed "+path);

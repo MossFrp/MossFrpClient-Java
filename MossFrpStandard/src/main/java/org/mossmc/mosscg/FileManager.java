@@ -1,10 +1,8 @@
 package org.mossmc.mosscg;
 
 import java.io.*;
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.util.Arrays;
 
 import static org.mossmc.mosscg.MossFrp.*;
 import static org.mossmc.mosscg.Code.tunnelMap;
@@ -80,7 +78,14 @@ public class FileManager {
         try{
             File dirFile = new File(dirPath);
             File cfgFile = new File(dirPath+"/frpc.ini");
-            File frpFile = new File(dirPath+"/frpc-"+frpFileName+".exe");
+            File frpFile = null;
+            if (getSystemType == systemType.windows) {
+                frpFile = new File(dirPath + "/frpc-" + frpFileName + ".exe");
+            }
+            if (getSystemType == systemType.linux) {
+                frpFile = new File(dirPath + "/frpc-" + frpFileName);
+            }
+            assert frpFile != null;
             if (!dirFile.exists()) {
                 if (!dirFile.mkdir()) {
                     sendWarn(getLanguage("File_WriteConfigFailed"));
@@ -94,7 +99,13 @@ public class FileManager {
                 }
             }
             if (!frpFile.exists()) {
-                InputStream in = MossFrp.class.getClassLoader().getResourceAsStream("frpc.exe");
+                InputStream in = null;
+                if (getSystemType == systemType.windows) {
+                    in = MossFrp.class.getClassLoader().getResourceAsStream("frpc.exe");
+                }
+                if (getSystemType == systemType.linux) {
+                    in = MossFrp.class.getClassLoader().getResourceAsStream("frpc");
+                }
                 try {
                     assert in != null;
                     Files.copy(in, frpFile.toPath());
@@ -103,6 +114,9 @@ public class FileManager {
                     sendWarn(getLanguage("File_WriteConfigFailed"));
                     return;
                 }
+                frpFile.setReadable(true);
+                frpFile.setExecutable(true);
+                frpFile.setWritable(true);
             }
             //写入frpc.ini
             FileWriter fileWriter = new FileWriter(cfgFile,false);
