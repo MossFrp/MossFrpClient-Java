@@ -1,8 +1,6 @@
 package org.mossmc.mosscg;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.nio.charset.Charset;
 import java.util.*;
 import java.util.concurrent.ExecutorService;
@@ -13,7 +11,7 @@ public class MossFrpProcess {
     //简单初始化一下
     //反正只是一个拿来调用process的工具
     public static void main(String[] args) {
-        checkStart(Arrays.toString(args));
+        checkStart(args);
         sendInfo("debug main start");
         registerDaemonThread();
         heartbeatThread();
@@ -25,7 +23,7 @@ public class MossFrpProcess {
                 String request = bufferedReader.readLine();
                 readRequest(request);
             } catch (Exception e) {
-                e.printStackTrace();
+                sendException(e);
             }
         }
     }
@@ -33,19 +31,34 @@ public class MossFrpProcess {
     //检查是否用参数启动
     //避免有用户直接点软件导致出bug
     //以及初始化系统设定
-    public static void checkStart(String args) {
-        if (!args.contains("-MossFrp=nb")) {
-            sendInfo("please not start this!");
-            System.exit(1);
+    public static void checkStart(String[] args) {
+        boolean pass = false;
+        for (String arg : args) {
+            switch (arg) {
+                case "-MossFrp=nb":
+                    pass = true;
+                    break;
+                case "-systemType=linux":
+                    getSystemType = systemType.linux;
+                    break;
+                case "-systemType=windows":
+                    getSystemType = systemType.windows;
+                    break;
+                case "-mode=plugin":
+                    getRunMode = runMode.plugin;
+                    break;
+                case "-mode=standard":
+                    getRunMode = runMode.standard;
+                    break;
+                default:
+                    if (getRunMode == runMode.plugin && arg.contains("-path")) {
+                        basicPath = "./"+arg.split("=")[1]+"/frps/";
+                    }
+                    break;
+            }
         }
-        if (args.contains("-systemType=linux")) {
-            getSystemType = systemType.linux;
-        }
-        if (args.contains("-systemType=windows")) {
-            getSystemType = systemType.windows;
-        }
-        if (getSystemType == null) {
-            sendInfo("please not start this!");
+        if (!pass||getSystemType == null||getRunMode == null) {
+            sendInfo("please not start this without enough arguments!");
             System.exit(1);
         }
     }
@@ -58,9 +71,19 @@ public class MossFrpProcess {
         windows,linux
     }
 
+    //运行模式
+    //区分调用版本
+    public static runMode getRunMode;
+
+    public enum runMode {
+        plugin,standard
+    }
+
+    //文件夹path
+    public static String basicPath = "./MossFrp/frps/";
+
     //读取请求
     public static void readRequest(String request) {
-        sendInfo("debug read run");
         if (request == null) {
             return;
         }
@@ -126,7 +149,7 @@ public class MossFrpProcess {
                 BufferedReader output = new BufferedReader(new InputStreamReader(frp.getInputStream()));
                 output.readLine();
                 output.close();
-                frp = run.exec("./MossFrp/frps/"+path+"/frpc-"+path+".exe -c ./MossFrp/frps/"+path+"/frpc.ini");
+                frp = run.exec(basicPath+path+"/frpc-"+path+".exe -c "+basicPath+path+"/frpc.ini");
                 frpProcessMap.put(path,frp);
                 sendInfo("send Success "+path);
                 readFrp(path);
@@ -134,13 +157,13 @@ public class MossFrpProcess {
             if (getSystemType == systemType.linux) {
                 sendInfo("send Start "+path);
                 Process frp;
-                frp = run.exec("./MossFrp/frps/"+path+"/frpc-"+path+" -c ./MossFrp/frps/"+path+"/frpc.ini");
+                frp = run.exec(basicPath+path+"/frpc-"+path+" -c "+basicPath+path+"/frpc.ini");
                 frpProcessMap.put(path,frp);
                 sendInfo("send Success "+path);
                 readFrp(path);
             }
         }catch (Exception e){
-            e.printStackTrace();
+            sendException(e);
             sendInfo("send Failed "+path);
         }
     }
@@ -152,7 +175,7 @@ public class MossFrpProcess {
             frpProcessMap.get(path).destroy();
             sendInfo("send Stop "+path);
         } catch (Exception e) {
-            e.printStackTrace();
+            sendException(e);
         }
     }
 
@@ -184,6 +207,20 @@ public class MossFrpProcess {
         System.out.println(info);
     }
 
+    //发送错误方法
+    public static void sendException(Exception e) {
+        StringWriter stringWriter = new StringWriter();
+        PrintWriter printWriter= new PrintWriter(stringWriter);
+        e.printStackTrace(printWriter);
+        sendInfo(stringWriter.toString());
+        try {
+            printWriter.close();
+            stringWriter.close();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
     //创建心跳线程
     public static void heartbeatThread() {
         ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
@@ -199,7 +236,7 @@ public class MossFrpProcess {
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                sendException(e);
             }
             if (beatTime < System.currentTimeMillis()-5000) {
                 sendInfo("Heartbeat timeout");
@@ -217,7 +254,7 @@ public class MossFrpProcess {
                     Thread.sleep(1000);
                 }
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                sendException(e);
             }
         });
         thread.setDaemon(true);
@@ -235,7 +272,7 @@ public class MossFrpProcess {
                     frpProcessMap.get(path).destroy();
                 }
             }catch (Exception e) {
-                e.printStackTrace();
+                sendException(e);
             }
             sendInfo("debug close complete");
         })));

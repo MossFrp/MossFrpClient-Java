@@ -8,6 +8,7 @@ Language_Unknown: Unknown language!
 Language_Changed: Successfully change language to English(us)!
 Exit_Start: Exiting MossFrp client......
 Exit_Finished: MossFrp client have already exit! Thanks for using!
+Permission_Reject: You do not have the permission to use this command!
 Prefix_Info: [Info]
 Prefix_Warn: [Warn]
 Prefix_Error: [Error]
@@ -69,6 +70,9 @@ File_WriteConfigFailed: The configuration file was written failed!
 File_WriteSaveStart: Writing save configuration file.......
 File_WriteSaveSuccess: The save configuration file was written successfully.
 File_WriteSaveFailed: The save configuration file was written failed!
+File_ReadNotExist: File not exist! Check if your input file name wrong!
+File_ReadUnknownMode: Unknown run mode! Check if set wrong run mode in the configuration file!
+File_ReadError: File read error! Check if your configuration file set correctly!
 Process_Start: Starting Frp......
 Process_Stop: Stopped tunnel [tunnelName]!
 Process_Failed: Frp start failed!
@@ -105,8 +109,27 @@ Command_HelpLangMain: "\r\n--= MossFrp Command Help =--
 Command_HelpTunnelNew: "Usage: tunnel new <name> <CDK>"
 Command_HelpTunnelRemove: "Usage: tunnel remove <name>"
 Command_TunnelNotExist: "Tunnel not exists! Please use command 'list' to check the tunnel list."
+Command_Help_Plugin: "\r\n--= MossFrp Command Help =--
+  \r\nFor help: mossfrp help
+  \r\nTunnel command: mossfrp tunnel
+  \r\nChange language: mossfrp lang
+  \r\nTunnel list: mossfrp list
+  \r\nTips: Don't input <> while input arguments."
+Command_HelpTunnelMain_Plugin: "\r\n--= MossFrp Command Help =--
+  \r\nNew tunnel: mossfrp tunnel new
+  \r\nRun tunnel: mossfrp tunnel run
+  \r\nRemove tunnel: mossfrp tunnel remove
+  \r\nTips: Don't input <> while input arguments."
+Command_HelpLangMain_Plugin: "\r\n--= MossFrp Command Help =--
+  \r\nChange language: mossfrp lang <language>
+  \r\nSupport languages: zh_cn en_us
+  \r\nTips: Don't input <> while input arguments."
+Command_HelpTunnelNew_Plugin: "Usage: mossfrp tunnel new <name> [CDK]"
+Command_HelpTunnelRun_Plugin: "Usage: mossfrp tunnel run <name> PS: Tunnel name is the configuration file name without suffix. For example: File is 'abc.yml', so name is 'abc'."
+Command_HelpTunnelRemove_Plugin: "Usage: mossfrp tunnel remove <name>"
+Command_TunnelNotExist_Plugin: "Tunnel not exists! Please use command 'mossfrp list' to check the tunnel list."
 Command_TunnelStopping: "Stopping the tunnel...... Please wait......"
-#Command_HelpTunnelFile: Created configuration file! Location is '/MossFrp/configs 'folder, please set your tunnel in it and use command 'tunnel run <name>' to run the tunnel.
+Command_HelpTunnelFile: Created configuration file! File location is 'MossFrp/configs 'folder, please set your tunnel settings in it and use command 'mossfrp tunnel run <name>' to run the tunnel.If file name is 'abc.yml', the tunnel name is 'abc'.
 SaveFile: "#MossFrp Client Custom Configuration File \r\n
 #Mode of run\r\n
 #1. MossFrp CDK mode. \r\n

@@ -1,6 +1,11 @@
 package org.mossmc.mosscg;
 
-import java.io.*;
+import org.bukkit.command.CommandSender;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
@@ -34,7 +39,7 @@ public class FrpManager {
         ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
         Thread read = new Thread(FrpManager::readProcess);
         singleThreadExecutor.execute(read::start);
-        sendInfo(getLanguage("Guide_ProcessStartComplete"));
+        sendInfo(getLanguage("Guide_ProcessStartComplete"),null);
     }
 
     //frp管理核心心跳包线程
@@ -47,7 +52,7 @@ public class FrpManager {
 
     //加载保存的配置文件
     public static void loadSave() {
-        sendInfo(getLanguage("Guide_LoadSaveStart"));
+        sendInfo(getLanguage("Guide_LoadSaveStart"),null);
         MossFrp.readSave();
         StartGuide.processStarted = true;
     }
@@ -69,7 +74,7 @@ public class FrpManager {
 
     //启动frp调用
     public static void runFrpProcess(String path) {
-        frpStatusMap.put(path,frpStatus.START);
+        frpStatusMap.put(path, frpStatus.START);
         sendProcess("run "+path+"\r\n");
     }
 
@@ -79,11 +84,11 @@ public class FrpManager {
     }
 
     //frp线程运行方法
-    public static void runFrp(String code,String frpName) {
+    public static void runFrp(String code, String frpName, CommandSender sender) {
         //写入配置文件frpc.ini
         //生成frpc.exe文件
         String prefix = code+"-"+frpName+"-";
-        FileManager.writeFrpSettings(code,frpName);
+        FileManager.writeFrpSettings(code,frpName,sender);
         //运行frp主方法部分
         runFrpProcess(Code.tunnelMap.get(prefix+"node")+"-"+frpName);
     }
@@ -107,19 +112,20 @@ public class FrpManager {
     public static void readProcess() {
         try {
             if (getSystemType == systemType.windows) {
-                frpProcess = Runtime.getRuntime().exec("java -server -Xmx30M -jar ./MossFrp/frps/MossFrpProcess.jar -MossFrp=nb -systemType=windows -mode=standard");
+                frpProcess = Runtime.getRuntime().exec("java -server -Xmx30M -jar "+dataFolder+"/frps/MossFrpProcess.jar -MossFrp=nb -systemType=windows -mode=plugin -path="+dataFolder.toString().replace("\\","/"));
             }
             if (getSystemType == systemType.linux) {
-                frpProcess = Runtime.getRuntime().exec("java -server -Xmx50M -jar ./MossFrp/frps/MossFrpProcess.jar -MossFrp=nb -systemType=linux -mode=standard");
+                frpProcess = Runtime.getRuntime().exec("java -server -Xmx50M -jar "+dataFolder+"/frps/MossFrpProcess.jar -MossFrp=nb -systemType=linux -mode=plugin -path="+dataFolder.toString().replace("\\","/"));
             }
             BufferedReader frpOut = new BufferedReader(new InputStreamReader(frpProcess.getInputStream()));
             loadHeartbeatThread();
             while (true) {
                 try {
                     String frpInfo = frpOut.readLine();
+                    //System.out.println(frpInfo);
                     readProcessInfo(frpInfo);
                 } catch (IOException e) {
-                    sendWarn(getLanguage("Frp_ReadError"));
+                    sendWarn(getLanguage("Frp_ReadError"),null);
                 }
             }
         } catch (IOException e) {
@@ -159,29 +165,31 @@ public class FrpManager {
             msg = processSend.substring(part1.length()+part2.length()+2);
         }
         if (part1.equals("msg")) {
+            logMessage("[Process] "+processSend);
             if (!part2.equals("")) {
                 readInfo(msg,part2);
                 return;
             }
         }
         if (part1.equals("send")) {
+            logMessage("[Process] "+processSend);
             if (part2.equals("")) {
                 return;
             }
             String prefix = "["+msg+"] ";
             if (part2.equals("Start")) {
-                frpStatusMap.put(msg,frpStatus.RUN);
+                frpStatusMap.put(msg, frpStatus.RUN);
             }
             if (part2.equals("Stop")) {
-                frpStatusMap.put(msg,frpStatus.STOP);
+                frpStatusMap.put(msg, frpStatus.STOP);
             }
-            sendInfo(prefix+getLanguage("Process_"+part2).replace("[tunnelName]",msg));
+            sendInfo(prefix+getLanguage("Process_"+part2).replace("[tunnelName]",msg),null);
             return;
         }
         if (part1.equals("debug")) {
             return;
         }
-        sendInfo(processSend);
+        sendInfo(processSend,null);
     }
 
     //解析读取到的信息
@@ -190,49 +198,49 @@ public class FrpManager {
         prefix = "["+prefix+"] ";
         logMessage(prefix+info);
         if (info.contains("login to server success")) {
-            sendInfo(prefix+getLanguage("Frp_InfoLogin"));
+            sendInfo(prefix+getLanguage("Frp_InfoLogin"),null);
             return;
         }
         if (info.contains("proxy added")) {
-            sendInfo(prefix+getLanguage("Frp_InfoStarting"));
+            sendInfo(prefix+getLanguage("Frp_InfoStarting"),null);
             return;
         }
         if (info.contains("start proxy success")) {
-            sendInfo(prefix+getLanguage("Frp_InfoStartSuccess"));
+            sendInfo(prefix+getLanguage("Frp_InfoStartSuccess"),null);
             return;
         }
         if (info.contains("port already used")) {
-            sendInfo(prefix+getLanguage("Frp_InfoPortUsed"));
+            sendInfo(prefix+getLanguage("Frp_InfoPortUsed"),null);
             return;
         }
         if (info.contains("work connection closed before response StartWorkConn message: EOF")) {
-            sendInfo(prefix+getLanguage("Frp_InfoErrorEOF"));
+            sendInfo(prefix+getLanguage("Frp_InfoErrorEOF"),null);
             return;
         }
         if (info.contains("try to reconnect to server...")) {
-            sendInfo(prefix+getLanguage("Frp_InfoReconnecting"));
+            sendInfo(prefix+getLanguage("Frp_InfoReconnecting"),null);
             return;
         }
         if (info.contains("A connection attempt failed because the connected party did not properly respond after a period of time")) {
-            sendInfo(prefix+getLanguage("Frp_InfoConnectNoRespond"));
+            sendInfo(prefix+getLanguage("Frp_InfoConnectNoRespond"),null);
             return;
         }
         if (info.contains("No connection could be made because the target machine actively refused it")) {
-            sendInfo(prefix+getLanguage("Frp_InfoConnectReject"));
+            sendInfo(prefix+getLanguage("Frp_InfoConnectReject"),null);
             return;
         }
         if (info.contains("token in login doesn't match token from configuration")) {
-            sendInfo(prefix+getLanguage("Frp_InfoConnectTokenWrong"));
+            sendInfo(prefix+getLanguage("Frp_InfoConnectTokenWrong"),null);
             return;
         }
         if (info.contains("no such host")) {
-            sendInfo(prefix+getLanguage("Frp_InfoNoSuchHost"));
+            sendInfo(prefix+getLanguage("Frp_InfoNoSuchHost"),null);
             return;
         }
         if (info.contains("login to server failed: EOF")) {
-            sendInfo(prefix+getLanguage("Frp_InfoLoginEOF"));
+            sendInfo(prefix+getLanguage("Frp_InfoLoginEOF"),null);
             return;
         }
-        sendInfo(prefix+info);
+        sendInfo(prefix+info,null);
     }
 }

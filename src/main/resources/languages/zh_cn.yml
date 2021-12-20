@@ -8,6 +8,7 @@ Language_Unknown: 未知的语言名称！
 Language_Changed: 成功切换语言为中文(简体)！
 Exit_Start: 正在退出MossFrp客户端！
 Exit_Finished: MossFrp客户端已退出！感谢使用！
+Permission_Reject: 你没有这个权限！
 Prefix_Info: [信息]
 Prefix_Warn: [警告]
 Prefix_Error: [错误]
@@ -69,6 +70,9 @@ File_WriteConfigFailed: 配置文件写入失败！
 File_WriteSaveSuccess: 保存配置文件写入完成
 File_WriteSaveFailed: 保存配置文件写入失败！
 File_WriteSaveStart: 正在写入frp保存配置文件
+File_ReadNotExist: 文件不存在！请检查配置文件名称是否输入正确！
+File_ReadUnknownMode: 未知的运行模式！请检查配置文件内运行模式是否输入正确！
+File_ReadError: 配置读取错误！请确认配置文件是否填写正确！
 Process_Start: 正在启动Frp！
 Process_Stop: 已关闭隧道[tunnelName]！
 Process_Failed: frp启动失败！
@@ -96,6 +100,7 @@ Command_Help: "\r\n--= MossFrp 指令帮助 =--
   \r\nTips：输入的时候别带括号<>哦！"
 Command_HelpTunnelMain: "\r\n--= MossFrp 指令帮助 =--
   \r\n新建隧道：tunnel new
+  \r\n运行隧道：tunnel run
   \r\n删除隧道：tunnel remove
   \r\nTips：输入的时候别带括号<>哦！"
 Command_HelpLangMain: "\r\n--= MossFrp 指令帮助 =--
@@ -103,14 +108,34 @@ Command_HelpLangMain: "\r\n--= MossFrp 指令帮助 =--
   \r\n可用语言列表：zh_cn en_us
   \r\nTips：输入的时候别带括号<>哦！"
 Command_HelpTunnelNew: 使用方法：tunnel new <隧道名称> <激活码>
+Command_HelpTunnelRun: 使用方法：mossfrp tunnel run <隧道名称> PS：隧道名称即配置文件名称除去后缀。举例：配置文件名称为”abc.yml“，名称即为”abc“。
 Command_HelpTunnelRemove: 使用方法：tunnel remove <隧道名称>
 Command_TunnelNotExist: 隧道不存在！请使用list指令查看隧道列表！
+Command_Help_Plugin: "\r\n--= MossFrp 指令帮助 =--
+  \r\n查看帮助：mossfrp help
+  \r\n隧道指令：mossfrp tunnel
+  \r\n切换语言：mossfrp lang
+  \r\n隧道列表：mossfrp list
+  \r\nTips：输入的时候别带括号<>哦！"
+Command_HelpTunnelMain_Plugin: "\r\n--= MossFrp 指令帮助 =--
+  \r\n新建隧道：mossfrp tunnel new
+  \r\n运行隧道：mossfrp tunnel run
+  \r\n删除隧道：mossfrp tunnel remove
+  \r\nTips：输入的时候别带括号<>哦！"
+Command_HelpLangMain_Plugin: "\r\n--= MossFrp 指令帮助 =--
+  \r\n切换语言：mossfrp lang <语言>
+  \r\n可用语言列表：zh_cn en_us
+  \r\nTips：输入的时候别带括号<>哦！"
+Command_HelpTunnelNew_Plugin: 使用方法：mossfrp tunnel new <隧道名称> [激活码]
+Command_HelpTunnelRun_Plugin: 使用方法：mossfrp tunnel run <隧道名称> PS：隧道名称即配置文件名称除去后缀。举例：配置文件名称为”abc.yml“，名称即为”abc“。
+Command_HelpTunnelRemove_Plugin: 使用方法：mossfrp tunnel remove <隧道名称>
+Command_TunnelNotExist_Plugin: 隧道不存在！请使用mossfrp list指令查看隧道列表！
 Command_TunnelStopping: 正在关闭隧道！请等待......
-#Command_HelpTunnelFile: 已创建配置文件！配置文件位于Frp运行目录下”/MossFrp/configs“文件夹，请在配置文件中设置好你的隧道配置，然后使用tunnel run <隧道名称>来运行隧道！
+Command_HelpTunnelFile: 已创建配置文件！配置文件位于插件文件夹目录下”MossFrp/configs“文件夹，请在配置文件中设置好你的隧道配置，然后使用”mossfrp tunnel run <隧道名称>“来运行隧道！如配置文件名称为abc.yml，则隧道名称为abc。
 SaveFile: "#MossFrp客户端自定义配置文件
 \r\n#运行模式（必填）
 \r\n#1、MossFrp激活码模式
-\r\n#2、自建节点模式 \
+\r\n#2、自建节点模式
 \r\n#注释后括号内数字代表对应模式需填写此项
 \r\nmode: [runMode]
 \r\n#MossFrp激活码（1）

@@ -1,22 +1,23 @@
 package org.mossmc.mosscg;
 
+import org.bukkit.command.CommandSender;
 import org.yaml.snakeyaml.Yaml;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.Map;
+import java.util.Random;
 
-import static org.mossmc.mosscg.Code.codeMap;
+import static org.mossmc.mosscg.Code.*;
 import static org.mossmc.mosscg.MossFrp.*;
-import static org.mossmc.mosscg.Code.tunnelMap;
 
 public class FileManager {
     //读取配置文件的方法
-    public static void loadSaveTunnel(String name) {
-        File file = new File("./MossFrp/configs/"+name+".yml");
+    public static void loadSaveTunnel(String name,CommandSender sender) {
+        File file = new File(dataFolder+"/configs/"+name+".yml");
         if (!file.exists()) {
-            sendWarn(getLanguage("File_ReadNotExist"));
+            sendWarn(getLanguage("File_ReadNotExist"),sender);
             return;
         }
         //yaml格式读取
@@ -37,7 +38,7 @@ public class FileManager {
                 String use_encryption = cacheMap.get("use_encryption").toString();
                 String proxy_protocol_version = cacheMap.get("proxy_protocol_version").toString();
                 String prefix = code+"-"+name+"-";
-                Code.decode(code,true);
+                Code.decode(code,true,sender);
                 tunnelMap.put(prefix+"token",code);
                 tunnelMap.put(prefix+"frpType",protocol);
                 tunnelMap.put(prefix+"localIP",localIP);
@@ -59,8 +60,8 @@ public class FileManager {
                     tunnelMap.put(prefix+"advancedSettings",tunnelMap.get(prefix+"advancedSettings")+"4");
                 }
                 cacheMap.clear();
-                Code.printTunnelInfo(code,name);
-                FileManager.writeFrpSettings(code,name);
+                Code.printTunnelInfo(code,name,sender);
+                FileManager.writeFrpSettings(code,name,sender);
                 FrpManager.runFrpProcess(name);
                 return;
             }
@@ -98,20 +99,64 @@ public class FileManager {
                     tunnelMap.put(prefix+"advancedSettings",tunnelMap.get(prefix+"advancedSettings")+"4");
                 }
                 cacheMap.clear();
-                Code.printTunnelInfo(token,name);
-                FileManager.writeFrpSettings(token,name);
+                Code.printTunnelInfo(token,name,sender);
+                FileManager.writeFrpSettings(token,name,sender);
                 FrpManager.runFrpProcess(name);
                 return;
             }
-            sendWarn(getLanguage("File_ReadUnknownMode"));
+            sendWarn(getLanguage("File_ReadUnknownMode"),sender);
         } catch (Exception e) {
             sendException(e);
-            sendWarn(getLanguage("File_ReadError"));
+            sendWarn(getLanguage("File_ReadError"),sender);
+        }
+    }
+    //创建空的保存配置文件，给用户填写
+    public static void writeEmptySaveTunnel(String name,String code,CommandSender sender) {
+        sendInfo(getLanguage("File_WriteSaveStart"),sender);
+        //初始化参数
+        String remoteIP = "null";
+        int remotePort = 0;
+        if (!code.equals("")) {
+            decode(code,true,sender);
+            remoteIP = codeMap.get(code+"-node")+".mossfrp.cn";
+            Random random = new Random();
+            remotePort = Integer.parseInt(codeMap.get(code+"-portServer"))+random.nextInt(8)+1;
+        }
+        //替换标识符
+        String fileInput = getLanguage("SaveFile");
+        fileInput = fileInput.replace("[runMode]","1")
+                .replace("[code]",code)
+                .replace("[token]",code)
+                .replace("[protocol]","tcp")
+                .replace("[localIP]","127.0.0.1")
+                .replace("[localPort]",String.valueOf(getInstance().getServer().getPort()))
+                .replace("[remoteIP]",remoteIP)
+                .replace("[remotePort]",String.valueOf(remotePort))
+                .replace("[compression]","false")
+                .replace("[encryption]","false")
+                .replace("[proxyProtocol]","false");
+        //写入文件
+        try {
+            File saveFile = new File(dataFolder+"/configs/"+name+".yml");
+            if (!saveFile.exists()) {
+                if (!saveFile.createNewFile()) {
+                    sendWarn(getLanguage("File_WriteSaveFailed"),sender);
+                    return;
+                }
+            }
+            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(saveFile), StandardCharsets.UTF_8));
+            writer.write(fileInput);
+            writer.flush();
+            writer.close();
+            sendInfo(getLanguage("File_WriteSaveSuccess"),sender);
+        } catch (Exception e) {
+            e.printStackTrace();
+            sendInfo(getLanguage("File_WriteSaveFailed"),sender);
         }
     }
     //保存隧道配置文件为yml，用于下次启动时读取
-    public static void writeSaveTunnel(String code,String frpName) {
-        sendInfo(getLanguage("File_WriteSaveStart"));
+    public static void writeSaveTunnel(String code, String frpName, CommandSender sender) {
+        sendInfo(getLanguage("File_WriteSaveStart"),sender);
         //读取高级选项
         String prefix = code+"-"+frpName+"-";
         String fileInput = getLanguage("SaveFile");
@@ -145,10 +190,10 @@ public class FileManager {
                 .replace("[proxyProtocol]",proxyProtocol);
         //写入文件部分
         try {
-            File saveFile = new File("./MossFrp/configs/"+tunnelMap.get(prefix+"node")+"-"+frpName+".yml");
+            File saveFile = new File(dataFolder+"/configs/"+tunnelMap.get(prefix+"node")+"-"+frpName+".yml");
             if (!saveFile.exists()) {
                 if (!saveFile.createNewFile()) {
-                    sendWarn(getLanguage("File_WriteSaveFailed"));
+                    sendWarn(getLanguage("File_WriteSaveFailed"),sender);
                     return;
                 }
             }
@@ -156,15 +201,15 @@ public class FileManager {
             writer.write(fileInput);
             writer.flush();
             writer.close();
-            sendInfo(getLanguage("File_WriteSaveSuccess"));
+            sendInfo(getLanguage("File_WriteSaveSuccess"),sender);
         } catch (Exception e) {
             e.printStackTrace();
-            sendInfo(getLanguage("File_WriteSaveFailed"));
+            sendInfo(getLanguage("File_WriteSaveFailed"),sender);
         }
     }
     //生成frpc.ini以及复制frpc.exe
-    public static void writeFrpSettings(String code,String frpName) {
-        sendInfo(getLanguage("File_WriteConfigStart"));
+    public static void writeFrpSettings(String code,String frpName,CommandSender sender) {
+        sendInfo(getLanguage("File_WriteConfigStart"),sender);
         String prefix = code+"-"+frpName+"-";
         String frpFileName;
         if (tunnelMap.containsKey(prefix+"new")) {
@@ -175,7 +220,7 @@ public class FileManager {
         //检查文件是否存在
         //以及创建文件
         String dirPath;
-        dirPath = "./MossFrp/frps/" + frpFileName;
+        dirPath = dataFolder+"/frps/" + frpFileName;
         try{
             File dirFile = new File(dirPath);
             File cfgFile = new File(dirPath+"/frpc.ini");
@@ -189,13 +234,13 @@ public class FileManager {
             assert frpFile != null;
             if (!dirFile.exists()) {
                 if (!dirFile.mkdir()) {
-                    sendWarn(getLanguage("File_WriteConfigFailed"));
+                    sendWarn(getLanguage("File_WriteConfigFailed"),sender);
                     return;
                 }
             }
             if (!cfgFile.exists()) {
                 if (!cfgFile.createNewFile()) {
-                    sendWarn(getLanguage("File_WriteConfigFailed"));
+                    sendWarn(getLanguage("File_WriteConfigFailed"),sender);
                     return;
                 }
             }
@@ -212,7 +257,7 @@ public class FileManager {
                     Files.copy(in, frpFile.toPath());
                 } catch (IOException e) {
                     e.printStackTrace();
-                    sendWarn(getLanguage("File_WriteConfigFailed"));
+                    sendWarn(getLanguage("File_WriteConfigFailed"),sender);
                     return;
                 }
                 frpFile.setReadable(true);
@@ -228,7 +273,7 @@ public class FileManager {
                 fileWriter.write("server_addr = "+tunnelMap.get(prefix+"node")+".mossfrp.cn\r\n");
             }
             fileWriter.write("server_port = "+tunnelMap.get(prefix+"portServer")+"\r\n");
-            fileWriter.write("log_file = ./MossFrp/frps/"+frpName+"/frps.log"+"\r\n");
+            fileWriter.write("log_file = "+dataFolder.toString().replace("\\","/")+"/frps/"+frpName+"/frps.log"+"\r\n");
             fileWriter.write("log_level = info"+"\r\n");
             fileWriter.write("log_max_days = 7"+"\r\n");
             fileWriter.write("token = "+tunnelMap.get(prefix+"token"));
@@ -253,14 +298,14 @@ public class FileManager {
                 fileWriter.write("proxy_protocol_version = v2\r\n");
             }
             if (advanced.contains("5")) {
-                writeSaveTunnel(code,frpName);
+                writeSaveTunnel(code,frpName,sender);
             }
             fileWriter.flush();
             fileWriter.close();
-            sendInfo(getLanguage("File_WriteConfigSuccess"));
+            sendInfo(getLanguage("File_WriteConfigSuccess"),sender);
         }catch(IOException e){
             sendException(e);
-            sendWarn(getLanguage("File_WriteConfigFailed"));
+            sendWarn(getLanguage("File_WriteConfigFailed"),sender);
         }
     }
 }

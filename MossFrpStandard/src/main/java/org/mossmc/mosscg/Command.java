@@ -61,7 +61,7 @@ public class Command {
         //读取指令部分
         //空指令判断
         if (command.length() < 1) {
-            sendWarn(getLanguage("Command_Unknown"));
+            sendWarn(getLanguage("Command_Help"));
             return false;
         }
         switch (part1) {
@@ -89,6 +89,14 @@ public class Command {
                 return true;
             //隧道相关指令
             case "tunnel":
+                if (part2.equals("run")) {
+                    if (!part3.equals("")) {
+                        FileManager.loadSaveTunnel(part3);
+                        return true;
+                    }
+                    sendInfo(getLanguage("Command_HelpTunnelRun"));
+                    return false;
+                }
                 if (part2.equals("new")) {
                     if (!part3.equals("") && !part4.equals("")) {
                         if (FrpManager.frpStatusMap.containsKey(part3)) {

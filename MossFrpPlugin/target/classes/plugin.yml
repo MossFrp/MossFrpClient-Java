@@ -1,5 +1,5 @@
 name: MossFrp
-version: 0.0.0.1.0000
+version: V0.4.2.1.1226 Beta
 main: org.mossmc.mosscg.MossFrp
 api-version: 1.16
 soft-depend: []
@@ -7,6 +7,18 @@ commands:
   MossFrp:
     description: MossFrp主指令
 permissions:
-  mossfrp.copyright:
-    description: 版权信息显示权限
+  mossfrp.help:
+    description: 帮助信息显示权限
+    default: true
+  mossfrp.lang:
+    description: 语言切换权限
+    default: op
+  mossfrp.list:
+    description: 显示穿透列表权限
+    default: op
+  mossfrp.tunnel:
+    description: 隧道管理指令权限
+    default: op
+  mossfrp.set:
+    description: 设置指令权限
     default: op

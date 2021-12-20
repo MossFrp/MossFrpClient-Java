@@ -418,6 +418,16 @@ public class MossFrp {
                 e.printStackTrace();
                 System.exit(1);
             }
+        } else {
+            frpProcessFile.delete();
+            InputStream in = MossFrp.class.getClassLoader().getResourceAsStream("MossFrpProcess.jar");
+            try {
+                assert in != null;
+                Files.copy(in, frpProcessFile.toPath());
+            } catch (IOException e) {
+                e.printStackTrace();
+                System.exit(1);
+            }
         }
         //frp配置文件夹检查
         File frpConfigDir = new File("./MossFrp/configs");
