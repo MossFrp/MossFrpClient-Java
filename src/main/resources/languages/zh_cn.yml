@@ -108,7 +108,7 @@ Command_HelpLangMain: "\r\n--= MossFrp 指令帮助 =--
   \r\n可用语言列表：zh_cn en_us
   \r\nTips：输入的时候别带括号<>哦！"
 Command_HelpTunnelNew: 使用方法：tunnel new <隧道名称> <激活码>
-Command_HelpTunnelRun: 使用方法：mossfrp tunnel run <隧道名称> PS：隧道名称即配置文件名称除去后缀。举例：配置文件名称为”abc.yml“，名称即为”abc“。
+Command_HelpTunnelRun: 使用方法：tunnel run <隧道名称> PS：隧道名称即配置文件名称除去后缀。举例：配置文件名称为”abc.yml“，名称即为”abc“。
 Command_HelpTunnelRemove: 使用方法：tunnel remove <隧道名称>
 Command_TunnelNotExist: 隧道不存在！请使用list指令查看隧道列表！
 Command_Help_Plugin: "\r\n--= MossFrp 指令帮助 =--

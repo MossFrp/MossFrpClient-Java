@@ -107,6 +107,7 @@ Command_HelpLangMain: "\r\n--= MossFrp Command Help =--
   \r\nSupport languages: zh_cn en_us
   \r\nTips: Don't input <> while input arguments."
 Command_HelpTunnelNew: "Usage: tunnel new <name> <CDK>"
+Command_HelpTunnelRun: "Usage: tunnel run <name> PS: Tunnel name is the configuration file name without suffix. For example: File is 'abc.yml', so name is 'abc'."
 Command_HelpTunnelRemove: "Usage: tunnel remove <name>"
 Command_TunnelNotExist: "Tunnel not exists! Please use command 'list' to check the tunnel list."
 Command_Help_Plugin: "\r\n--= MossFrp Command Help =--
