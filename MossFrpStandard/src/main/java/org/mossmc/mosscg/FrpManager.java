@@ -120,8 +120,15 @@ public class FrpManager {
                     readProcessInfo(frpInfo);
                 } catch (IOException e) {
                     sendWarn(getLanguage("Frp_ReadError"));
+                    try {
+                        frpProcess.destroy();
+                    } catch (Exception exception) {
+                        sendException(e);
+                    }
+                    break;
                 }
             }
+            loadProcessThread();
         } catch (IOException e) {
             sendException(e);
             System.exit(1);
@@ -218,7 +225,11 @@ public class FrpManager {
             return;
         }
         if (info.contains("No connection could be made because the target machine actively refused it")) {
-            sendInfo(prefix+getLanguage("Frp_InfoConnectReject"));
+            if (info.contains("connect to local service")) {
+                sendInfo(prefix + getLanguage("Frp_InfoConnectRejectLocal"));
+            } else {
+                sendInfo(prefix + getLanguage("Frp_InfoConnectRejectRemote"));
+            }
             return;
         }
         if (info.contains("token in login doesn't match token from configuration")) {

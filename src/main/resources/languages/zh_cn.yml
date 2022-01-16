@@ -78,6 +78,8 @@ Process_Stop: 已关闭隧道[tunnelName]！
 Process_Failed: frp启动失败！
 Process_Success: frp启动成功！
 List_Send: Frp隧道：[tunnelName] - [tunnelStatus]
+List_LocalPrefix: 本地IP：[localIP]
+List_RemotePrefix: 远程IP：[remoteIP]
 Frp_ReadError: 读取frp输出时发生错误！
 Frp_InfoLogin: 成功登录到远程Frp节点！
 Frp_InfoStarting: 正在启动隧道！
@@ -88,7 +90,8 @@ Frp_InfoLoginEOF: 登陆失败！错误：EOF
 Frp_InfoReconnecting: 正在尝试重新链接到服务器！
 Frp_InfoNoSuchHost: 无法解析服务器地址！请确认你输入的服务器地址是否正确或你的电脑的网络连通性！
 Frp_InfoConnectNoRespond: 链接失败：目标服务器无响应！请检查远程frp服务器是否在线或MossFrp激活码是否到期！
-Frp_InfoConnectReject: 链接失败：目标服务器拒绝连接！请检查远程frp服务器是否在线或MossFrp激活码是否到期！
+Frp_InfoConnectRejectRemote: 链接失败：目标服务器拒绝连接！请检查远程frp服务器是否在线或MossFrp激活码是否到期！
+Frp_InfoConnectRejectLocal: 链接失败：本地服务器拒绝连接！请检查本地服务端是否开启或端口是否正确！
 Frp_InfoConnectTokenWrong: 链接失败：token错误！请检查远程frp服务器token是否对应本地token或MossFrp激活码是否正确！
 Command_Unknown: 未知指令！
 Command_TunnelAlreadyExist: 隧道已存在！请更换隧道名称！

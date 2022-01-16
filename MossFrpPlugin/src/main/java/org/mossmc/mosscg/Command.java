@@ -73,6 +73,12 @@ public class Command {
                 }
                 for (String name : FrpManager.frpStatusMap.keySet()) {
                     sendInfo(getLanguage("List_Send").replace("[tunnelName]",name).replace("[tunnelStatus]",FrpManager.frpStatusMap.get(name).toString()),sender);
+                    sendInfo(getLanguage("List_LocalPrefix").replace("[localIP]",Code.tunnelMap.get(name+"-localIP")+":"+Code.tunnelMap.get(name+"-portLocal")),sender);
+                    if (Code.tunnelMap.containsKey(name+"-custom")) {
+                        sendInfo(getLanguage("List_RemotePrefix").replace("[remoteIP]",Code.tunnelMap.get(name+"-remoteIP")+":"+Code.tunnelMap.get(name+"-portOpen")),sender);
+                    } else {
+                        sendInfo(getLanguage("List_RemotePrefix").replace("[remoteIP]",Code.tunnelMap.get(name+"-node")+".mossfrp.cn:"+Code.tunnelMap.get(name+"-portOpen")),sender);
+                    }
                 }
                 return true;
             //隧道相关指令

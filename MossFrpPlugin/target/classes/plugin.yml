@@ -19,6 +19,3 @@ permissions:
   mossfrp.tunnel:
     description: 隧道管理指令权限
     default: op
-  mossfrp.set:
-    description: 设置指令权限
-    default: op

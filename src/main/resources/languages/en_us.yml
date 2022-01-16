@@ -78,6 +78,8 @@ Process_Stop: Stopped tunnel [tunnelName]!
 Process_Failed: Frp start failed!
 Process_Success: Frp start successed!
 List_Send: "Tunnel: [tunnelName] - [tunnelStatus]"
+List_LocalPrefix: "Local address: [localIP]"
+List_RemotePrefix: "Remote address：[remoteIP]"
 Frp_ReadError: An error has occurred while reading Frp output message.
 Frp_InfoLogin: Successfully login info remote Frp server!
 Frp_InfoStarting: Starting tunnel......
@@ -87,9 +89,10 @@ Frp_InfoErrorEOF: Connection error! EOF.
 Frp_InfoLoginEOF: Login failed! EOF.
 Frp_InfoReconnecting: Trying reconnect to Frp server......
 Frp_InfoNoSuchHost: No such host! Please check your server address or if your PC connected to internet!
-Frp_InfoConnectNoRespond: Connection failed! There was no respond from Frp server! Check if the Frp server down of your MossFrp CDK is outdated!
-Frp_InfoConnectReject: Connection failed! Your connection was rejected by server! Check if the Frp server down of your MossFrp CDK is outdated!
-Frp_InfoConnectTokenWrong: Connection failed! Wrong token! Check if the Frp server down of your MossFrp CDK is outdated or wrong!
+Frp_InfoConnectNoRespond: Connection failed! There was no respond from Frp server! Check if the Frp server down or your MossFrp CDK is outdated!
+Frp_InfoConnectRejectRemote: Connection reject! Your connection was rejected by remote server! Check if the Frp server down or your MossFrp CDK is outdated!
+Frp_InfoConnectRejectLocal: Connection reject! Your connection was rejected by local server! Check if your local server down or your local port wrong!
+Frp_InfoConnectTokenWrong: Connection failed! Wrong token! Check if the Frp server down or your MossFrp CDK is outdated or wrong!
 Command_Unknown: Unknown command.
 Command_TunnelAlreadyExist: Tunnel already existed! Please change the name of tunnel.
 Command_Help: "\r\n--= MossFrp Command Help =--
