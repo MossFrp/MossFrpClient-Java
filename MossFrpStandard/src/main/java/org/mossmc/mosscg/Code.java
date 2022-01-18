@@ -38,8 +38,8 @@ public class Code {
     }
     //显示隧道信息的方法
     //每次输入设置都会调用一次
-    public static void printTunnelInfo(String code,String frpName) {
-        String prefix = code+"-"+frpName+"-";
+    public static void printTunnelInfo(String frpName) {
+        String prefix = frpName+"-";
         sendInfo("");
         sendInfo(getLanguage("CodeGuide_PrintLine"));
         sendInfo(getLanguage("CodeGuide_PrintFrpName")+frpName);
@@ -67,7 +67,7 @@ public class Code {
         }
         //将数据存入隧道缓存
         //方便后续调用
-        String prefix = code+"-"+frpName+"-";
+        String prefix = frpName+"-";
         tunnelMap.put(prefix+"token",code);
         tunnelMap.put(prefix+"frpType","");
         tunnelMap.put(prefix+"localIP","");
@@ -80,7 +80,7 @@ public class Code {
         tunnelMap.put(prefix+"new","true");
         //设置隧道协议
         while (true) {
-            printTunnelInfo(code,frpName);
+            printTunnelInfo(frpName);
             sendInfo(getLanguage("CodeGuide_PrintExit"));
             sendInfo(getLanguage("CodeGuide_ProtocolInfo"));
             String read = readInput();
@@ -96,7 +96,7 @@ public class Code {
         }
         //设置本地IP地址
         while (true) {
-            printTunnelInfo(code,frpName);
+            printTunnelInfo(frpName);
             sendInfo(getLanguage("CodeGuide_PrintExit"));
             sendInfo(getLanguage("CodeGuide_LocalIPInfo"));
             String read = readInput();
@@ -116,7 +116,7 @@ public class Code {
         }
         //设置本地端口
         while (true) {
-            printTunnelInfo(code,frpName);
+            printTunnelInfo(frpName);
             sendInfo(getLanguage("CodeGuide_PrintExit"));
             sendInfo(getLanguage("CodeGuide_LocalPortInfo"));
             String read = readInput();
@@ -139,7 +139,7 @@ public class Code {
         }
         //设置远程端口
         while (true) {
-            printTunnelInfo(code,frpName);
+            printTunnelInfo(frpName);
             sendInfo(getLanguage("CodeGuide_PrintExit"));
             sendInfo(getLanguage("CodeGuide_RemotePortInfo").replace("[remotePortRange]",tunnelMap.get(prefix+"portStart")+"-"+tunnelMap.get(prefix+"portEnd")));
             String read = readInput();
@@ -158,7 +158,7 @@ public class Code {
         }
         //设置高级选项
         while (true) {
-            printTunnelInfo(code,frpName);
+            printTunnelInfo(frpName);
             sendInfo(getLanguage("CodeGuide_PrintExit"));
             sendInfo(getLanguage("CodeGuide_AdvancedInfo"));
             String read = readInput();
@@ -178,7 +178,7 @@ public class Code {
                 sendErrorWarn(getLanguage("CodeGuide_AdvancedWarn"));
             }
         }
-        printTunnelInfo(code,frpName);
+        printTunnelInfo(frpName);
         sendInfo(getLanguage("CodeGuide_Complete"));
         //新建独立线程运行frp
         //保证运行不把主线程玩炸了

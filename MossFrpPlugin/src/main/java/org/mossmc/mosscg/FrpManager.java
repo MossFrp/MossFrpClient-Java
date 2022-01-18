@@ -87,7 +87,7 @@ public class FrpManager {
     public static void runFrp(String code, String frpName, CommandSender sender) {
         //写入配置文件frpc.ini
         //生成frpc.exe文件
-        String prefix = code+"-"+frpName+"-";
+        String prefix = frpName+"-";
         FileManager.writeFrpSettings(code,frpName,sender);
         //运行frp主方法部分
         runFrpProcess(Code.tunnelMap.get(prefix+"node")+"-"+frpName);
@@ -122,7 +122,6 @@ public class FrpManager {
             while (true) {
                 try {
                     String frpInfo = frpOut.readLine();
-                    //System.out.println(frpInfo);
                     readProcessInfo(frpInfo);
                 } catch (IOException e) {
                     sendWarn(getLanguage("Frp_ReadError"),null);

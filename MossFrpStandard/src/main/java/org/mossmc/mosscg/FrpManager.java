@@ -82,7 +82,7 @@ public class FrpManager {
     public static void runFrp(String code,String frpName) {
         //写入配置文件frpc.ini
         //生成frpc.exe文件
-        String prefix = code+"-"+frpName+"-";
+        String prefix = frpName+"-";
         FileManager.writeFrpSettings(code,frpName);
         //运行frp主方法部分
         runFrpProcess(Code.tunnelMap.get(prefix+"node")+"-"+frpName);

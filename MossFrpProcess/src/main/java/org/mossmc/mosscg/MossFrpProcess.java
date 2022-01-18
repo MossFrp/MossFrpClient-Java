@@ -150,17 +150,19 @@ public class MossFrpProcess {
                 output.readLine();
                 output.close();
                 frp = run.exec(basicPath+path+"/frpc-"+path+".exe -c "+basicPath+path+"/frpc.ini");
+                BufferedReader frpOut = new BufferedReader(new InputStreamReader(frp.getInputStream()));
                 frpProcessMap.put(path,frp);
                 sendInfo("send Success "+path);
-                readFrp(path);
+                readFrp(path,frp,frpOut);
             }
             if (getSystemType == systemType.linux) {
                 sendInfo("send Start "+path);
                 Process frp;
                 frp = run.exec(basicPath+path+"/frpc-"+path+" -c "+basicPath+path+"/frpc.ini");
+                BufferedReader frpOut = new BufferedReader(new InputStreamReader(frp.getInputStream()));
                 frpProcessMap.put(path,frp);
                 sendInfo("send Success "+path);
-                readFrp(path);
+                readFrp(path,frp,frpOut);
             }
         }catch (Exception e){
             sendException(e);
@@ -181,10 +183,8 @@ public class MossFrpProcess {
 
     //读取frp返回流
     //然后输出信息
-    public static void readFrp(String path) {
-        Process frp = frpProcessMap.get(path);
+    public static void readFrp(String path,Process frp,BufferedReader frpOut) {
         String prefix = path+" ";
-        BufferedReader frpOut = new BufferedReader(new InputStreamReader(frp.getInputStream()));
         while (true) {
             if (!frp.isAlive()) {
                 stopFrp(path);

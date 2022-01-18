@@ -96,7 +96,7 @@ public class MossFrp extends JavaPlugin {
                         String use_compression = cacheMap.get("use_compression").toString();
                         String use_encryption = cacheMap.get("use_encryption").toString();
                         String proxy_protocol_version = cacheMap.get("proxy_protocol_version").toString();
-                        String prefix = code+"-"+name+"-";
+                        String prefix = name+"-";
                         Code.decode(code,true,null);
                         tunnelMap.put(prefix+"token",code);
                         tunnelMap.put(prefix+"frpType",protocol);
@@ -119,7 +119,7 @@ public class MossFrp extends JavaPlugin {
                             tunnelMap.put(prefix+"advancedSettings",tunnelMap.get(prefix+"advancedSettings")+"4");
                         }
                         cacheMap.clear();
-                        Code.printTunnelInfo(code,name,null);
+                        Code.printTunnelInfo(name,null);
                         FileManager.writeFrpSettings(code,name,null);
                         FrpManager.runFrpProcess(name);
                         continue;
@@ -135,7 +135,7 @@ public class MossFrp extends JavaPlugin {
                         String use_compression = cacheMap.get("use_compression").toString();
                         String use_encryption = cacheMap.get("use_encryption").toString();
                         String proxy_protocol_version = cacheMap.get("proxy_protocol_version").toString();
-                        String prefix = token+"-"+name+"-";
+                        String prefix = name+"-";
                         tunnelMap.put(prefix+"custom","true");
                         tunnelMap.put(prefix+"token",token);
                         tunnelMap.put(prefix+"frpType",protocol);
@@ -158,7 +158,7 @@ public class MossFrp extends JavaPlugin {
                             tunnelMap.put(prefix+"advancedSettings",tunnelMap.get(prefix+"advancedSettings")+"4");
                         }
                         cacheMap.clear();
-                        Code.printTunnelInfo(token,name,null);
+                        Code.printTunnelInfo(name,null);
                         FileManager.writeFrpSettings(token,name,null);
                         FrpManager.runFrpProcess(name);
                     }

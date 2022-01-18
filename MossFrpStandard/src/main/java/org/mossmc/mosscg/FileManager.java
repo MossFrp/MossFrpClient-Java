@@ -59,7 +59,7 @@ public class FileManager {
                     tunnelMap.put(prefix+"advancedSettings",tunnelMap.get(prefix+"advancedSettings")+"4");
                 }
                 cacheMap.clear();
-                Code.printTunnelInfo(code,name);
+                Code.printTunnelInfo(name);
                 FileManager.writeFrpSettings(code,name);
                 FrpManager.runFrpProcess(name);
                 return;
@@ -98,7 +98,7 @@ public class FileManager {
                     tunnelMap.put(prefix+"advancedSettings",tunnelMap.get(prefix+"advancedSettings")+"4");
                 }
                 cacheMap.clear();
-                Code.printTunnelInfo(token,name);
+                Code.printTunnelInfo(name);
                 FileManager.writeFrpSettings(token,name);
                 FrpManager.runFrpProcess(name);
                 return;
@@ -165,7 +165,7 @@ public class FileManager {
     //生成frpc.ini以及复制frpc.exe
     public static void writeFrpSettings(String code,String frpName) {
         sendInfo(getLanguage("File_WriteConfigStart"));
-        String prefix = code+"-"+frpName+"-";
+        String prefix = frpName+"-";
         String frpFileName;
         if (tunnelMap.containsKey(prefix+"new")) {
             frpFileName = tunnelMap.get(prefix+"node") + "-" + frpName;

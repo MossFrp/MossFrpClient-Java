@@ -37,7 +37,7 @@ public class FileManager {
                 String use_compression = cacheMap.get("use_compression").toString();
                 String use_encryption = cacheMap.get("use_encryption").toString();
                 String proxy_protocol_version = cacheMap.get("proxy_protocol_version").toString();
-                String prefix = code+"-"+name+"-";
+                String prefix = name+"-";
                 Code.decode(code,true,sender);
                 tunnelMap.put(prefix+"token",code);
                 tunnelMap.put(prefix+"frpType",protocol);
@@ -60,7 +60,7 @@ public class FileManager {
                     tunnelMap.put(prefix+"advancedSettings",tunnelMap.get(prefix+"advancedSettings")+"4");
                 }
                 cacheMap.clear();
-                Code.printTunnelInfo(code,name,sender);
+                Code.printTunnelInfo(name,sender);
                 FileManager.writeFrpSettings(code,name,sender);
                 FrpManager.runFrpProcess(name);
                 return;
@@ -76,7 +76,7 @@ public class FileManager {
                 String use_compression = cacheMap.get("use_compression").toString();
                 String use_encryption = cacheMap.get("use_encryption").toString();
                 String proxy_protocol_version = cacheMap.get("proxy_protocol_version").toString();
-                String prefix = token+"-"+name+"-";
+                String prefix = name+"-";
                 tunnelMap.put(prefix+"custom","true");
                 tunnelMap.put(prefix+"token",token);
                 tunnelMap.put(prefix+"frpType",protocol);
@@ -99,7 +99,7 @@ public class FileManager {
                     tunnelMap.put(prefix+"advancedSettings",tunnelMap.get(prefix+"advancedSettings")+"4");
                 }
                 cacheMap.clear();
-                Code.printTunnelInfo(token,name,sender);
+                Code.printTunnelInfo(name,sender);
                 FileManager.writeFrpSettings(token,name,sender);
                 FrpManager.runFrpProcess(name);
                 return;
@@ -158,7 +158,7 @@ public class FileManager {
     public static void writeSaveTunnel(String code, String frpName, CommandSender sender) {
         sendInfo(getLanguage("File_WriteSaveStart"),sender);
         //读取高级选项
-        String prefix = code+"-"+frpName+"-";
+        String prefix = frpName+"-";
         String fileInput = getLanguage("SaveFile");
         String compression = "false";
         String encryption = "false";
@@ -210,7 +210,7 @@ public class FileManager {
     //生成frpc.ini以及复制frpc.exe
     public static void writeFrpSettings(String code,String frpName,CommandSender sender) {
         sendInfo(getLanguage("File_WriteConfigStart"),sender);
-        String prefix = code+"-"+frpName+"-";
+        String prefix = frpName+"-";
         String frpFileName;
         if (tunnelMap.containsKey(prefix+"new")) {
             frpFileName = tunnelMap.get(prefix+"node") + "-" + frpName;
