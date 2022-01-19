@@ -43,7 +43,7 @@ public class Code {
         sendInfo("");
         sendInfo(getLanguage("CodeGuide_PrintLine"));
         sendInfo(getLanguage("CodeGuide_PrintFrpName")+frpName);
-        sendInfo(getLanguage("CodeGuide_PrintToken")+tunnelMap.get(prefix+"token"));
+        sendInfo(getLanguage("CodeGuide_PrintToken")+autoHide(tunnelMap.get(prefix+"token")));
         sendInfo(getLanguage("CodeGuide_PrintProtocol")+tunnelMap.get(prefix+"frpType"));
         sendInfo(getLanguage("CodeGuide_PrintLocalIP")+tunnelMap.get(prefix+"localIP")+":"+tunnelMap.get(prefix+"portLocal"));
         if (tunnelMap.containsKey(prefix+"custom")) {
@@ -52,6 +52,27 @@ public class Code {
             sendInfo(getLanguage("CodeGuide_PrintRemoteIP") + tunnelMap.get(prefix + "node") + ".mossfrp.cn:" + tunnelMap.get(prefix + "portOpen"));
         }
         sendInfo(getLanguage("CodeGuide_PrintLine"));
+    }
+    public static String autoHide(String input) {
+        int length = input.length();
+        StringBuilder builder = new StringBuilder();
+        if (length <= 6) {
+            int i = 0;
+            while (i<length) {
+                i++;
+                builder.append("*");
+            }
+        } else {
+            builder.append(input, 0, 2);
+            length = length - 4;
+            int i = 0;
+            while (i<length) {
+                i++;
+                builder.append("*");
+            }
+            builder.append(input.substring(input.length()-2));
+        }
+        return builder.toString();
     }
     //激活码设置向导
     //方便一些萌新不会用做了一个向导

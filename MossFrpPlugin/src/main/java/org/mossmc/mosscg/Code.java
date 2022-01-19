@@ -41,7 +41,7 @@ public class Code {
         sendInfo("",sender);
         sendInfo(getLanguage("CodeGuide_PrintLine"),sender);
         sendInfo(getLanguage("CodeGuide_PrintFrpName") + frpName,sender);
-        sendInfo(getLanguage("CodeGuide_PrintToken") + tunnelMap.get(prefix + "token"),sender);
+        sendInfo(getLanguage("CodeGuide_PrintToken") + autoHide(tunnelMap.get(prefix + "token")),sender);
         sendInfo(getLanguage("CodeGuide_PrintProtocol") + tunnelMap.get(prefix + "frpType"),sender);
         sendInfo(getLanguage("CodeGuide_PrintLocalIP") + tunnelMap.get(prefix + "localIP") + ":" + tunnelMap.get(prefix + "portLocal"),sender);
         if (tunnelMap.containsKey(prefix + "custom")) {
@@ -50,6 +50,28 @@ public class Code {
             sendInfo(getLanguage("CodeGuide_PrintRemoteIP") + tunnelMap.get(prefix + "node") + ".mossfrp.cn:" + tunnelMap.get(prefix + "portOpen"),sender);
         }
         sendInfo(getLanguage("CodeGuide_PrintLine"),sender);
+    }
+
+    public static String autoHide(String input) {
+        int length = input.length();
+        StringBuilder builder = new StringBuilder();
+        if (length <= 6) {
+            int i = 0;
+            while (i<length) {
+                i++;
+                builder.append("*");
+            }
+        } else {
+            builder.append(input, 0, 2);
+            length = length - 4;
+            int i = 0;
+            while (i<length) {
+                i++;
+                builder.append("*");
+            }
+            builder.append(input.substring(input.length()-2));
+        }
+        return builder.toString();
     }
     //激活码设置向导（插件暂时不启用）
     //方便一些萌新不会用做了一个向导
