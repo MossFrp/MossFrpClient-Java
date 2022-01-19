@@ -113,7 +113,7 @@ public class FileManager {
     public static void writeSaveTunnel(String code,String frpName) {
         sendInfo(getLanguage("File_WriteSaveStart"));
         //读取高级选项
-        String prefix = code+"-"+frpName+"-";
+        String prefix = frpName+"-";
         String fileInput = getLanguage("SaveFile");
         String compression = "false";
         String encryption = "false";
@@ -244,7 +244,7 @@ public class FileManager {
                 fileWriter.write("use_compression = true\r\n");
             }
             if (advanced.contains("2")) {
-                fileWriter.write("use_encryption = true\r\n");
+                fileWriter.write("tls_enable = true\r\n");
             }
             if (advanced.contains("3")) {
                 fileWriter.write("proxy_protocol_version = v1\r\n");

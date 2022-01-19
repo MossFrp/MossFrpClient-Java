@@ -289,7 +289,7 @@ public class FileManager {
                 fileWriter.write("use_compression = true\r\n");
             }
             if (advanced.contains("2")) {
-                fileWriter.write("use_encryption = true\r\n");
+                fileWriter.write("tls_enable = true\r\n");
             }
             if (advanced.contains("3")) {
                 fileWriter.write("proxy_protocol_version = v1\r\n");
