@@ -65,7 +65,7 @@ public class FileManager {
                 return;
             }
             //自定义模式读取
-            if (cacheMap.get("mode").equals("2")) {
+            if (cacheMap.get("mode").toString().equals("2")) {
                 String token = cacheMap.get("token").toString();
                 String protocol = cacheMap.get("protocol").toString();
                 String localIP = cacheMap.get("localIP").toString();
@@ -75,15 +75,15 @@ public class FileManager {
                 String use_compression = cacheMap.get("use_compression").toString();
                 String use_encryption = cacheMap.get("use_encryption").toString();
                 String proxy_protocol_version = cacheMap.get("proxy_protocol_version").toString();
-                String prefix = token+"-"+name+"-";
+                String prefix = name+"-";
                 tunnelMap.put(prefix+"custom","true");
                 tunnelMap.put(prefix+"token",token);
                 tunnelMap.put(prefix+"frpType",protocol);
                 tunnelMap.put(prefix+"localIP",localIP);
                 tunnelMap.put(prefix+"portOpen",remotePort);
                 tunnelMap.put(prefix+"portLocal",localPort);
-                tunnelMap.put(prefix+"portServer",codeMap.get(remotePort));
-                tunnelMap.put(prefix+"remoteIP",codeMap.get(remoteIP));
+                tunnelMap.put(prefix+"portServer",remotePort);
+                tunnelMap.put(prefix+"remoteIP",remoteIP);
                 tunnelMap.put(prefix+"advancedSettings","");
                 if (use_compression.equals("true")) {
                     tunnelMap.put(prefix+"advancedSettings",tunnelMap.get(prefix+"advancedSettings")+"1");
