@@ -99,6 +99,8 @@ public class Code {
         tunnelMap.put(prefix+"portEnd",codeMap.get(code+"-portEnd"));
         tunnelMap.put(prefix+"node",codeMap.get(code+"-node"));
         tunnelMap.put(prefix+"new","true");
+        tunnelMap.put(prefix+"tunnelExtraSettings","false");
+        tunnelMap.put(prefix+"commonExtraSettings","false");
         //设置隧道协议
         while (true) {
             printTunnelInfo(frpName,sender);

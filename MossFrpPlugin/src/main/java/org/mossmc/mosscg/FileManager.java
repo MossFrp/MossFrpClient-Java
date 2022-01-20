@@ -142,7 +142,9 @@ public class FileManager {
                 .replace("[remotePort]",String.valueOf(remotePort))
                 .replace("[compression]","false")
                 .replace("[encryption]","false")
-                .replace("[proxyProtocol]","false");
+                .replace("[proxyProtocol]","false")
+                .replace("[commonExtraSettings]","false")
+                .replace("[tunnelExtraSettings]","false");
         //写入文件
         try {
             File saveFile = new File(dataFolder+"/configs/"+name+".yml");
@@ -196,8 +198,8 @@ public class FileManager {
                 .replace("[compression]",compression)
                 .replace("[encryption]",encryption)
                 .replace("[proxyProtocol]",proxyProtocol)
-                .replace("[commonExtraSettings]","")
-                .replace("[tunnelExtraSettings]","");
+                .replace("[commonExtraSettings]","false")
+                .replace("[tunnelExtraSettings]","false");
         //写入文件部分
         try {
             File saveFile = new File(dataFolder+"/configs/"+tunnelMap.get(prefix+"node")+"-"+frpName+".yml");
@@ -287,14 +289,18 @@ public class FileManager {
             fileWriter.write("log_level = info"+"\r\n");
             fileWriter.write("log_max_days = 7"+"\r\n");
             fileWriter.write("token = "+tunnelMap.get(prefix+"token")+"\r\n");
-            fileWriter.write(tunnelMap.get(prefix+"commonExtraSettings"));
+            if (!tunnelMap.get(prefix+"commonExtraSettings").equals("false")) {
+                fileWriter.write(tunnelMap.get(prefix + "commonExtraSettings") + "\r\n");
+            }
             fileWriter.write("\r\n");
             fileWriter.write("["+frpName+"]"+"\r\n");
             fileWriter.write("type = "+tunnelMap.get(prefix+"frpType")+"\r\n");
             fileWriter.write("local_ip = "+tunnelMap.get(prefix+"localIP")+"\r\n");
             fileWriter.write("local_port = "+tunnelMap.get(prefix+"portLocal")+"\r\n");
             fileWriter.write("remote_port = "+tunnelMap.get(prefix+"portOpen")+"\r\n");
-            fileWriter.write(tunnelMap.get(prefix+"tunnelExtraSettings")+"\r\n");
+            if (!tunnelMap.get(prefix+"tunnelExtraSettings").equals("false")) {
+                fileWriter.write(tunnelMap.get(prefix + "tunnelExtraSettings") + "\r\n");
+            }
             fileWriter.flush();
             String advanced = tunnelMap.get(prefix+"advancedSettings");
             if (advanced.contains("1")) {
