@@ -176,4 +176,10 @@ use_encryption: [encryption] \r\n
 #Please set 'proxy_protocol: true' and 'ip_forward: true' in Bungee configuration. \r\n
 #And set 'BungeeCord: true' in Spigot configuration. \r\n
 #Then set argument there as 'v2' \r\n
-proxy_protocol_version: [proxyProtocol] \r\n"
+proxy_protocol_version: [proxyProtocol] \r\n
+#Extra common settings. \r\n
+#Its not necessary to change it. \r\n
+commonExtraSettings: [commonTunnelSettings] \r\n
+#Extra tunnel settings. \r\n
+#Its not necessary to change it.  \r\n
+tunnelExtraSettings: [tunnelExtraSettings] "

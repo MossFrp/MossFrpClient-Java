@@ -13,9 +13,6 @@ import java.util.Calendar;
 import java.util.Map;
 import java.util.logging.Logger;
 
-import static org.mossmc.mosscg.Code.codeMap;
-import static org.mossmc.mosscg.Code.tunnelMap;
-
 public class MossFrp extends JavaPlugin {
     //主类，用于调用另一个主类
     @Override
@@ -69,99 +66,14 @@ public class MossFrp extends JavaPlugin {
         if (tempList == null) {
             return;
         }
-        Map cacheMap;
         //对文件列表进行遍历
         for (File value : tempList) {
             if (value.isFile()) {
-                //yaml格式读取
-                Yaml yaml = new Yaml();
-                FileInputStream input;
                 try {
-                    input = new FileInputStream(value);
-                    cacheMap = yaml.loadAs(input, Map.class);
                     String fileName = value.getName();
                     String[] cut = fileName.split("\\.");
                     String name = cut[0];
-                    //未知模式判定
-                    if (!cacheMap.get("mode").toString().equals("1") && !cacheMap.get("mode").toString().equals("2")) {
-                        continue;
-                    }
-                    //MossFrp模式读取
-                    if (cacheMap.get("mode").toString().equals("1")) {
-                        String code = cacheMap.get("code").toString();
-                        String protocol = cacheMap.get("protocol").toString();
-                        String localIP = cacheMap.get("localIP").toString();
-                        String localPort = cacheMap.get("localPort").toString();
-                        String remotePort = cacheMap.get("remotePort").toString();
-                        String use_compression = cacheMap.get("use_compression").toString();
-                        String use_encryption = cacheMap.get("use_encryption").toString();
-                        String proxy_protocol_version = cacheMap.get("proxy_protocol_version").toString();
-                        String prefix = name+"-";
-                        Code.decode(code,true,null);
-                        tunnelMap.put(prefix+"token",code);
-                        tunnelMap.put(prefix+"frpType",protocol);
-                        tunnelMap.put(prefix+"localIP",localIP);
-                        tunnelMap.put(prefix+"portOpen",remotePort);
-                        tunnelMap.put(prefix+"portLocal",localPort);
-                        tunnelMap.put(prefix+"portServer",codeMap.get(code+"-portServer"));
-                        tunnelMap.put(prefix+"node",codeMap.get(code+"-node"));
-                        tunnelMap.put(prefix+"advancedSettings","");
-                        if (use_compression.equals("true")) {
-                            tunnelMap.put(prefix+"advancedSettings",tunnelMap.get(prefix+"advancedSettings")+"1");
-                        }
-                        if (use_encryption.equals("true")) {
-                            tunnelMap.put(prefix+"advancedSettings",tunnelMap.get(prefix+"advancedSettings")+"2");
-                        }
-                        if (proxy_protocol_version.equals("v1")) {
-                            tunnelMap.put(prefix+"advancedSettings",tunnelMap.get(prefix+"advancedSettings")+"3");
-                        }
-                        if (proxy_protocol_version.equals("v2")) {
-                            tunnelMap.put(prefix+"advancedSettings",tunnelMap.get(prefix+"advancedSettings")+"4");
-                        }
-                        cacheMap.clear();
-                        Code.printTunnelInfo(name,null);
-                        FileManager.writeFrpSettings(code,name,null);
-                        FrpManager.runFrpProcess(name);
-                        continue;
-                    }
-                    //自定义模式读取
-                    if (cacheMap.get("mode").toString().equals("2")) {
-                        String token = cacheMap.get("token").toString();
-                        String protocol = cacheMap.get("protocol").toString();
-                        String localIP = cacheMap.get("localIP").toString();
-                        String localPort = cacheMap.get("localPort").toString();
-                        String remoteIP = cacheMap.get("remoteIP").toString();
-                        String remotePort = cacheMap.get("remotePort").toString();
-                        String use_compression = cacheMap.get("use_compression").toString();
-                        String use_encryption = cacheMap.get("use_encryption").toString();
-                        String proxy_protocol_version = cacheMap.get("proxy_protocol_version").toString();
-                        String prefix = name+"-";
-                        tunnelMap.put(prefix+"custom","true");
-                        tunnelMap.put(prefix+"token",token);
-                        tunnelMap.put(prefix+"frpType",protocol);
-                        tunnelMap.put(prefix+"localIP",localIP);
-                        tunnelMap.put(prefix+"portOpen",remotePort);
-                        tunnelMap.put(prefix+"portLocal",localPort);
-                        tunnelMap.put(prefix+"portServer",remotePort);
-                        tunnelMap.put(prefix+"remoteIP",remoteIP);
-                        tunnelMap.put(prefix+"advancedSettings","");
-                        if (use_compression.equals("true")) {
-                            tunnelMap.put(prefix+"advancedSettings",tunnelMap.get(prefix+"advancedSettings")+"1");
-                        }
-                        if (use_encryption.equals("true")) {
-                            tunnelMap.put(prefix+"advancedSettings",tunnelMap.get(prefix+"advancedSettings")+"2");
-                        }
-                        if (proxy_protocol_version.equals("v1")) {
-                            tunnelMap.put(prefix+"advancedSettings",tunnelMap.get(prefix+"advancedSettings")+"3");
-                        }
-                        if (proxy_protocol_version.equals("v2")) {
-                            tunnelMap.put(prefix+"advancedSettings",tunnelMap.get(prefix+"advancedSettings")+"4");
-                        }
-                        cacheMap.clear();
-                        Code.printTunnelInfo(name,null);
-                        FileManager.writeFrpSettings(token,name,null);
-                        FrpManager.runFrpProcess(name);
-                    }
+                    FileManager.loadSaveTunnel(name,null);
                 } catch (Exception e) {
                     sendException(e);
                 }

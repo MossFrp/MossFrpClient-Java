@@ -88,7 +88,7 @@ public class FrpManager {
         //写入配置文件frpc.ini
         //生成frpc.exe文件
         String prefix = frpName+"-";
-        FileManager.writeFrpSettings(code,frpName,sender);
+        FileManager.writeFrpSettings(frpName,sender);
         //运行frp主方法部分
         runFrpProcess(Code.tunnelMap.get(prefix+"node")+"-"+frpName);
     }
@@ -112,10 +112,10 @@ public class FrpManager {
     public static void readProcess() {
         try {
             if (getSystemType == systemType.windows) {
-                frpProcess = Runtime.getRuntime().exec("java -server -Xmx30M -jar "+dataFolder+"/frps/MossFrpProcess.jar -MossFrp=nb -systemType=windows -mode=plugin -path="+dataFolder.toString().replace("\\","/"));
+                frpProcess = Runtime.getRuntime().exec("java -Xmx30M -jar "+dataFolder+"/frps/MossFrpProcess.jar -MossFrp=nb -systemType=windows -mode=plugin -path="+dataFolder.toString().replace("\\","/"));
             }
             if (getSystemType == systemType.linux) {
-                frpProcess = Runtime.getRuntime().exec("java -server -Xmx50M -jar "+dataFolder+"/frps/MossFrpProcess.jar -MossFrp=nb -systemType=linux -mode=plugin -path="+dataFolder.toString().replace("\\","/"));
+                frpProcess = Runtime.getRuntime().exec("java -Xmx50M -jar "+dataFolder+"/frps/MossFrpProcess.jar -MossFrp=nb -systemType=linux -mode=plugin -path="+dataFolder.toString().replace("\\","/"));
             }
             BufferedReader frpOut = new BufferedReader(new InputStreamReader(frpProcess.getInputStream()));
             loadHeartbeatThread();

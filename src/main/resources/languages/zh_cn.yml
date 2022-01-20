@@ -135,44 +135,50 @@ Command_HelpTunnelRemove_Plugin: 使用方法：mossfrp tunnel remove <隧道名
 Command_TunnelNotExist_Plugin: 隧道不存在！请使用mossfrp list指令查看隧道列表！
 Command_TunnelStopping: 正在关闭隧道！请等待......
 Command_HelpTunnelFile: 已创建配置文件！配置文件位于插件文件夹目录下”MossFrp/configs“文件夹，请在配置文件中设置好你的隧道配置，然后使用”mossfrp tunnel run <隧道名称>“来运行隧道！如配置文件名称为abc.yml，则隧道名称为abc。
-SaveFile: "#MossFrp客户端自定义配置文件
-\r\n#运行模式（必填）
-\r\n#1、MossFrp激活码模式
-\r\n#2、自建节点模式
-\r\n#注释后括号内数字代表对应模式需填写此项
-\r\nmode: [runMode]
-\r\n#MossFrp激活码（1）
-\r\ncode: [code]
-\r\n#Token密码（2）
-\r\n#用于服务端身份验证
-\r\ntoken: [token]
-\r\n#协议（1/2）
-\r\n#MC一般是tcp
-\r\nprotocol: [protocol]
-\r\n#本地地址（1/2）
-\r\n#一般填127.0.0.1即可
-\r\nlocalIP: [localIP]
-\r\n#本地端口（1/2）
-\r\n#MC服务器默认25565
-\r\n#联机请填开放端口
-\r\n#即开启局域网游戏后聊天栏提示的端口
-\r\nlocalPort: [localPort]
-\r\n#服务器地址（2）
-\r\n#frp服务器的地址
-\r\nremoteIP: [remoteIP]
-\r\n#服务器端口（1/2）
-\r\n#请填写激活码对应可用端口范围内的一个
-\r\nremotePort: [remotePort]
-\r\n#启用带宽压缩（1/2）
-\r\n#据说会有一点点延迟
-\r\n#带宽不够用可以开启
-\r\nuse_compression: [compression]
-\r\n#启用链接加密（1/2）
-\r\n#讲真没啥用，需要可以开启
-\r\nuse_encryption: [encryption]
-\r\n#开启protocol（1/2）
-\r\n#用于Bungee转发真实IP
-\r\n#请在Bungee配置文件中设置proxy_protocol: true以及ip_forward: true
-\r\n#然后在Spigot配置文件中设置BungeeCord: true
-\r\n#最后在此设置参数为 v2
-\r\nproxy_protocol_version: [proxyProtocol] "
+SaveFile: "#MossFrp客户端自定义配置文件 \r\n
+#运行模式（必填） \r\n
+#1、MossFrp激活码模式 \r\n
+#2、自建节点模式 \r\n
+#注释后括号内数字代表对应模式需填写此项 \r\n
+mode: [runMode] \r\n
+#MossFrp激活码（1） \r\n
+code: [code] \r\n
+#Token密码（2） \r\n
+#用于服务端身份验证 \r\n
+token: [token] \r\n
+#协议（1/2） \r\n
+#MC一般是tcp \r\n
+protocol: [protocol] \r\n
+#本地地址（1/2） \r\n
+#一般填127.0.0.1即可 \r\n
+localIP: [localIP] \r\n
+#本地端口（1/2） \r\n
+#MC服务器默认25565 \r\n
+#联机请填开放端口 \r\n
+#即开启局域网游戏后聊天栏提示的端口 \r\n
+localPort: [localPort] \r\n
+#服务器地址（2） \r\n
+#frp服务器的地址 \r\n
+remoteIP: [remoteIP] \r\n
+#服务器端口（1/2） \r\n
+#请填写激活码对应可用端口范围内的一个 \r\n
+remotePort: [remotePort] \r\n
+#启用带宽压缩（1/2） \r\n
+#据说会有一点点延迟 \r\n
+#带宽不够用可以开启 \r\n
+use_compression: [compression] \r\n
+#启用链接加密（1/2） \r\n
+#讲真没啥用，需要可以开启 \r\n
+use_encryption: [encryption] \r\n
+#开启protocol（1/2） \r\n
+#用于Bungee转发真实IP \r\n
+#请在Bungee配置文件中设置proxy_protocol: true以及ip_forward: true \r\n
+#然后在Spigot配置文件中设置BungeeCord: true \r\n
+#最后在此设置参数为 v2 \r\n
+proxy_protocol_version: [proxyProtocol]  \r\n
+#frpc的基础额外配置 \r\n
+#非必要，没特殊需求就别动 \r\n
+commonExtraSettings: [commonExtraSettings] \r\n
+#frpc的隧道额外配置 \r\n
+#非必要，没特殊需求就别动 \r\n
+tunnelExtraSettings: [tunnelExtraSettings]"

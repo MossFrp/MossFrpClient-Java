@@ -37,3 +37,11 @@ use_encryption: false
 #请在Bungee配置文件中设置proxy_protocol: true
 #然后在此设置参数为 v2
 proxy_protocol_version: false
+#frpc的基础额外配置
+#用\r\n换行
+#非必要，没特殊需求就别动
+commonExtraSettings: ""
+#frpc的隧道额外配置
+#用\r\n换行
+#非必要，没特殊需求就别动
+tunnelExtraSettings: ""

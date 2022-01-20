@@ -37,6 +37,8 @@ public class FileManager {
                 String use_compression = cacheMap.get("use_compression").toString();
                 String use_encryption = cacheMap.get("use_encryption").toString();
                 String proxy_protocol_version = cacheMap.get("proxy_protocol_version").toString();
+                String tunnelExtraSettings = cacheMap.get("tunnelExtraSettings").toString();
+                String commonExtraSettings = cacheMap.get("commonExtraSettings").toString();
                 String prefix = name+"-";
                 Code.decode(code,true,sender);
                 tunnelMap.put(prefix+"token",code);
@@ -46,6 +48,8 @@ public class FileManager {
                 tunnelMap.put(prefix+"portLocal",localPort);
                 tunnelMap.put(prefix+"portServer",codeMap.get(code+"-portServer"));
                 tunnelMap.put(prefix+"node",codeMap.get(code+"-node"));
+                tunnelMap.put(prefix+"tunnelExtraSettings",tunnelExtraSettings);
+                tunnelMap.put(prefix+"commonExtraSettings",commonExtraSettings);
                 tunnelMap.put(prefix+"advancedSettings","");
                 if (use_compression.equals("true")) {
                     tunnelMap.put(prefix+"advancedSettings",tunnelMap.get(prefix+"advancedSettings")+"1");
@@ -61,7 +65,7 @@ public class FileManager {
                 }
                 cacheMap.clear();
                 Code.printTunnelInfo(name,sender);
-                FileManager.writeFrpSettings(code,name,sender);
+                FileManager.writeFrpSettings(name,sender);
                 FrpManager.runFrpProcess(name);
                 return;
             }
@@ -76,6 +80,8 @@ public class FileManager {
                 String use_compression = cacheMap.get("use_compression").toString();
                 String use_encryption = cacheMap.get("use_encryption").toString();
                 String proxy_protocol_version = cacheMap.get("proxy_protocol_version").toString();
+                String tunnelExtraSettings = cacheMap.get("tunnelExtraSettings").toString();
+                String commonExtraSettings = cacheMap.get("commonExtraSettings").toString();
                 String prefix = name+"-";
                 tunnelMap.put(prefix+"custom","true");
                 tunnelMap.put(prefix+"token",token);
@@ -85,6 +91,8 @@ public class FileManager {
                 tunnelMap.put(prefix+"portLocal",localPort);
                 tunnelMap.put(prefix+"portServer",remotePort);
                 tunnelMap.put(prefix+"remoteIP",remoteIP);
+                tunnelMap.put(prefix+"tunnelExtraSettings",tunnelExtraSettings);
+                tunnelMap.put(prefix+"commonExtraSettings",commonExtraSettings);
                 tunnelMap.put(prefix+"advancedSettings","");
                 if (use_compression.equals("true")) {
                     tunnelMap.put(prefix+"advancedSettings",tunnelMap.get(prefix+"advancedSettings")+"1");
@@ -100,7 +108,7 @@ public class FileManager {
                 }
                 cacheMap.clear();
                 Code.printTunnelInfo(name,sender);
-                FileManager.writeFrpSettings(token,name,sender);
+                FileManager.writeFrpSettings(name,sender);
                 FrpManager.runFrpProcess(name);
                 return;
             }
@@ -155,7 +163,7 @@ public class FileManager {
         }
     }
     //保存隧道配置文件为yml，用于下次启动时读取
-    public static void writeSaveTunnel(String code, String frpName, CommandSender sender) {
+    public static void writeSaveTunnel(String frpName, CommandSender sender) {
         sendInfo(getLanguage("File_WriteSaveStart"),sender);
         //读取高级选项
         String prefix = frpName+"-";
@@ -187,7 +195,9 @@ public class FileManager {
                 .replace("[remotePort]",tunnelMap.get(prefix+"portOpen"))
                 .replace("[compression]",compression)
                 .replace("[encryption]",encryption)
-                .replace("[proxyProtocol]",proxyProtocol);
+                .replace("[proxyProtocol]",proxyProtocol)
+                .replace("[commonExtraSettings]","")
+                .replace("[tunnelExtraSettings]","");
         //写入文件部分
         try {
             File saveFile = new File(dataFolder+"/configs/"+tunnelMap.get(prefix+"node")+"-"+frpName+".yml");
@@ -208,7 +218,7 @@ public class FileManager {
         }
     }
     //生成frpc.ini以及复制frpc.exe
-    public static void writeFrpSettings(String code,String frpName,CommandSender sender) {
+    public static void writeFrpSettings(String frpName,CommandSender sender) {
         sendInfo(getLanguage("File_WriteConfigStart"),sender);
         String prefix = frpName+"-";
         String frpFileName;
@@ -276,13 +286,15 @@ public class FileManager {
             fileWriter.write("log_file = "+dataFolder.toString().replace("\\","/")+"/frps/"+frpName+"/frps.log"+"\r\n");
             fileWriter.write("log_level = info"+"\r\n");
             fileWriter.write("log_max_days = 7"+"\r\n");
-            fileWriter.write("token = "+tunnelMap.get(prefix+"token"));
+            fileWriter.write("token = "+tunnelMap.get(prefix+"token")+"\r\n");
+            fileWriter.write(tunnelMap.get(prefix+"commonExtraSettings"));
             fileWriter.write("\r\n");
             fileWriter.write("["+frpName+"]"+"\r\n");
             fileWriter.write("type = "+tunnelMap.get(prefix+"frpType")+"\r\n");
             fileWriter.write("local_ip = "+tunnelMap.get(prefix+"localIP")+"\r\n");
             fileWriter.write("local_port = "+tunnelMap.get(prefix+"portLocal")+"\r\n");
             fileWriter.write("remote_port = "+tunnelMap.get(prefix+"portOpen")+"\r\n");
+            fileWriter.write(tunnelMap.get(prefix+"tunnelExtraSettings")+"\r\n");
             fileWriter.flush();
             String advanced = tunnelMap.get(prefix+"advancedSettings");
             if (advanced.contains("1")) {
@@ -298,7 +310,7 @@ public class FileManager {
                 fileWriter.write("proxy_protocol_version = v2\r\n");
             }
             if (advanced.contains("5")) {
-                writeSaveTunnel(code,frpName,sender);
+                writeSaveTunnel(frpName,sender);
             }
             fileWriter.flush();
             fileWriter.close();
