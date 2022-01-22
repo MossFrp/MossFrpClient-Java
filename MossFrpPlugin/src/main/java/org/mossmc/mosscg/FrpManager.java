@@ -68,8 +68,15 @@ public class FrpManager {
                 out.flush();
             } catch (Exception e) {
                 sendException(e);
+                try {
+                    frpProcess.destroy();
+                } catch (Exception exception) {
+                    sendException(e);
+                }
+                break;
             }
         }
+        loadProcessThread();
     }
 
     //启动frp调用
@@ -84,7 +91,7 @@ public class FrpManager {
     }
 
     //frp线程运行方法
-    public static void runFrp(String code, String frpName, CommandSender sender) {
+    public static void runFrp(String frpName, CommandSender sender) {
         //写入配置文件frpc.ini
         //生成frpc.exe文件
         String prefix = frpName+"-";
@@ -123,13 +130,8 @@ public class FrpManager {
                 try {
                     String frpInfo = frpOut.readLine();
                     readProcessInfo(frpInfo);
-                } catch (IOException e) {
+                } catch (Exception e) {
                     sendWarn(getLanguage("Frp_ReadError"),null);
-                    try {
-                        frpProcess.destroy();
-                    } catch (Exception exception) {
-                        sendException(e);
-                    }
                     break;
                 }
             }

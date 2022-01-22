@@ -205,7 +205,7 @@ public class Code {
         sendInfo(getLanguage("CodeGuide_Complete"),sender);
         //新建独立线程运行frp
         //保证运行不把主线程玩炸了
-        FrpManager.runFrp(code,frpName,sender);
+        FrpManager.runFrp(frpName,sender);
     }
     //激活码解码方法
     //cache选项为是否存入缓存
