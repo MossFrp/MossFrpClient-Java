@@ -1,5 +1,0 @@
-Manifest-Version: 1.0
-Implementation-Title: MossFrp
-Implementation-Version: MossFrp-Beta
-Implementation-Vendor: MossCG
-Main-Class: org.mossmc.mosscg.MossFrp
