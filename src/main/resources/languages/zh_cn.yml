@@ -1,184 +1,113 @@
-Start_Welcome: 欢迎使用MossFrp 版本：
-Start_Copyright: 本插件&独立客户端均为B站@墨守MossCG版权所有
-Start_ToGuide: 正在启动运行引导
-Start_CheckFailed: 启动失败！请使用命令行启动MossFrp！并添加启动参数：-MossFrp=nb
-Start_SystemFull: 操作系统名称：[system]
-Start_SystemRead: 运行模式：[system]
-Language_Unknown: 未知的语言名称！
-Language_Changed: 成功切换语言为中文(简体)！
-Exit_Start: 正在退出MossFrp客户端！
-Exit_Finished: MossFrp客户端已退出！感谢使用！
-Permission_Reject: 你没有这个权限！
-Prefix_Info: [信息]
-Prefix_Warn: [警告]
-Prefix_Error: [错误]
-Prefix_Exception: [报错]
-Prefix_Unknown: [未知]
-Prefix_Command: [指令]
-Guide_CommandStart: 正在启动指令线程
-Guide_CommandStartComplete: 指令线程已启动
-Guide_ProcessStart: 正在启动frp核心管理线程
-Guide_ProcessStartComplete: frp核心管理线程已启动
-Guide_StartComplete: 启动完成！输入“help”查看帮助！
-Guide_LoadSaveStart: 正在加载保存配置文件
-Guide_LoadSaveComplete: 保存配置文件加载完成！
-Code_DecodeFailed: 激活码解码失败！请确认你输入的激活码是否有误！
-Code_DecodeSuccess: 激活码解码成功！数据如下：
-Code_DecodeNode: 节点：
-Code_DecodeNumber: 编号：
-Code_DecodePortServer: 服务端口：
-Code_DecodePortRange: 可用端口：
-CodeGuide_Start: 正在启动隧道设置向导！
-CodeGuide_PrintLine: ----------===MossFrp===----------
-CodeGuide_PrintFrpName: 名称：
-CodeGuide_PrintToken: 激活码：
-CodeGuide_PrintProtocol: 穿透协议：
-CodeGuide_PrintLocalIP: 本地地址：
-CodeGuide_PrintRemoteIP: 远程地址：
-CodeGuide_PrintExit: 输入exit离开设置向导
-CodeGuide_Exit: 已退出设置向导
-CodeGuide_Complete: 设置完成！正在启动Frp！
-CodeGuide_ProtocolInfo: "\r\n请输入使用的穿透协议
-  \r\n可用协议：tcp udp
-  \r\nTips：我的世界JAVA版使用tcp协议"
-CodeGuide_ProtocolWarn: 参数错误！请输入tcp或udp！
-CodeGuide_LocalIPInfo: "\r\n请输入要映射的本地地址
-  \r\n千万不要在此输入端口！
-  \r\nTips：本地地址为 127.0.0.1，一般填这个即可"
-CodeGuide_LocalIPWarn: 参数错误！请输入合法的IP地址！
-CodeGuide_LocalIPWarnPort: 参数错误！请不要在此输入端口号！
-CodeGuide_LocalPortInfo: "\r\n请输入要映射的本地端口
-  \r\n可用范围：1-65535
-  \r\nTips：MC服务器默认为25565端口，联机请查看对局域网开放时提示的端口！"
-CodeGuide_LocalPortWarn: 参数错误！请输入合法的数字端口号！
-CodeGuide_RemotePortInfo: "\r\n请输入使用的远程端口
-  \r\n可用范围：[remotePortRange]
-  \r\nTips：就是别人连接用的端口"
-CodeGuide_RemotePortWarn: 请输入可用的范围！可用端口范围：[remotePortRange]
-CodeGuide_AdvancedInfo: "\r\n请输入开启的高级选项前的数字
-  \r\n1.开启带宽压缩【能少量压缩带宽，但是会提高延迟，不建议开启】
-  \r\n2.开启链接加密【如果出现登录到服务端EOF，可以尝试开启】
-  \r\n3.开启proxy协议v1【不会用就别开】
-  \r\n4.开启proxy协议v2【不会用就别开】
-  \r\n5.记住隧道【下次启动客户端自动开启，推荐开启】
-  \r\n如开启链接加密+带宽压缩+记住隧道则填125
-  \r\n不开启请直接回车跳过"
-CodeGuide_AdvancedWarn: 请填入合法的数字选项！
-File_WriteConfigStart: 正在写入frp配置文件
-File_WriteConfigSuccess: 配置文件写入完成
-File_WriteConfigFailed: 配置文件写入失败！
-File_WriteSaveSuccess: 保存配置文件写入完成
-File_WriteSaveFailed: 保存配置文件写入失败！
-File_WriteSaveStart: 正在写入frp保存配置文件
-File_ReadNotExist: 文件不存在！请检查配置文件名称是否输入正确！
-File_ReadUnknownMode: 未知的运行模式！请检查配置文件内运行模式是否输入正确！
-File_ReadError: 配置读取错误！请确认配置文件是否填写正确！
-Process_Start: 正在启动Frp！
-Process_Stop: 已关闭隧道[tunnelName]！
-Process_Failed: frp启动失败！
-Process_Success: frp启动成功！
-List_Send: Frp隧道：[tunnelName] - [tunnelStatus]
-List_LocalPrefix: 本地IP：[localIP]
-List_RemotePrefix: 远程IP：[remoteIP]
-Frp_ReadError: 读取frp输出时发生错误！
-Frp_InfoLogin: 成功登录到远程Frp节点！
-Frp_InfoStarting: 正在启动隧道！
-Frp_InfoStartSuccess: 隧道启动成功！请使用指令 list 查看隧道列表！
-Frp_InfoPortUsed: 检测到端口被占用！请修改端口！
-Frp_InfoErrorEOF: 链接异常！错误：EOF
-Frp_InfoLoginEOF: 登陆失败！错误：EOF
-Frp_InfoReconnecting: 正在尝试重新链接到服务器！
-Frp_InfoNoSuchHost: 无法解析服务器地址！请确认你输入的服务器地址是否正确或你的电脑的网络连通性！
-Frp_InfoConnectNoRespond: 链接失败：目标服务器无响应！请检查远程frp服务器是否在线或MossFrp激活码是否到期！
-Frp_InfoConnectRejectRemote: 链接失败：目标服务器拒绝连接！请检查远程frp服务器是否在线或MossFrp激活码是否到期！
-Frp_InfoConnectRejectLocal: 链接失败：本地服务器拒绝连接！请检查本地服务端是否开启或端口是否正确！
-Frp_InfoConnectTokenWrong: 链接失败：token错误！请检查远程frp服务器token是否对应本地token或MossFrp激活码是否正确！
-Command_Unknown: 未知指令！
-Command_TunnelAlreadyExist: 隧道已存在！请更换隧道名称！
+Language_Changed: "成功设置语言为中文(简体)！"
+Language_Unknown: "未知的语言名称！"
+
+Start_Time: "启动完成！耗时[time]秒！使用指令’help‘来查看帮助！"
+Start_Welcome: "欢迎使用MossFrp Java版本客户端 版本：[version]"
+Start_Copyright: "本插件&独立客户端均为B站@墨守MossCG版权所有"
+Start_SystemFull: "操作系统名称：[system]"
+Start_SystemRead: "运行模式：[system]"
+Start_CommandComplete: "指令监听线程已启动"
+Start_ProcessComplete: "Frp核心管理线程已启动"
+Start_UpdateDomainsComplete: "可用域名更新已完成！"
+Start_UpdateDomainsFailed: "可用域名更新失败！使用默认域名！"
+Start_CheckUpdateComplete: "版本更新检查已完成！"
+Start_CheckUpdateFailed: "版本更新检查失败！请检查网络连接！"
+Start_CheckNoticeFailed: "公告获取失败！请检查网络连接！"
+Start_NeedUpdate: "检查到新版本！最新版本：[version]，请及时更新！"
+Start_CheckFailed: "启动失败！请使用命令行启动MossFrp！并添加启动参数：-MossFrp=nb，
+这是为了防止用户直接点开jar客户端导致客户端运行但不显示窗口所设置的保护措施，
+此保护措施在linux和插件版本不会生效！"
+
+Load_LoadFile: "正在加载配置文件：[file]"
+Load_NotEnableFile: "不启用的配置文件：[file]"
+Load_LoadFileFailed: "无法加载配置文件：[file]"
+Load_LoadFileSucceed: "已加载配置文件：[file]"
+
+Save_SaveReadFailed: "读取保存配置文件模板时出错！"
+Save_SaveWriteFailed: "写入保存配置文件时出错！"
+Save_SaveSucceed: "已保存配置文件[name].yml！请在客户端下文件夹/MossFrp/configs里找到对应配置文件完成配置，配置完成之后使用mossfrp reload（独立端使用reload）来使配置文件生效！"
+
+Exit_Start: "正在退出MossFrp客户端！"
+Exit_Finished: "MossFrp客户端已退出！感谢使用！"
+
+Prefix_Info: "[信息]"
+Prefix_Warn: "[警告]"
+Prefix_Error: "[错误]"
+Prefix_Exception: "[报错]"
+Prefix_Debug: "[测试]"
+Prefix_Command: "[指令]"
+Prefix_Unknown: "[未知]"
+
+Code_DecodeFailed: "穿透码解码失败！请确认你输入的穿透码是否有误！"
+Code_DecodeSuccess: "穿透码解码成功！数据如下："
+Code_DecodeNode: "节点："
+Code_DecodeNumber: "编号："
+Code_DecodePortServer: "服务端口："
+Code_DecodePortRange: "可用端口："
+
+Core_RunError: "无法启动Frp管理核心！请检查或反馈错误！"
+Core_HeartbeatError: "Frp管理核心心跳包出现错误！"
+Core_HeartbeatTimeout: "Frp管理核心心跳包超时！"
+Core_ProcessStart: "Frp核心管理线程已启动"
+Core_ProcessClose: "Frp核心管理线程正在关闭"
+Core_ProcessExit: "Frp核心管理线程已关闭"
+Core_FrpStartRun: "Frp进程[name]启动中！"
+Core_FrpStartFailed: "Frp进程[name]启动失败！"
+Core_FrpStartSucceed: "Frp进程[name]启动成功！"
+Core_FrpStop: "Frp进程[name]已停止！"
+
+Frp_ReadError: "读取frp输出时发生错误！"
+Frp_InfoLogin: "成功登录到远程Frp节点！"
+Frp_InfoStarting: "正在启动隧道！"
+Frp_InfoStartSuccess: "隧道启动成功！请使用指令 list 查看隧道列表！"
+Frp_InfoPortUsed: "检测到端口被占用！请修改端口！"
+Frp_InfoErrorEOF: "链接异常！错误：EOF"
+Frp_InfoLoginEOF: "登陆失败！错误：EOF"
+Frp_InfoReconnecting: "正在尝试重新链接到服务器！"
+Frp_InfoNoSuchHost: "无法解析服务器地址！请确认你输入的服务器地址是否正确或你的电脑的网络连通性！"
+Frp_InfoConnectNoRespond: "链接失败：目标服务器无响应！请检查远程frp服务器是否在线或MossFrp穿透码是否到期！"
+Frp_InfoConnectRejectRemote: "链接失败：目标服务器拒绝连接！请检查远程frp服务器是否在线或MossFrp穿透码是否到期！"
+Frp_InfoConnectRejectLocal: "链接失败：本地服务器拒绝连接！请检查本地服务端是否开启或端口是否正确！"
+Frp_InfoConnectTokenWrong: "链接失败：token错误！请检查远程frp服务器token是否对应本地token或MossFrp穿透码是否正确！"
+
+List_Prefix: "隧道列表："
+List_Starting: "[启动中]"
+List_Online: "[开启]"
+List_Offline: "[关闭]"
+List_Local: "本地地址："
+List_Remote: "连接地址："
+List_Or: " 或 "
+
+File_WriteConfigStart: "正在写入frp配置文件"
+File_WriteConfigSuccess: "配置文件写入完成"
+File_WriteConfigFailed: "配置文件写入失败！"
+File_WriteSaveSuccess: "保存配置文件写入完成"
+File_WriteSaveFailed: "保存配置文件写入失败！"
+File_WriteSaveStart: "正在写入frp保存配置文件"
+
+Command_Unknown: "未知指令！"
+Command_ConsoleOnly: "MossFrp指令只允许在后台使用！"
+Command_ReloadStart: "正在重载MossFrp......"
+Command_ReloadComplete: "已重载MossFrp！"
+
 Command_Help: "\r\n--= MossFrp 指令帮助 =--
-  \r\n查看帮助：help
-  \r\n隧道指令：tunnel
-  \r\n切换语言：lang
+  \r\n保存配置：save
   \r\n隧道列表：list
+  \r\n切换语言：lang
+  \r\n重载软件：reload
+  \r\n关闭软件：exit
+  \r\n查看帮助：help
   \r\nTips：输入的时候别带括号<>哦！"
-Command_HelpTunnelMain: "\r\n--= MossFrp 指令帮助 =--
-  \r\n新建隧道：tunnel new
-  \r\n运行隧道：tunnel run
-  \r\n删除隧道：tunnel remove
-  \r\nTips：输入的时候别带括号<>哦！"
-Command_HelpLangMain: "\r\n--= MossFrp 指令帮助 =--
+Command_HelpLang: "\r\n--= MossFrp 指令帮助 =--
   \r\n切换语言：lang <语言>
   \r\n可用语言列表：zh_cn en_us
+  \r\n当然你也可以自己写语言文件加载哦
+  \r\n注意在此处切换语言只是临时切换，请到配置文件里面设置语言
   \r\nTips：输入的时候别带括号<>哦！"
-Command_HelpTunnelNew: 使用方法：tunnel new <隧道名称> <激活码>
-Command_HelpTunnelRun: 使用方法：tunnel run <隧道名称> PS：隧道名称即配置文件名称除去后缀。举例：配置文件名称为”abc.yml“，名称即为”abc“。
-Command_HelpTunnelRemove: 使用方法：tunnel remove <隧道名称>
-Command_TunnelNotExist: 隧道不存在！请使用list指令查看隧道列表！
-Command_Help_Plugin: "\r\n--= MossFrp 指令帮助 =--
-  \r\n查看帮助：mossfrp help
-  \r\n隧道指令：mossfrp tunnel
-  \r\n切换语言：mossfrp lang
-  \r\n隧道列表：mossfrp list
+Command_HelpSave: "\r\n--= MossFrp 指令帮助 =--
+  \r\n保存配置：save <名称> <穿透码>
+  \r\n举例：save myTunnel abc123456789
+  \r\n名称不允许中文/特殊符号/空格，只允许英文/下划线/数字
+  \r\n如果是非MossFrp隧道，直接在对应文件夹下复制example.yml去改就行
+  \r\n配置文件将会保存在/MossFrp/configs文件夹下
   \r\nTips：输入的时候别带括号<>哦！"
-Command_HelpTunnelMain_Plugin: "\r\n--= MossFrp 指令帮助 =--
-  \r\n新建隧道：mossfrp tunnel new
-  \r\n运行隧道：mossfrp tunnel run
-  \r\n删除隧道：mossfrp tunnel remove
-  \r\nTips：输入的时候别带括号<>哦！"
-Command_HelpLangMain_Plugin: "\r\n--= MossFrp 指令帮助 =--
-  \r\n切换语言：mossfrp lang <语言>
-  \r\n可用语言列表：zh_cn en_us
-  \r\nTips：输入的时候别带括号<>哦！"
-Command_HelpTunnelNew_Plugin: 使用方法：mossfrp tunnel new <隧道名称> [激活码]
-Command_HelpTunnelRun_Plugin: 使用方法：mossfrp tunnel run <隧道名称> PS：隧道名称即配置文件名称除去后缀。举例：配置文件名称为”abc.yml“，名称即为”abc“。
-Command_HelpTunnelRemove_Plugin: 使用方法：mossfrp tunnel remove <隧道名称>
-Command_TunnelNotExist_Plugin: 隧道不存在！请使用mossfrp list指令查看隧道列表！
-Command_TunnelStopping: 正在关闭隧道！请等待......
-Command_HelpTunnelFile: 已创建配置文件！配置文件位于插件文件夹目录下”MossFrp/configs“文件夹，请在配置文件中设置好你的隧道配置，然后使用”mossfrp tunnel run <隧道名称>“来运行隧道！如配置文件名称为abc.yml，则隧道名称为abc。
-SaveFile: "#MossFrp客户端自定义配置文件 \r\n
-#运行模式（必填） \r\n
-#1、MossFrp激活码模式 \r\n
-#2、自建节点模式 \r\n
-#注释后括号内数字代表对应模式需填写此项 \r\n
-mode: [runMode] \r\n
-#MossFrp激活码（1） \r\n
-code: [code] \r\n
-#Token密码（2） \r\n
-#用于服务端身份验证 \r\n
-token: [token] \r\n
-#协议（1/2） \r\n
-#MC一般是tcp \r\n
-protocol: [protocol] \r\n
-#本地地址（1/2） \r\n
-#一般填127.0.0.1即可 \r\n
-localIP: [localIP] \r\n
-#本地端口（1/2） \r\n
-#MC服务器默认25565 \r\n
-#联机请填开放端口 \r\n
-#即开启局域网游戏后聊天栏提示的端口 \r\n
-localPort: [localPort] \r\n
-#服务器地址（2） \r\n
-#frp服务器的地址 \r\n
-remoteIP: [remoteIP] \r\n
-#服务器端口（1/2） \r\n
-#请填写激活码对应可用端口范围内的一个 \r\n
-remotePort: [remotePort] \r\n
-#启用带宽压缩（1/2） \r\n
-#据说会有一点点延迟 \r\n
-#带宽不够用可以开启 \r\n
-use_compression: [compression] \r\n
-#启用链接加密（1/2） \r\n
-#讲真没啥用，需要可以开启 \r\n
-use_encryption: [encryption] \r\n
-#开启protocol（1/2） \r\n
-#用于Bungee转发真实IP \r\n
-#请在Bungee配置文件中设置proxy_protocol: true以及ip_forward: true \r\n
-#然后在Spigot配置文件中设置BungeeCord: true \r\n
-#最后在此设置参数为 v2 \r\n
-proxy_protocol_version: [proxyProtocol]  \r\n
-#frpc的基础额外配置 \r\n
-#非必要，没特殊需求就别动 \r\n
-commonExtraSettings: [commonExtraSettings] \r\n
-#frpc的隧道额外配置 \r\n
-#非必要，没特殊需求就别动 \r\n
-tunnelExtraSettings: [tunnelExtraSettings]"

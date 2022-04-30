@@ -6,38 +6,46 @@ enable: false
 #隧道类型
 #如果是MossFrp用户则填mossfrp
 #反之填custom
-type: "custom"
+type: "mossfrp"
 
 #本地地址
 #一般填127.0.0.1即可
-localIP: 127.0.0.1
+localIP: "127.0.0.1"
 #本地端口
 #MC服务器默认25565
 #联机请填开放端口
 #如MC开启局域网游戏后聊天栏提示的端口
-localPort: 25565
+localPort: "25565"
 
 #服务器地址
 #frp服务器的地址
-remoteIP: idn.mossfrp.cn
+#MossFrp用户则为 节点.mossfrp.cn
+#如zz1节点就填zz1.mossfrp.cn
+remoteIP: "[remoteIP]"
 #服务器端口
 #即服务端frps设置的连接端口
-remotePort: 45670
+#MossFrp用户即穿透码列表里头显示的端口（一般尾数为0）
+#如果使用的save指令生成的配置文件就不用改
+remotePort: "[remotePort]"
 #开放端口
 #也就是后面连接服务器使用的端口
-openPort: 45678
+#MossFrp用户一般是上面remotePort的后面顺序9个
+#可用的端口范围是[portStart]-[portEnd]
+openPort: "[openPort]"
 
 #Token密码
 #用于服务端身份验证，MossFrp用户在此填你的穿透码
 #考虑到安全性原因，我们要求无论是否为mossfrp用户都需要设置token
-token: "123456"
+token: "[token]"
 
 #穿透协议
 #选填tcp/udp
 #MC一般是tcp
 protocol: tcp
 
+#---------------------------
 #以下是一些高级设置，不懂就别乱动哈
+#---------------------------
 
 #启用带宽压缩
 #据说会有一点点延迟

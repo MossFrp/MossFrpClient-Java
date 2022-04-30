@@ -1,0 +1,9 @@
+{
+  "id":"MossFrp",
+  "name":"MossFrp",
+  "version":"V1.2.2.1.1900 Release",
+  "description":"A plugin which can run Frp with server.",
+  "authors":["MossCG"],
+  "dependencies":[],
+  "main":"org.mossmc.mosscg.MossFrp.PathVelocity"
+}

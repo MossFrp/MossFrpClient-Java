@@ -1,185 +1,113 @@
-Start_Welcome: "Welcome to use MossFrp, version:"
-Start_Copyright: This plugin client and standard version client are copyrighted by Bilibili@墨守MossCG.
-Start_ToGuide: Starting boot guide.
-Start_CheckFailed: Start failed! Please start MossFrp client with CMD, and add arguments '-MossFrp=syst
+Language_Changed: "Successfully set language to English(us)!"
+Language_Unknown: "Unknown language!"
+
+Start_Time: "Load completed, used [time] seconds! Use command 'help' to get command help."
+Start_Welcome: "Welcome to use MossFrp JAVA Client, version:[version]"
+Start_Copyright: "This plugin client and standard version client are copyrighted by Bilibili@墨守MossCG."
 Start_SystemFull:  "Operate system name: [system]"
 Start_SystemRead: "Run mode: [system]"
-Language_Unknown: Unknown language!
-Language_Changed: Successfully change language to English(us)!
-Exit_Start: Exiting MossFrp client......
-Exit_Finished: MossFrp client have already exit! Thanks for using!
-Permission_Reject: You do not have the permission to use this command!
-Prefix_Info: [Info]
-Prefix_Warn: [Warn]
-Prefix_Error: [Error]
-Prefix_Exception: [Exception]
-Prefix_Unknown: [Unknown]
-Prefix_Command: [Command]
-Guide_CommandStart: Starting command thread......
-Guide_CommandStartComplete: Command thread started!
-Guide_ProcessStart: Starting frp process manager core......
-Guide_ProcessStartComplete: Frp process manager core started!
-Guide_StartComplete: Start complete! Input 'help' for more infomation!
-Guide_LoadSaveStart: Loading saved configuration......
-Guide_LoadSaveComplete: Successfully loaded saved configuration!
-Code_DecodeFailed: CDK decode failed! Please comfirm your CDK!
-Code_DecodeSuccess: CDK decode success! Infomation below.
+Start_CommandComplete: "Command listener thread started."
+Start_ProcessComplete: "Frp process manager core started."
+Start_UpdateDomainsComplete: "Available domains update succeed."
+Start_UpdateDomainsFailed: "Available domains update failed. Use default domains."
+Start_CheckUpdateComplete: "Update check complete."
+Start_CheckUpdateFailed: "Update check failed! Please check if your internet is connected."
+Start_CheckNoticeFailed: "Failed to get notice from server! Please check if your internet is connected."
+Start_NeedUpdate: "Fount a new version! Latest version: [version], update if available!"
+Start_CheckFailed: "Start failed! Please start MossFrp client with CMD, and add argument '-MossFrp=nb',
+we set this to prevent users from click jar client file directly that client run without windows,
+this setting won't active if user's system is linux or run this as a plugin!"
+
+Load_LoadFile: "Loading saved config: [file]"
+Load_NotEnableFile: "Not enabled config: [file]"
+Load_LoadFileFailed: "Failed to load saved config: [file]"
+Load_LoadFileSucceed: "Succeed to load saved config: [file]"
+
+Save_SaveReadFailed: "Failed to read save config template!"
+Save_SaveWriteFailed: "Failed to write save config file!"
+Save_SaveSucceed: "Config file [name].yml saved. Find and complete your frp config in '/MossFrp/configs', then use the command 'mossfrp reload'(Standard version use 'reload'.) to enable your tunnel."
+
+Exit_Start: "Exiting MossFrp client......"
+Exit_Finished: "MossFrp client have already exit! Thanks for using!"
+
+Prefix_Info: "[Info]"
+Prefix_Warn: "[Warn]"
+Prefix_Error: "[Error]"
+Prefix_Exception: "[Exception]"
+Prefix_Debug: "[Debug]"
+Prefix_Command: "[Command]"
+Prefix_Unknown: "[Unknown]"
+
+Code_DecodeFailed: "Tunnel key decode failed! Please confirm your tunnel key!"
+Code_DecodeSuccess: "Tunnel key decode success! Information below."
 Code_DecodeNode: "Node: "
 Code_DecodeNumber: "Number: "
 Code_DecodePortServer: "Server Port: "
 Code_DecodePortRange: "Available Port: "
-CodeGuide_Start: Starting tunnel settings guide......
-CodeGuide_PrintLine: ----------===MossFrp===----------
-CodeGuide_PrintFrpName: "Name: "
-CodeGuide_PrintToken: "Token: "
-CodeGuide_PrintProtocol: "Protocol: "
-CodeGuide_PrintLocalIP: "Local host: "
-CodeGuide_PrintRemoteIP: "Remote Host: "
-CodeGuide_PrintExit: Input 'exit' to leave tunnel settings guide.
-CodeGuide_Exit: Exited tunnel settings guide!
-CodeGuide_Complete: Setting complete! Starting your tunnel......
-CodeGuide_ProtocolInfo: "\r\nPlease input the protocol of tunnel.
-  \r\nAvailable protocol:tcp udp
-  \r\nTips: Minecraft JAVA version use 'tcp' protocol."
-CodeGuide_ProtocolWarn: Argument wrong! Input 'tcp' or 'udp'!
-CodeGuide_LocalIPInfo: "\r\nPlease input the local host of tunnel.
-  \r\nDON'T INPUT PORT THERE!
-  \r\nTips: You can input '127.0.0.1' as local host."
-CodeGuide_LocalIPWarn: Argument wrong! Please input a availble hostname!
-CodeGuide_LocalIPWarnPort: Argument wrong! DON'T INPUT PORT THERE!
-CodeGuide_LocalPortInfo: "\r\nPlease input the local port of tunnel.
-  \r\nAvailable range: 1-65535
-  \r\nTips: Minecraft server default is 25565. If you are LAN game, just see which port the game opened for LAN game and input it here."
-CodeGuide_LocalPortWarn: Argument wrong! Input a number within range of 1-25565!
-CodeGuide_RemotePortInfo: "\r\nPlease input the remote port of tunnel.
-  \r\nAvailable range: [remotePortRange]
-  \r\nTips: Means the port your friends use to connect."
-CodeGuide_RemotePortWarn: Argument wrong! Input a number within range of [remotePortRange].
-CodeGuide_AdvancedInfo: "\r\nPlease input the number behind the advanced settings below.
-  \r\n1.Enable bandwidth compression.
-  \r\n2.Enable connection encryption.
-  \r\n3.Enable proxy protocol version 1.
-  \r\n4.Enable proxy protocol version 2.
-  \r\n5.Remember this tunnel. (Start automatically the next time you use MossFrp client.)
-  \r\nFor example: To enable bandwidth compression and connection encryption and remember this tunnel, input '125'.
-  \r\nPress enter to skip these settings."
-CodeGuide_AdvancedWarn: Argument wrong! Input a available number or use enter to skip these settings.
-File_WriteConfigStart: Writing Frp configuration file.......
-File_WriteConfigSuccess: The configuration file was written successfully.
-File_WriteConfigFailed: The configuration file was written failed!
-File_WriteSaveStart: Writing save configuration file.......
-File_WriteSaveSuccess: The save configuration file was written successfully.
-File_WriteSaveFailed: The save configuration file was written failed!
-File_ReadNotExist: File not exist! Check if your input file name wrong!
-File_ReadUnknownMode: Unknown run mode! Check if set wrong run mode in the configuration file!
-File_ReadError: File read error! Check if your configuration file set correctly!
-Process_Start: Starting Frp......
-Process_Stop: Stopped tunnel [tunnelName]!
-Process_Failed: Frp start failed!
-Process_Success: Frp start successed!
-List_Send: "Tunnel: [tunnelName] - [tunnelStatus]"
-List_LocalPrefix: "Local address: [localIP]"
-List_RemotePrefix: "Remote address：[remoteIP]"
-Frp_ReadError: An error has occurred while reading Frp output message.
-Frp_InfoLogin: Successfully login info remote Frp server!
-Frp_InfoStarting: Starting tunnel......
-Frp_InfoStartSuccess: Tunnel start successfully! Use 'list' to see the list of tunnel.
-Frp_InfoPortUsed: Port already used! Please change your remote port!
-Frp_InfoErrorEOF: Connection error! EOF.
-Frp_InfoLoginEOF: Login failed! EOF.
-Frp_InfoReconnecting: Trying reconnect to Frp server......
-Frp_InfoNoSuchHost: No such host! Please check your server address or if your PC connected to internet!
-Frp_InfoConnectNoRespond: Connection failed! There was no respond from Frp server! Check if the Frp server down or your MossFrp CDK is outdated!
-Frp_InfoConnectRejectRemote: Connection reject! Your connection was rejected by remote server! Check if the Frp server down or your MossFrp CDK is outdated!
-Frp_InfoConnectRejectLocal: Connection reject! Your connection was rejected by local server! Check if your local server down or your local port wrong!
-Frp_InfoConnectTokenWrong: Connection failed! Wrong token! Check if the Frp server down or your MossFrp CDK is outdated or wrong!
-Command_Unknown: Unknown command.
-Command_TunnelAlreadyExist: Tunnel already existed! Please change the name of tunnel.
+
+Core_RunError: "Can not start frp process core! Please check or report error!"
+Core_HeartbeatError: "Frp process heartbeat error!"
+Core_HeartbeatTimeout: "Frp process heartbeat timeout!"
+Core_ProcessStart: "Frp process manager core started."
+Core_ProcessClose: "Frp process manager core closing."
+Core_ProcessExit: "Frp process manager core closed."
+Core_FrpStartRun: "Frp process [name] starting."
+Core_FrpStartFailed: "Frp process [name] start failed."
+Core_FrpStartSucceed: "Frp process [name] start succeed."
+Core_FrpStop: "Frp process [name] stopped."
+
+Frp_ReadError: "An error has occurred while reading Frp output message."
+Frp_InfoLogin: "Successfully login info remote Frp server!"
+Frp_InfoStarting: "Starting tunnel......"
+Frp_InfoStartSuccess: "Tunnel start successfully! Use 'list' to see the list of tunnel."
+Frp_InfoPortUsed: "Port already used! Please change your remote port!"
+Frp_InfoErrorEOF: "Connection error! EOF."
+Frp_InfoLoginEOF: "Login failed! EOF."
+Frp_InfoReconnecting: "Trying reconnect to Frp server......"
+Frp_InfoNoSuchHost: "No such host! Please check your server address or if your PC connected to internet!"
+Frp_InfoConnectNoRespond: "Connection failed! There was no respond from Frp server! Check if the Frp server down or your MossFrp tunnel key is outdated!"
+Frp_InfoConnectRejectRemote: "Connection reject! Your connection was rejected by remote server! Check if the Frp server down or your MossFrp tunnel key is outdated!"
+Frp_InfoConnectRejectLocal: "Connection reject! Your connection was rejected by local server! Check if your local server down or your local port wrong!"
+Frp_InfoConnectTokenWrong: "Connection failed! Wrong token! Check if the Frp server down or your MossFrp tunnel key is outdated or wrong!"
+
+List_Prefix: "Tunnel list: "
+List_Starting: "[Starting]"
+List_Online: "[Enabled]"
+List_Offline: "[Disabled]"
+List_Local: "Local address: "
+List_Remote: "Remote address:"
+List_Or: " Or "
+
+File_WriteConfigStart: "Writing Frp configuration file......"
+File_WriteConfigSuccess: "The configuration file was written successfully."
+File_WriteConfigFailed: "The configuration file was written failed!"
+File_WriteSaveStart: "Writing save configuration file......"
+File_WriteSaveSuccess: "The save configuration file was written successfully."
+File_WriteSaveFailed: "The save configuration file was written failed!"
+
+Command_Unknown: "Unknown command."
+Command_ConsoleOnly: "MossFrp commands can be only executed in console!"
+Command_ReloadStart: "Reloading MossFrp......"
+Command_ReloadComplete: "MossFrp reloaded!"
+
 Command_Help: "\r\n--= MossFrp Command Help =--
-  \r\nFor help: help
-  \r\nTunnel command: tunnel
-  \r\nChange language: lang
+  \r\nSave config: save
   \r\nTunnel list: list
+  \r\nChange language: lang
+  \r\nReload software: reload
+  \r\nClose software: exit
+  \r\nCheck for help: help
   \r\nTips: Don't input <> while input arguments."
-Command_HelpTunnelMain: "\r\n--= MossFrp Command Help =--
-  \r\nNew tunnel: tunnel new
-  \r\nRemove tunnel: tunnel remove
-  \r\nTips: Don't input <> while input arguments."
-Command_HelpLangMain: "\r\n--= MossFrp Command Help =--
+Command_HelpLang: "\r\n--= MossFrp Command Help =--
   \r\nChange language: lang <language>
   \r\nSupport languages: zh_cn en_us
+  \r\nOf course you can write your custom language files and load it.
+  \r\nSet language here is temporarily, you can set language in config permanently.
   \r\nTips: Don't input <> while input arguments."
-Command_HelpTunnelNew: "Usage: tunnel new <name> <CDK>"
-Command_HelpTunnelRun: "Usage: tunnel run <name> PS: Tunnel name is the configuration file name without suffix. For example: File is 'abc.yml', so name is 'abc'."
-Command_HelpTunnelRemove: "Usage: tunnel remove <name>"
-Command_TunnelNotExist: "Tunnel not exists! Please use command 'list' to check the tunnel list."
-Command_Help_Plugin: "\r\n--= MossFrp Command Help =--
-  \r\nFor help: mossfrp help
-  \r\nTunnel command: mossfrp tunnel
-  \r\nChange language: mossfrp lang
-  \r\nTunnel list: mossfrp list
+Command_HelpSave: "\r\n--= MossFrp Command Help =--
+  \r\nSave config: save <name> <code>
+  \r\nExample: save myTunnel abc123456789
+  \r\nChinese/spaces/symbols are not allowed in name, you can only use letter/underline/number.
+  \r\nIf your frp server isn't provided by MossFrp, copy example.yml and complete it.
+  \r\nFrp config files save in '/MossFrp/configs'
   \r\nTips: Don't input <> while input arguments."
-Command_HelpTunnelMain_Plugin: "\r\n--= MossFrp Command Help =--
-  \r\nNew tunnel: mossfrp tunnel new
-  \r\nRun tunnel: mossfrp tunnel run
-  \r\nRemove tunnel: mossfrp tunnel remove
-  \r\nTips: Don't input <> while input arguments."
-Command_HelpLangMain_Plugin: "\r\n--= MossFrp Command Help =--
-  \r\nChange language: mossfrp lang <language>
-  \r\nSupport languages: zh_cn en_us
-  \r\nTips: Don't input <> while input arguments."
-Command_HelpTunnelNew_Plugin: "Usage: mossfrp tunnel new <name> [CDK]"
-Command_HelpTunnelRun_Plugin: "Usage: mossfrp tunnel run <name> PS: Tunnel name is the configuration file name without suffix. For example: File is 'abc.yml', so name is 'abc'."
-Command_HelpTunnelRemove_Plugin: "Usage: mossfrp tunnel remove <name>"
-Command_TunnelNotExist_Plugin: "Tunnel not exists! Please use command 'mossfrp list' to check the tunnel list."
-Command_TunnelStopping: "Stopping the tunnel...... Please wait......"
-Command_HelpTunnelFile: Created configuration file! File location is 'MossFrp/configs 'folder, please set your tunnel settings in it and use command 'mossfrp tunnel run <name>' to run the tunnel.If file name is 'abc.yml', the tunnel name is 'abc'.
-SaveFile: "#MossFrp Client Custom Configuration File \r\n
-#Mode of run\r\n
-#1. MossFrp CDK mode. \r\n
-#2. Custom Frp server mode. \r\n
-#The number in brackets after the note means that in that run mode needs to be filled in. \r\n
-mode: [runMode] \r\n
-#MossFrp CDK.(1) \r\n
-code: [code] \r\n
-#Connect token.(2) \r\n
-#Used for server auth. \r\n
-token: [token] \r\n
-#Protocol of tunnel.(1/2) \r\n
-#Minecraft JAVA version is tcp. \r\n
-protocol: [protocol] \r\n
-#Local host.(1/2) \r\n
-#Just input '127.0.0.1' is enough. \r\n
-localIP: [localIP] \r\n
-#Local port.(1/2) \r\n
-#Minecraft server default is 25565. \r\n
-#If you are LAN game, \r\n
-#just see in the chat which port the game opened for LAN game and input it here. \r\n
-localPort: [localPort] \r\n
-#Frp server address.(2) \r\n
-#Input your Frp server address here. \r\n
-#Incloud Frp server connection port. \r\n
-remoteIP: [remoteIP] \r\n
-#Server port of Frp server.(1/2) \r\n
-#If use MossFrp mode, input one of the available port MossFrp gave you here. \r\n
-#If use Custom mode, input available port here. \r\n
-remotePort: [remotePort] \r\n
-#Enable bandwidth compression.(1/2) \r\n
-#Maybe cause a bit of delay. \r\n
-#If your bandwidth is out of use, you can try open it. \r\n
-use_compression: [compression] \r\n
-#Enable connection encryption.(1/2) \r\n
-#Actually, it's not useful...... But you can open it if you want. \r\n
-use_encryption: [encryption] \r\n
-#Enable proxy protocol.(1/2) \r\n
-#For Minecraft Bungee to forward real IP instead using 127.0.0.1 as the IP of all the players.\r\n
-#Please set 'proxy_protocol: true' and 'ip_forward: true' in Bungee configuration. \r\n
-#And set 'BungeeCord: true' in Spigot configuration. \r\n
-#Then set argument there as 'v2' \r\n
-proxy_protocol_version: [proxyProtocol] \r\n
-#Extra common settings. \r\n
-#Its not necessary to change it. \r\n
-commonExtraSettings: [commonTunnelSettings] \r\n
-#Extra tunnel settings. \r\n
-#Its not necessary to change it.  \r\n
-tunnelExtraSettings: [tunnelExtraSettings] "

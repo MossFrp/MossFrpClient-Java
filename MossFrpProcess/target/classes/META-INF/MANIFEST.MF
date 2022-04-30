@@ -2,4 +2,4 @@ Manifest-Version: 1.0
 Implementation-Title: MossFrpProcess
 Implementation-Version: MossFrpProcess
 Implementation-Vendor: MossCG
-Main-Class: org.mossmc.mosscg.MossFrpProcess
+Main-Class: org.mossmc.mosscg.MossFrpProcess.ProcessMain
