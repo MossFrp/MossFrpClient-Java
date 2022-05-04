@@ -1,0 +1,15 @@
+[
+{
+    "modid": "mossfrp",
+    "name": "MossFrp",
+    "description": "A mod which can run Frp with server.",
+    "version": "V1.3.1.1.1241 Release",
+    "logoFile": "",
+    "mcversion": "",
+    "url": "",
+    "updateUrl": "",
+    "authors": [ "MossCG" ],
+    "parent":"",
+    "dependencies": []
+}
+]

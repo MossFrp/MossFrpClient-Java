@@ -10,6 +10,7 @@ public class InfoGroup {
         sendInfo("#lang#Start_Copyright");
         sendInfo(getLanguage("Start_SystemFull").replace("[system]",BasicInfo.getSystemName));
         sendInfo(getLanguage("Start_SystemRead").replace("[system]",BasicInfo.getSystemType.name()));
+        sendInfo(getLanguage("Start_RunMode").replace("[mode]",BasicInfo.getRunMode.name()));
     }
 
     public static void sendEndGroup() {

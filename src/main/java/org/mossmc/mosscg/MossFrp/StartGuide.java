@@ -43,16 +43,7 @@ public class StartGuide {
     }
 
     public static void checkStart(String[] args) {
-        if (BasicInfo.getRunMode == BasicInfo.runMode.plugin) {
-            return;
-        }
-        if (BasicInfo.getRunMode == BasicInfo.runMode.bungee) {
-            return;
-        }
-        if (BasicInfo.getRunMode == BasicInfo.runMode.velocity) {
-            return;
-        }
-        if (BasicInfo.getSystemType == BasicInfo.systemType.linux) {
+        if (BasicInfo.getRunMode != BasicInfo.runMode.standard) {
             return;
         }
         if (!Arrays.toString(args).contains("-MossFrp=nb")) {

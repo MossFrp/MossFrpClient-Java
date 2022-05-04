@@ -14,7 +14,7 @@ public class BasicInfo {
     public static runMode getRunMode;
 
     public enum runMode {
-        plugin,standard,bungee,velocity
+        plugin,standard,bungee,velocity,forge,fabric
     }
 
     //文件夹path

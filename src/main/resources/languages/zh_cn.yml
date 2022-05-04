@@ -1,11 +1,12 @@
 Language_Changed: "成功设置语言为中文(简体)！"
 Language_Unknown: "未知的语言名称！"
 
-Start_Time: "启动完成！耗时[time]秒！使用指令’help‘来查看帮助！"
+Start_Time: "启动完成！耗时[time]秒！使用指令‘help’来查看帮助！"
 Start_Welcome: "欢迎使用MossFrp Java版本客户端 版本：[version]"
 Start_Copyright: "本插件&独立客户端均为B站@墨守MossCG版权所有"
 Start_SystemFull: "操作系统名称：[system]"
-Start_SystemRead: "运行模式：[system]"
+Start_SystemRead: "识别系统模式：[system]"
+Start_RunMode: "客户端运行模式：[mode]"
 Start_CommandComplete: "指令监听线程已启动"
 Start_ProcessComplete: "Frp核心管理线程已启动"
 Start_UpdateDomainsComplete: "可用域名更新已完成！"
@@ -58,7 +59,7 @@ Core_FrpStop: "Frp进程[name]已停止！"
 
 Frp_ReadError: "读取frp输出时发生错误！"
 Frp_InfoLogin: "成功登录到远程Frp节点！"
-Frp_InfoStarting: "正在启动隧道！"
+Frp_InfoStarting: "代理已创建，正在开启转发！"
 Frp_InfoStartSuccess: "隧道启动成功！请使用指令 list 查看隧道列表！"
 Frp_InfoPortUsed: "检测到端口被占用！请修改端口！"
 Frp_InfoErrorEOF: "链接异常！错误：EOF"
@@ -69,6 +70,9 @@ Frp_InfoConnectNoRespond: "链接失败：目标服务器无响应！请检查�
 Frp_InfoConnectRejectRemote: "链接失败：目标服务器拒绝连接！请检查远程frp服务器是否在线或MossFrp穿透码是否到期！"
 Frp_InfoConnectRejectLocal: "链接失败：本地服务器拒绝连接！请检查本地服务端是否开启或端口是否正确！"
 Frp_InfoConnectTokenWrong: "链接失败：token错误！请检查远程frp服务器token是否对应本地token或MossFrp穿透码是否正确！"
+Frp_InfoUDPConnection: "接收到一个UDP链接，地址：[address]"
+Frp_InfoUDPConnectionEOF: "UDP链接异常！错误：EOF"
+Frp_InfoWriterClosing: "写入控制正在关闭......"
 
 List_Prefix: "隧道列表："
 List_Starting: "[启动中]"
@@ -84,16 +88,21 @@ File_WriteConfigFailed: "配置文件写入失败！"
 File_WriteSaveSuccess: "保存配置文件写入完成"
 File_WriteSaveFailed: "保存配置文件写入失败！"
 File_WriteSaveStart: "正在写入frp保存配置文件"
+File_CollectStart: "正在收集日志信息！"
+File_CollectFailed: "日志信息收集失败！"
+File_CollectComplete: "日志信息已收集完成，文件名称：[name]，请到/MossFrp/report文件夹中获得日志信息文件！"
 
 Command_Unknown: "未知指令！"
 Command_ConsoleOnly: "MossFrp指令只允许在后台使用！"
 Command_ReloadStart: "正在重载MossFrp......"
 Command_ReloadComplete: "已重载MossFrp！"
+Command_NameChinese: "配置文件名称不允许出现中文或特殊符号哦~请使用数字/字母/下划线组成的名称哦~"
 
 Command_Help: "\r\n--= MossFrp 指令帮助 =--
   \r\n保存配置：save
   \r\n隧道列表：list
   \r\n切换语言：lang
+  \r\n收集信息：report
   \r\n重载软件：reload
   \r\n关闭软件：exit
   \r\n查看帮助：help

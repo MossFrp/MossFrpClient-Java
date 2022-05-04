@@ -14,6 +14,7 @@ public class FileCheck {
             checkDirExist(FileGet.getLanguageDirFile);
             checkDirExist(FileGet.getLogDirFile);
             checkDirExist(FileGet.getFrpDirFile);
+            checkDirExist(FileGet.getReportDirFile);
             checkReplace(FileGet.getLanguageChineseFile,"languages/zh_cn.yml");
             checkReplace(FileGet.getLanguageEnglishFile,"languages/en_us.yml");
             checkReplace(FileGet.getProcessFile,"MossFrpProcess.jar");

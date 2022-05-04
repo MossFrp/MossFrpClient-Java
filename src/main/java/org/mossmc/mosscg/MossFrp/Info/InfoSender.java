@@ -2,6 +2,7 @@ package org.mossmc.mosscg.MossFrp.Info;
 
 import org.mossmc.mosscg.MossFrp.BasicInfo;
 import org.mossmc.mosscg.MossFrp.Language.LanguageGet;
+import org.mossmc.mosscg.MossFrp.PathForge;
 import org.mossmc.mosscg.MossFrp.PathVelocity;
 import org.mossmc.mosscg.MossFrp.Time.TimeDate;
 
@@ -35,6 +36,15 @@ public class InfoSender {
                 return;
             }
             PathVelocity.getLogger().info(info);
+        }
+        if (BasicInfo.getRunMode.equals(BasicInfo.runMode.forge)) {
+            if (type.equals("warn")||type.equals("exception")) {
+                PathForge.getLogger().warn(info);
+                PathForge.sendPlayer(info);
+                return;
+            }
+            PathForge.getLogger().info(info);
+            PathForge.sendPlayer(info);
         }
     }
 }

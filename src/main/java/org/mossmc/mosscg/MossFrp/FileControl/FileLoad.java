@@ -11,6 +11,7 @@ public class FileLoad {
         FileGet.getLanguageDirFile = new File(BasicInfo.getDataFolder+"/languages");
         FileGet.getFrpConfigDirFile = new File(BasicInfo.getDataFolder+"/configs");
         FileGet.getFrpDirFile = new File(BasicInfo.getDataFolder+"/frps");
+        FileGet.getReportDirFile = new File(BasicInfo.getDataFolder+"/report");
 
         FileGet.getLanguageChineseFile = new File(BasicInfo.getDataFolder+"/languages/zh_cn.yml");
         FileGet.getLanguageEnglishFile = new File(BasicInfo.getDataFolder+"/languages/en_us.yml");

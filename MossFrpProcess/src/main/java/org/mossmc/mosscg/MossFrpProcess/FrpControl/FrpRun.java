@@ -11,6 +11,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import static org.mossmc.mosscg.MossFrpProcess.BasicInfo.getSystemType;
+import static org.mossmc.mosscg.MossFrpProcess.FrpControl.FrpStop.stopFrp;
 import static org.mossmc.mosscg.MossFrpProcess.FrpControl.FrpThread.frpThreadMap;
 import static org.mossmc.mosscg.MossFrpProcess.Logger.sendException;
 import static org.mossmc.mosscg.MossFrpProcess.Logger.sendInfo;
@@ -31,25 +32,23 @@ public class FrpRun {
     public static void newFrp(String path) {
         Runtime run = Runtime.getRuntime();
         try {
-            Process frp;
+            Process frp = null;
             if (getSystemType == BasicInfo.systemType.windows) {
                 frp = run.exec("taskkill /im frpc-"+path+".exe /f");
                 BufferedReader output = new BufferedReader(new InputStreamReader(frp.getInputStream()));
                 output.readLine();
                 output.close();
                 frp = run.exec(BasicInfo.basicPath+path+"/frpc-"+path+".exe -c "+ BasicInfo.basicPath+path+"/frpc.ini");
-                BufferedReader frpOut = new BufferedReader(new InputStreamReader(frp.getInputStream()));
-                FrpProcess.frpProcessMap.put(path,frp);
-                sendInfo(CreateSuccess.create(path));
-                FrpRead.readFrp(path,frp,frpOut);
             }
             if (getSystemType == BasicInfo.systemType.linux) {
                 frp = run.exec(BasicInfo.basicPath+path+"/frpc-"+path+" -c "+ BasicInfo.basicPath+path+"/frpc.ini");
-                BufferedReader frpOut = new BufferedReader(new InputStreamReader(frp.getInputStream()));
-                FrpProcess.frpProcessMap.put(path,frp);
-                sendInfo(CreateSuccess.create(path));
-                FrpRead.readFrp(path,frp,frpOut);
             }
+            FrpProcess.frpProcessMap.put(path,frp);
+            sendInfo(CreateSuccess.create(path));
+            assert frp != null;
+            FrpRead.newReadThread(path,frp);
+            frp.waitFor();
+            stopFrp(path);
         }catch (Exception e){
             sendException(e);
             sendInfo(CreateFailed.create(path));

@@ -61,6 +61,12 @@ public class ProcessMain {
                 case "-mode=velocity":
                     getRunMode = runMode.velocity;
                     break;
+                case "-mode=forge":
+                    getRunMode = runMode.forge;
+                    break;
+                case "-mode=fabric":
+                    getRunMode = runMode.fabric;
+                    break;
                 default:
                     break;
             }

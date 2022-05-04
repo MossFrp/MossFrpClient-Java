@@ -9,7 +9,7 @@ import static org.mossmc.mosscg.MossFrp.BasicVoid.getLanguage;
 
 public class BasicInfo {
     public enum runMode{
-        plugin,standard,bungee,velocity
+        plugin,standard,bungee,velocity,forge
     }
 
     public enum systemType{
@@ -26,9 +26,11 @@ public class BasicInfo {
     public static PathPlugin getPluginInstance;
     public static PathBungee getBungeeInstance;
     public static PathVelocity getVelocityInstance;
+    public static PathForge getForgeInstance;
+
     public static Path getDataFolder;
 
-    public static final String getVersion = "V1.2.2.1.1900 Release";
+    public static final String getVersion = "V1.3.1.1.1241 Release";
     public static final String getAuthor = "MossCG";
     public static final String getName = "MossFrp";
 

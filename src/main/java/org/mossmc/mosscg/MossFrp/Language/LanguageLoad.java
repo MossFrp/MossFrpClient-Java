@@ -9,6 +9,8 @@ import java.io.FileNotFoundException;
 import java.util.Map;
 
 public class LanguageLoad {
+    public static String languageName;
+
     public static void load(String language) {
         Yaml yaml = new Yaml();
         FileInputStream input;
@@ -21,6 +23,7 @@ public class LanguageLoad {
             return;
         }
         LanguageGet.languageMap = yaml.loadAs(input, Map.class);
+        languageName = language;
         BasicVoid.sendInfo("#lang#Language_Changed");
     }
 }

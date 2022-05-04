@@ -8,6 +8,7 @@ public class FileGet {
     public static File getLanguageDirFile;
     public static File getFrpConfigDirFile;
     public static File getFrpDirFile;
+    public static File getReportDirFile;
 
     public static File getLanguageChineseFile;
     public static File getLanguageEnglishFile;

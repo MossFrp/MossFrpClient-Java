@@ -165,6 +165,19 @@ public class FrpProcessRead {
             sendInfo(prefix+getLanguage("Frp_InfoLoginEOF"));
             return;
         }
+        if (info.contains("incoming a new work connection for udp proxy")) {
+            String[] cut = info.split(",");
+            sendInfo(prefix+getLanguage("Frp_InfoUDPConnection").replace("[address]",cut[1]));
+            return;
+        }
+        if (info.contains("read from workConn for udp error: EOF")) {
+            sendInfo(prefix+getLanguage("Frp_InfoUDPConnectionEOF"));
+            return;
+        }
+        if (info.contains("control writer is closing")) {
+            sendInfo(prefix+getLanguage("Frp_InfoWriterClosing"));
+            return;
+        }
         sendInfo(prefix+info);
     }
 }

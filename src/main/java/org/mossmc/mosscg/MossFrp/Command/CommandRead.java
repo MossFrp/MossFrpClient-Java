@@ -2,11 +2,9 @@ package org.mossmc.mosscg.MossFrp.Command;
 
 import org.mossmc.mosscg.MossFrp.BasicVoid;
 import org.mossmc.mosscg.MossFrp.Code.CodeDecode;
-import org.mossmc.mosscg.MossFrp.Config.ConfigCodeLoad;
 import org.mossmc.mosscg.MossFrp.Config.ConfigCodeSave;
-import org.mossmc.mosscg.MossFrp.Config.ConfigLoad;
+import org.mossmc.mosscg.MossFrp.FileControl.FileCollect;
 import org.mossmc.mosscg.MossFrp.FrpControl.FrpCache;
-import org.mossmc.mosscg.MossFrp.FrpControl.FrpStop;
 import org.mossmc.mosscg.MossFrp.Language.LanguageLoad;
 
 import java.util.Arrays;
@@ -32,6 +30,10 @@ public class CommandRead {
                     sendWarn("#lang#Command_HelpSave");
                     return;
                 }
+                if (isContainChinese(args[1])) {
+                    sendWarn("#lang#Command_NameChinese");
+                    return;
+                }
                 boolean decode = CodeDecode.decode(args[2]);
                 if (!decode) {
                     return;
@@ -50,6 +52,9 @@ public class CommandRead {
                 break;
             case "reload":
                 BasicVoid.reloadMossFrp();
+                break;
+            case "report":
+                FileCollect.createCollect();
                 break;
             default:
                 sendWarn("#lang#Command_Unknown");

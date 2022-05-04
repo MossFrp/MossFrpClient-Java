@@ -5,7 +5,8 @@ Start_Time: "Load completed, used [time] seconds! Use command 'help' to get comm
 Start_Welcome: "Welcome to use MossFrp JAVA Client, version:[version]"
 Start_Copyright: "This plugin client and standard version client are copyrighted by Bilibili@墨守MossCG."
 Start_SystemFull:  "Operate system name: [system]"
-Start_SystemRead: "Run mode: [system]"
+Start_SystemRead: "Run system mode: [system]"
+Start_RunMode: "Client run mode: [mode]"
 Start_CommandComplete: "Command listener thread started."
 Start_ProcessComplete: "Frp process manager core started."
 Start_UpdateDomainsComplete: "Available domains update succeed."
@@ -58,17 +59,20 @@ Core_FrpStop: "Frp process [name] stopped."
 
 Frp_ReadError: "An error has occurred while reading Frp output message."
 Frp_InfoLogin: "Successfully login info remote Frp server!"
-Frp_InfoStarting: "Starting tunnel......"
+Frp_InfoStarting: "Proxy added. Starting tunnel......"
 Frp_InfoStartSuccess: "Tunnel start successfully! Use 'list' to see the list of tunnel."
 Frp_InfoPortUsed: "Port already used! Please change your remote port!"
-Frp_InfoErrorEOF: "Connection error! EOF."
-Frp_InfoLoginEOF: "Login failed! EOF."
+Frp_InfoErrorEOF: "Connection error! Reason: EOF."
+Frp_InfoLoginEOF: "Login failed! Reason: EOF."
 Frp_InfoReconnecting: "Trying reconnect to Frp server......"
 Frp_InfoNoSuchHost: "No such host! Please check your server address or if your PC connected to internet!"
 Frp_InfoConnectNoRespond: "Connection failed! There was no respond from Frp server! Check if the Frp server down or your MossFrp tunnel key is outdated!"
 Frp_InfoConnectRejectRemote: "Connection reject! Your connection was rejected by remote server! Check if the Frp server down or your MossFrp tunnel key is outdated!"
 Frp_InfoConnectRejectLocal: "Connection reject! Your connection was rejected by local server! Check if your local server down or your local port wrong!"
 Frp_InfoConnectTokenWrong: "Connection failed! Wrong token! Check if the Frp server down or your MossFrp tunnel key is outdated or wrong!"
+Frp_InfoUDPConnection: "Receive a UDP connection, address: [address]"
+Frp_InfoUDPConnectionEOF: "UDP connection error! Reason: EOF."
+Frp_InfoWriterClosing: "Control writer is closing......"
 
 List_Prefix: "Tunnel list: "
 List_Starting: "[Starting]"
@@ -84,16 +88,21 @@ File_WriteConfigFailed: "The configuration file was written failed!"
 File_WriteSaveStart: "Writing save configuration file......"
 File_WriteSaveSuccess: "The save configuration file was written successfully."
 File_WriteSaveFailed: "The save configuration file was written failed!"
+File_CollectStart: "Collecting info......Please wait......"
+File_CollectFailed: "Failed to collect info!"
+File_CollectComplete: "Info collect succeed. Info file name: [name] , go to dir /MossFrp/report to get info collect file."
 
 Command_Unknown: "Unknown command."
 Command_ConsoleOnly: "MossFrp commands can be only executed in console!"
 Command_ReloadStart: "Reloading MossFrp......"
 Command_ReloadComplete: "MossFrp reloaded!"
+Command_NameChinese: "Chinese or special symbols are not allowed in config name!"
 
 Command_Help: "\r\n--= MossFrp Command Help =--
   \r\nSave config: save
   \r\nTunnel list: list
   \r\nChange language: lang
+  \r\nCollect info: report
   \r\nReload software: reload
   \r\nClose software: exit
   \r\nCheck for help: help

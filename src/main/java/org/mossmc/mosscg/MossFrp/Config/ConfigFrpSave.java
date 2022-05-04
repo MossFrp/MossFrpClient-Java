@@ -11,9 +11,9 @@ public class ConfigFrpSave {
         FileWriter fileWriter = new FileWriter(cfgFile,false);
         fileWriter.write("[common]"+"\r\n");fileWriter.write("server_addr = "+ FrpCache.frpCache.get(frpName).get("remoteAddress")+"\r\n");
         fileWriter.write("server_port = "+FrpCache.frpCache.get(frpName).get("remotePort")+"\r\n");
-        fileWriter.write("log_file = "+dirPath.replaceAll("\\\\","/")+"frps.log"+"\r\n");
-        fileWriter.write("log_level = info"+"\r\n");
-        fileWriter.write("log_max_days = 7"+"\r\n");
+        //fileWriter.write("log_file = "+dirPath.replaceAll("\\\\","/")+"frps.log"+"\r\n");
+        //fileWriter.write("log_level = info"+"\r\n");
+        //fileWriter.write("log_max_days = 7"+"\r\n");
         fileWriter.write("token = "+FrpCache.frpCache.get(frpName).get("token")+"\r\n");
         fileWriter.write(FrpCache.frpCache.get(frpName).get("commonExtraSettings") + "\r\n");
         fileWriter.write("\r\n");

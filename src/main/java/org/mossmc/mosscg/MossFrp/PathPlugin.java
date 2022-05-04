@@ -4,6 +4,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.jetbrains.annotations.NotNull;
 import org.mossmc.mosscg.MossFrp.Command.CommandRead;
 
 public class PathPlugin extends JavaPlugin {
@@ -17,7 +18,7 @@ public class PathPlugin extends JavaPlugin {
     }
 
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
         if (!isConsole(sender)) {
             sender.sendMessage(BasicVoid.getLanguage("Command_ConsoleOnly"));
             return false;

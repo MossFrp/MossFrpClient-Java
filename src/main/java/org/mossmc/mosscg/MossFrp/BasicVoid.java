@@ -10,6 +10,9 @@ import org.mossmc.mosscg.MossFrp.Info.InfoSender;
 import org.mossmc.mosscg.MossFrp.Language.LanguageGet;
 import org.mossmc.mosscg.MossFrp.Language.LanguageLoad;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class BasicVoid {
     //消息发送部分
     //直接调用就可以发送消息
@@ -60,5 +63,11 @@ public class BasicVoid {
         LanguageLoad.load(BasicVoid.getConfig("language"));
         ConfigCodeLoad.loadAll();
         sendInfo("#lang#Command_ReloadComplete");
+    }
+
+    public static boolean isContainChinese(String str) {
+        Pattern pattern = Pattern.compile("[\u4e00-\u9fa5]");
+        Matcher matcher = pattern.matcher(str);
+        return matcher.find();
     }
 }
