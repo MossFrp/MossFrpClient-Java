@@ -1,11 +1,13 @@
 package org.mossmc.mosscg.MossFrp.Command;
 
+import org.mossmc.mosscg.MossFrp.BasicInfo;
 import org.mossmc.mosscg.MossFrp.BasicVoid;
 import org.mossmc.mosscg.MossFrp.Code.CodeDecode;
 import org.mossmc.mosscg.MossFrp.Config.ConfigCodeSave;
 import org.mossmc.mosscg.MossFrp.FileControl.FileCollect;
 import org.mossmc.mosscg.MossFrp.FrpControl.FrpCache;
 import org.mossmc.mosscg.MossFrp.Language.LanguageLoad;
+import org.mossmc.mosscg.MossFrpForgeSuport.MossFrpForgeSupport;
 
 import java.util.Arrays;
 
@@ -20,6 +22,11 @@ public class CommandRead {
         }
         switch (args[0]) {
             case "exit":
+                if (BasicInfo.getRunMode.equals(BasicInfo.runMode.forge)) {
+                    break;
+                    //MossFrpForgeSupport.forgeExit();
+                    //不会有人会用/mossfrp exit来退出游戏吧
+                }
                 System.exit(0);
                 break;
             case "help":

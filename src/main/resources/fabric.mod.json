@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "id": "mossfrp",
+  "version": "V1.4.2.1.1513 Beta",
+
+  "name": "MossFrp",
+  "description": "A mod which can run Frp with client.",
+  "authors": [
+    "MossCG"
+  ],
+  "contact": {
+    "homepage": "https://www.mossfrp.top/",
+    "sources": "https://github.com/MossFrp"
+  },
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "org.mossmc.mosscg.MossFrp.PathFabric"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.7.4",
+    "fabric": "*",
+    "minecraft": "*"
+  },
+  "suggests": {
+    "another-mod": "*"
+  }
+}

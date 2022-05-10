@@ -2,14 +2,13 @@
 {
     "modid": "mossfrp",
     "name": "MossFrp",
-    "description": "A mod which can run Frp with server.",
-    "version": "V1.3.1.1.1241 Release",
+    "description": "A mod which can run Frp with client.",
+    "version": "V1.4.2.1.1513 Beta",
     "logoFile": "",
     "mcversion": "",
     "url": "",
     "updateUrl": "",
     "authors": [ "MossCG" ],
-    "parent":"",
-    "dependencies": []
+    "parent":""
 }
 ]

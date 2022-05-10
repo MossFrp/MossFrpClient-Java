@@ -1,5 +1,5 @@
 name: MossFrp
-version: V1.3.1.1.1241 Release
+version: V1.4.2.1.1513 Beta
 main: org.mossmc.mosscg.MossFrp.PathPlugin
 author: MossCG
 description: A plugin which can run Frp with server.
