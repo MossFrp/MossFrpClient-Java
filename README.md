@@ -5,4 +5,5 @@ MossFrp的Java版客户端仓库
 <br>构建时请先构建process然后再把打包成jar的process丢到另外的包里
 <br>Clone时可不要弄混
 <br>目前支持独立端/spigot系插件/bungeecord插件/velocity插件
+<br>forge客户端模组[1.9-1.12.2]/fabric客户端模组[1.13-latest]
 <br>系统支持windows/linux
