@@ -6,8 +6,8 @@ import org.apache.logging.log4j.Logger;
 import org.mossmc.mosscg.MossFrpForgeSuport.MossFrpForgeSupport;
 
 import java.io.File;
-
 @Mod(
+        value = "mossfrp",
         modid = "mossfrp",
         name = BasicInfo.getName,
         version = BasicInfo.getVersion,
@@ -29,7 +29,6 @@ public class PathForge {
         BasicInfo.getRunMode = BasicInfo.runMode.forge;
         StartGuide.runGuide(null);
     }
-
     public static void sendPlayer(String info) {
         MossFrpForgeSupport.sendPlayer(info);
     }

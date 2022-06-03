@@ -1,0 +1,9 @@
+modLoader="javafml"
+loaderVersion="[25,)"
+license="GNU GPLv3"
+[[mods]]
+modId="mossfrp"
+version="V1.5.1.1.1213 Beta"
+displayName="MossFrp"
+authors="MossCG"
+description='''A mod which can run Frp with client.'''

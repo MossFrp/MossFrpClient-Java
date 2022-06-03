@@ -31,7 +31,7 @@ public class BasicInfo {
 
     public static Path getDataFolder;
 
-    public static final String getVersion = "V1.4.2.1.1513 Beta";
+    public static final String getVersion = "V1.5.1.1.1213 Beta";
     public static final String getAuthor = "MossCG";
     public static final String getName = "MossFrp";
 

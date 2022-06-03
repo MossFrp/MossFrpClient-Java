@@ -32,9 +32,7 @@ public class StartGuide {
         LanguageLoad.load(BasicVoid.getConfig("language"));
         registerDaemonThread();
         checkStart(args);
-        InfoUpdate.checkNotice();
-        InfoUpdate.updateDomains();
-        InfoUpdate.checkUpdate();
+        InfoUpdate.updateThread();
         InfoGroup.sendStartGroup();
         FrpProcessCore.loadProcess();
         ConfigCodeLoad.loadAll();

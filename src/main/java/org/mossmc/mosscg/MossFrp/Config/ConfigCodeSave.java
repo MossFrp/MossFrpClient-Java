@@ -24,6 +24,7 @@ public class ConfigCodeSave {
                 .replace("[portStart]",codeMap.get("portStart").toString())
                 .replace("[portEnd]",codeMap.get("portEnd").toString())
                 .replace("[openPort]",codeMap.get("portStart").toString())
+                .replace("[localPort]",String.valueOf(getLocalPort()))
                 .replace("[token]",code);
         writeIntoConfig(name,template);
         sendInfo(getLanguage("Save_SaveSucceed").replace("[name]",name));

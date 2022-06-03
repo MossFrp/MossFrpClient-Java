@@ -1,16 +1,43 @@
 package org.mossmc.mosscg.MossFrp.Info;
 
 import com.alibaba.fastjson.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 import java.nio.charset.StandardCharsets;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import static org.mossmc.mosscg.MossFrp.BasicVoid.*;
 import static org.mossmc.mosscg.MossFrp.BasicInfo.*;
 
 public class InfoUpdate {
+    public static void updateThread() {
+        ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
+        Thread updateThread = new Thread(InfoUpdate::update);
+        updateThread.setName("infoUpdateThread");
+        singleThreadExecutor.execute(updateThread);
+    }
+
+    public static boolean firstUpdate = true;
+
+    @SuppressWarnings({"BusyWait", "InfiniteLoopStatement"})
+    public static void update() {
+        while (true) {
+            try {
+                updateDomains();
+                checkNotice();
+                checkUpdate();
+                firstUpdate = false;
+                Thread.sleep(1000*60*60);
+            } catch (Exception e) {
+                sendException(e);
+            }
+        }
+    }
+
     public static void updateDomains() {
         listDomains.add("mossfrp.cn");
         if (getConfig("checkDomains").equals("false")) {
@@ -30,7 +57,9 @@ public class InfoUpdate {
             }
             sendInfo("#lang#Start_UpdateDomainsComplete");
         } catch (Exception e) {
-            sendException(e);
+            if (firstUpdate) {
+                sendException(e);
+            }
             listDomains.add("mossfrp.cn");
             sendWarn("#lang#Start_UpdateDomainsFailed");
         }
@@ -58,7 +87,9 @@ public class InfoUpdate {
             }
             sendInfo("#lang#Start_CheckUpdateComplete");
         } catch (Exception e) {
-            sendException(e);
+            if (firstUpdate) {
+                sendException(e);
+            }
             sendWarn("#lang#Start_CheckUpdateFailed");
         }
     }
@@ -79,7 +110,9 @@ public class InfoUpdate {
                 i++;
             }
         } catch (Exception e) {
-            sendException(e);
+            if (firstUpdate) {
+                sendException(e);
+            }
             sendWarn("#lang#Start_CheckNoticeFailed");
         }
     }
@@ -98,7 +131,9 @@ public class InfoUpdate {
             input.close();
             return JSONObject.parseObject(stringBuilder.toString());
         } catch (Exception e) {
-            sendException(e);
+            if (firstUpdate) {
+                sendException(e);
+            }
             return null;
         }
     }

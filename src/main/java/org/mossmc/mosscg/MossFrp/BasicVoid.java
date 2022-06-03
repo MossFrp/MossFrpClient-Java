@@ -1,5 +1,6 @@
 package org.mossmc.mosscg.MossFrp;
 
+import org.bukkit.Bukkit;
 import org.mossmc.mosscg.MossFrp.Config.ConfigCodeLoad;
 import org.mossmc.mosscg.MossFrp.Config.ConfigGet;
 import org.mossmc.mosscg.MossFrp.Config.ConfigLoad;
@@ -69,5 +70,19 @@ public class BasicVoid {
         Pattern pattern = Pattern.compile("[\u4e00-\u9fa5]");
         Matcher matcher = pattern.matcher(str);
         return matcher.find();
+    }
+
+    public static int getLocalPort() {
+        try {
+            switch (BasicInfo.getRunMode) {
+                case plugin:
+                    return Bukkit.getPort();
+                default:
+                    return 25565;
+            }
+        } catch (Exception e) {
+            sendException(e);
+        }
+        return 25565;
     }
 }

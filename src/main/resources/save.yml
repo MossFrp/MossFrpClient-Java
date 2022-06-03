@@ -1,7 +1,7 @@
 #MossFrp客户端配置文件
 
 #是否启用此隧道
-enable: false
+enable: true
 
 #隧道类型
 #如果是MossFrp用户则填mossfrp
@@ -15,7 +15,7 @@ localIP: "127.0.0.1"
 #MC服务器默认25565
 #联机请填开放端口
 #如MC开启局域网游戏后聊天栏提示的端口
-localPort: "25565"
+localPort: "[localPort]"
 
 #服务器地址
 #frp服务器的地址
