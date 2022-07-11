@@ -46,13 +46,30 @@ public class StartGuide {
         }
         if (!Arrays.toString(args).contains("-MossFrp=nb")) {
             try {
-                FileWriter fileWriter = new FileWriter("./run.bat");
-                fileWriter.write("@echo off \r\n");
-                fileWriter.write("title MossFrp Standard Client \r\n");
-                fileWriter.write("java -Xmx50m -jar MossFrpJava.jar -MossFrp=nb \r\n");
-                fileWriter.write("pause \r\n");
-                fileWriter.flush();
-                fileWriter.close();
+                //
+                FileWriter fileWriter = new FileWriter("./run.bat");//如果我用的是Linux呢 (
+                //fileWriter.write("@echo off \r\n");
+                //fileWriter.write("title MossFrp Standard Client \r\n");
+                //fileWriter.write("java -Xmx50m -jar MossFrpJava.jar -MossFrp=nb \r\n");
+                //fileWriter.write("pause \r\n");
+                //fileWriter.flush();
+                //fileWriter.close();
+                switch (System.getProperty(" os.name").toLowerCase().contains("windows"))
+                {
+                    case true:
+                        FileWriter fileWriter = new FileWriter("./run.bat");
+                        fileWriter.write("java -Xmx50m -jar MossFrpJava.jar -MossFrp=nb \r\n");
+                        fileWriter.flush();
+                        fileWriter.close();
+                        break;
+                    case false:
+                        FileWriter fileWriter = new FileWriter("./run.sh");
+                        fileWriter.write("java -Xmx50m -jar MossFrpJava.jar -MossFrp=nb \r\n");
+                        fileWriter.flush();
+                        fileWriter.close();
+                        break;
+                }
+                
             } catch (IOException e) {
                 sendException(e);
             }
