@@ -1,5 +1,7 @@
 package org.mossmc.mosscg.MossFrp.FileControl;
 
+import org.mossmc.mosscg.MossFrp.BasicInfo;
+
 import java.io.File;
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -9,6 +11,7 @@ import static org.mossmc.mosscg.MossFrp.BasicVoid.*;
 public class FileCheck {
     public static void check() {
         try {
+            checkDirExist(new File(String.valueOf(BasicInfo.getDataFolder)));
             checkDirExist(FileGet.getMainDirFile);
             checkDirExist(FileGet.getFrpConfigDirFile);
             checkDirExist(FileGet.getLanguageDirFile);

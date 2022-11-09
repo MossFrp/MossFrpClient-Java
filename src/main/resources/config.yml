@@ -29,3 +29,7 @@ checkNotice: true
 processDebug: false
 #process核心超时时间（单位：毫秒）
 processTimeout: 5000
+
+#是否关闭Log日志
+#关闭后将不再输出日志文件
+disableLog: false

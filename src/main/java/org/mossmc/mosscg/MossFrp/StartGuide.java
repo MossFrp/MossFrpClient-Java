@@ -75,7 +75,9 @@ public class StartGuide {
         while (true){
             try {
                 Thread.sleep(2000);
-                System.gc();
+                if (BasicInfo.getRunMode.equals(BasicInfo.runMode.standard)) {
+                    System.gc();
+                }
             } catch (InterruptedException e) {
                 sendException(e);
             }
